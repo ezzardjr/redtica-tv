@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">RedTica TV</string>
+    <string name="conectando">Conectando con RedTica TV…</string>
+    <string name="cargando_lista">Cargando canales…</string>
+    <string name="sin_senal">Sin señal, reintentando…</string>
+    <string name="lista_vacia">La lista de canales está vacía</string>
+    <string name="error_conexion">No se pudo conectar. Reintentando en 10 s…</string>
+    <string name="vpn_denegada">Se necesita aceptar la conexión para ver los canales.\nPresione OK para intentar de nuevo.</string>
+    <string name="canales">Canales</string>
+</resources>

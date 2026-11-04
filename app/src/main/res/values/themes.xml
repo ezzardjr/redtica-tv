@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="fondo">#000000</color>
+    <color name="panel">#E60D1B2A</color>
+    <color name="acento">#00A8E8</color>
+    <color name="foco">#3300A8E8</color>
+    <color name="texto">#FFFFFF</color>
+    <color name="texto_sec">#9FB3C8</color>
+
+    <style name="Theme.RedTicaTV" parent="Theme.AppCompat.NoActionBar">
+        <item name="android:windowBackground">@color/fondo</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="colorAccent">@color/acento</item>
+    </style>
+</resources>
