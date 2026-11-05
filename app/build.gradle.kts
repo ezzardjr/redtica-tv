@@ -32,7 +32,7 @@ android {
         create("prueba") {
             dimension = "modo"
             applicationId = "com.redtica.tv"
-            buildConfigField("String", "PLAYLIST_URL", "\"http://10.1.1.10:4000/playlist.m3u8?ts\"")
+            buildConfigField("String", "PLAYLIST_URL", "\"http://10.1.1.10:8000/playlist.m3u8?ts\"")
             buildConfigField("boolean", "USA_TUNEL", "true")
         }
     }
