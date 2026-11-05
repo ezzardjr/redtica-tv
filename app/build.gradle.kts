@@ -11,8 +11,8 @@ android {
         applicationId = "com.redtica.tv"
         minSdk = 21
         targetSdk = 35
-        versionCode = 7
-        versionName = "0.7"
+        versionCode = 10
+        versionName = "1.0"
     }
 
     buildFeatures {
@@ -39,11 +39,25 @@ android {
         }
     }
 
+    // Llave de publicación: GitHub Actions la crea desde los secretos
+    // RELEASE_KEYSTORE_B64 y RELEASE_KEYSTORE_PASSWORD. Sin ellos se firma con la llave debug.
+    val releaseKeystore = file("release.jks")
+    signingConfigs {
+        create("release") {
+            if (releaseKeystore.exists()) {
+                storeFile = releaseKeystore
+                storePassword = System.getenv("RELEASE_KEYSTORE_PASSWORD")
+                keyAlias = "redtica"
+                keyPassword = System.getenv("RELEASE_KEYSTORE_PASSWORD")
+            }
+        }
+    }
+
     buildTypes {
         release {
             isMinifyEnabled = false
-            // Versión de prueba: se firma con la llave debug para instalar fácil.
-            signingConfig = signingConfigs.getByName("debug")
+            signingConfig = if (releaseKeystore.exists()) signingConfigs.getByName("release")
+            else signingConfigs.getByName("debug")
         }
     }
 

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=1920, height=1080">
+  <title>RedTica TV</title>
+  <link rel="stylesheet" href="style.css">
+  <!-- Samsung Tizen: API del reproductor nativo (en LG/navegador no existe y se ignora) -->
+  <script src="$WEBAPIS/webapis/webapis.js"></script>
+</head>
+<body>
+  <!-- LG webOS / navegador: reproductor HTML5 -->
+  <video id="video" autoplay playsinline></video>
+  <!-- Samsung Tizen: superficie del reproductor nativo AVPlay -->
+  <object id="avplay" type="application/avplayer"></object>
+
+  <div id="banner" class="hidden"></div>
+  <div id="status" class="hidden"></div>
+
+  <div id="panel" class="hidden">
+    <div class="panel-head">
+      <img src="img/logo.png" alt="">
+      <span>RedTica TV</span>
+    </div>
+    <ul id="list"></ul>
+    <div class="panel-help">OK: ver canal · ◀ audio · ▶ formato · Atrás: cerrar</div>
+  </div>
+
+  <script src="config.js"></script>
+  <script src="channels.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

@@ -5,3 +5,5 @@ local.properties
 .idea/
 *.iml
 .DS_Store
+app/release.jks
+node_modules/

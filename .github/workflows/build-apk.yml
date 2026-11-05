@@ -17,16 +17,36 @@ jobs:
 
       - uses: gradle/actions/setup-gradle@v4
 
+      - name: Llave de publicación (si está configurada)
+        env:
+          RELEASE_KEYSTORE_B64: ${{ secrets.RELEASE_KEYSTORE_B64 }}
+        run: |
+          if [ -n "$RELEASE_KEYSTORE_B64" ]; then
+            echo "$RELEASE_KEYSTORE_B64" | base64 -d > app/release.jks
+            echo "Firmando con la llave de REDTICA"
+          else
+            echo "::warning::Sin secreto RELEASE_KEYSTORE_B64: se firma con la llave debug"
+          fi
+
       - name: Compilar
+        env:
+          RELEASE_KEYSTORE_PASSWORD: ${{ secrets.RELEASE_KEYSTORE_PASSWORD }}
         run: |
           chmod +x gradlew
-          ./gradlew assembleClienteDebug assemblePruebaDebug --no-daemon
-          mv app/build/outputs/apk/cliente/debug/app-cliente-debug.apk RedTicaTV-cliente.apk
-          mv app/build/outputs/apk/prueba/debug/app-prueba-debug.apk RedTicaTV-prueba.apk
+          ./gradlew assembleClienteRelease bundleClienteRelease assemblePruebaDebug --no-daemon
+          mkdir -p salida
+          mv app/build/outputs/apk/cliente/release/app-cliente-release.apk salida/RedTicaTV-cliente.apk
+          mv app/build/outputs/bundle/clienteRelease/app-cliente-release.aab salida/RedTicaTV-cliente-GooglePlay.aab
+          mv app/build/outputs/apk/prueba/debug/app-prueba-debug.apk salida/RedTicaTV-prueba.apk
+
+      - name: Apps de TV (LG y Samsung)
+        run: |
+          npm install --no-save @webos-tools/cli
+          ARES_PACKAGE=$PWD/node_modules/.bin/ares-package ./tv-web/build.sh
+          cp tv-web/dist/*.ipk salida/RedTicaTV-LG.ipk
+          cp tv-web/dist/RedTicaTV-Samsung-proyecto.zip salida/
 
       - uses: actions/upload-artifact@v4
         with:
-          name: RedTicaTV-apk
-          path: |
-            RedTicaTV-cliente.apk
-            RedTicaTV-prueba.apk
+          name: RedTicaTV-apps
+          path: salida/*
