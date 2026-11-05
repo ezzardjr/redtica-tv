@@ -16,6 +16,7 @@ import androidx.media3.common.MimeTypes
 import androidx.media3.common.PlaybackException
 import androidx.media3.common.Player
 import androidx.media3.exoplayer.ExoPlayer
+import androidx.media3.ui.AspectRatioFrameLayout
 import androidx.media3.ui.PlayerView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -54,6 +55,17 @@ class MainActivity : AppCompatActivity() {
     private val multicastTimeout = Runnable { if (usingMulticast) fallbackToHttp() }
     private val retryConnect = Runnable { connect() }
 
+    /** Número que el cliente va marcando con el control (ej. 4 y 2 = canal 42). */
+    private var typed = ""
+    private val goToTyped = Runnable { jumpToTyped() }
+
+    /** Formatos de pantalla que se rotan con la flecha derecha. */
+    private val formats = listOf(
+        AspectRatioFrameLayout.RESIZE_MODE_FILL to R.string.formato_completa,
+        AspectRatioFrameLayout.RESIZE_MODE_ZOOM to R.string.formato_zoom,
+        AspectRatioFrameLayout.RESIZE_MODE_FIT to R.string.formato_original
+    )
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -68,6 +80,8 @@ class MainActivity : AppCompatActivity() {
 
         // Toque en pantalla (teléfono): abre/cierra la lista
         playerView.setOnClickListener { if (isListVisible()) hideList() else showList() }
+        // Toque largo (teléfono): cambia el formato de pantalla
+        playerView.setOnLongClickListener { cycleFormat(); true }
 
         hideSystemUi()
         // Versión cliente: conexión directa por la red de REDTICA, sin VPN
@@ -147,8 +161,13 @@ class MainActivity : AppCompatActivity() {
             showStatus(getString(R.string.lista_vacia))
             return
         }
+        val ordered = try {
+            M3uParser.applyOrder(loaded, assets.open("orden.txt").bufferedReader().use { it.readText() })
+        } catch (_: Exception) {
+            loaded.onEachIndexed { i, c -> c.num = i + 1 }
+        }
         channels.clear()
-        channels.addAll(loaded)
+        channels.addAll(ordered)
         if (BuildConfig.USA_MULTICAST) {
             try {
                 M3uParser.applyMulticast(channels, assets.open("multicast.txt").bufferedReader().use { it.readText() })
@@ -160,7 +179,9 @@ class MainActivity : AppCompatActivity() {
             play(idx)
         }
         list.adapter = adapter
-        current = prefs.getInt("ultimo", 0).coerceIn(0, channels.size - 1)
+        // Último canal visto (por id, así no cambia si se reordena la lista)
+        val lastId = prefs.getString("ultimo_id", null)
+        current = channels.indexOfFirst { it.id != null && it.id == lastId }.takeIf { it >= 0 } ?: 0
         ensurePlayer()
         play(current)
     }
@@ -200,10 +221,10 @@ class MainActivity : AppCompatActivity() {
         if (channels.isEmpty()) return
         ui.removeCallbacks(retryPlay)
         current = (index % channels.size + channels.size) % channels.size
-        prefs.edit().putInt("ultimo", current).apply()
-        adapter?.current = current
-
         val ch = channels[current]
+        prefs.edit().putString("ultimo_id", ch.id).apply()
+        adapter?.current = current
+        applyFormat(ch)
         ui.removeCallbacks(multicastTimeout)
         val mcast = if (BuildConfig.USA_MULTICAST && !multicastFailed) ch.mcast else null
         usingMulticast = mcast != null
@@ -258,23 +279,82 @@ class MainActivity : AppCompatActivity() {
         }
 
         if (event.action == KeyEvent.ACTION_DOWN && !isListVisible() && channels.isNotEmpty()) {
+            digitOf(code)?.let { onDigit(it); return true }
             when (code) {
+                KeyEvent.KEYCODE_DPAD_RIGHT, KeyEvent.KEYCODE_TV_ZOOM_MODE,
+                KeyEvent.KEYCODE_PROG_RED -> {
+                    cycleFormat(); return true
+                }
                 KeyEvent.KEYCODE_DPAD_UP, KeyEvent.KEYCODE_CHANNEL_UP -> {
                     play(current + 1); return true
                 }
                 KeyEvent.KEYCODE_DPAD_DOWN, KeyEvent.KEYCODE_CHANNEL_DOWN -> {
                     play(current - 1); return true
                 }
-                KeyEvent.KEYCODE_DPAD_LEFT, KeyEvent.KEYCODE_DPAD_RIGHT,
-                KeyEvent.KEYCODE_MENU, KeyEvent.KEYCODE_GUIDE -> {
+                KeyEvent.KEYCODE_DPAD_LEFT, KeyEvent.KEYCODE_MENU, KeyEvent.KEYCODE_GUIDE -> {
                     showList(); return true
                 }
             }
             if (isOkKey(code)) {
-                showList(); return true
+                if (typed.isNotEmpty()) jumpToTyped() else showList()
+                return true
             }
         }
         return super.dispatchKeyEvent(event)
+    }
+
+    // ---------- Número de canal con el control ----------
+
+    private fun digitOf(code: Int): Int? = when (code) {
+        in KeyEvent.KEYCODE_0..KeyEvent.KEYCODE_9 -> code - KeyEvent.KEYCODE_0
+        in KeyEvent.KEYCODE_NUMPAD_0..KeyEvent.KEYCODE_NUMPAD_9 -> code - KeyEvent.KEYCODE_NUMPAD_0
+        else -> null
+    }
+
+    private fun onDigit(d: Int) {
+        if (typed.length >= 3) typed = ""
+        typed += d
+        banner.text = typed
+        banner.visibility = View.VISIBLE
+        ui.removeCallbacks(hideBanner)
+        ui.removeCallbacks(goToTyped)
+        // Con 3 cifras salta de una vez; si no, espera 2 s por la siguiente cifra
+        if (typed.length == 3) jumpToTyped() else ui.postDelayed(goToTyped, 2000)
+    }
+
+    private fun jumpToTyped() {
+        ui.removeCallbacks(goToTyped)
+        val n = typed.toIntOrNull()
+        typed = ""
+        val idx = if (n == null) -1 else channels.indexOfFirst { it.num == n }
+        if (idx >= 0) {
+            play(idx)
+        } else {
+            banner.text = getString(R.string.canal_no_existe, n ?: 0)
+            ui.postDelayed(hideBanner, 2000)
+        }
+    }
+
+    // ---------- Formato de pantalla ----------
+
+    /** Formato guardado para el canal; por defecto pantalla completa. */
+    private fun formatIndex(ch: Channel): Int =
+        prefs.getInt("formato_" + (ch.id ?: ch.name), 0).coerceIn(0, formats.size - 1)
+
+    private fun applyFormat(ch: Channel) {
+        playerView.resizeMode = formats[formatIndex(ch)].first
+    }
+
+    private fun cycleFormat() {
+        if (channels.isEmpty()) return
+        val ch = channels[current]
+        val next = (formatIndex(ch) + 1) % formats.size
+        prefs.edit().putInt("formato_" + (ch.id ?: ch.name), next).apply()
+        applyFormat(ch)
+        banner.text = getString(formats[next].second)
+        banner.visibility = View.VISIBLE
+        ui.removeCallbacks(hideBanner)
+        ui.postDelayed(hideBanner, 2500)
     }
 
     private fun isOkKey(code: Int) = code == KeyEvent.KEYCODE_DPAD_CENTER ||
@@ -299,7 +379,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun showBanner(ch: Channel) {
-        banner.text = "${current + 1}   ${ch.name}"
+        banner.text = "${ch.num}   ${ch.name}"
         banner.visibility = View.VISIBLE
         ui.removeCallbacks(hideBanner)
         ui.postDelayed(hideBanner, 3500)

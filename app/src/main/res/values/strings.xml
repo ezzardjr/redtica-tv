@@ -8,4 +8,8 @@
     <string name="error_conexion">No se pudo conectar. Reintentando en 10 s…</string>
     <string name="vpn_denegada">Se necesita aceptar la conexión para ver los canales.\nPresione OK para intentar de nuevo.</string>
     <string name="canales">Canales</string>
+    <string name="formato_completa">Pantalla completa</string>
+    <string name="formato_zoom">Zoom (recorta bordes negros)</string>
+    <string name="formato_original">Tamaño original</string>
+    <string name="canal_no_existe">No existe el canal %1$d</string>
 </resources>

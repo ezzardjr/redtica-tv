@@ -5,7 +5,14 @@ import java.net.HttpURLConnection
 import java.net.URL
 
 /** [mcast] = dirección multicast udp://239.10.10.x:1234 si el canal la tiene, o null. */
-data class Channel(val name: String, val url: String, val id: String? = null, var mcast: String? = null)
+/** [num] = número que ve el cliente (assets/orden.txt). */
+data class Channel(
+    val name: String,
+    val url: String,
+    val id: String? = null,
+    var mcast: String? = null,
+    var num: Int = 0
+)
 
 /** Descarga y lee la lista M3U del Astra. */
 object M3uParser {
@@ -63,5 +70,28 @@ object M3uParser {
                 if (p.size == 2 && p[1].toIntOrNull() != null) p[0] to p[1].toInt() else null
             }.toMap()
         channels.forEach { ch -> ch.id?.let { map[it] }?.let { ch.mcast = "udp://239.10.10.$it:1234" } }
+    }
+
+    /**
+     * Ordena según assets/orden.txt (numero|id|nombre) y asigna el número de canal.
+     * Los canales del Astra que no estén en el archivo van al final, en su orden original.
+     */
+    fun applyOrder(channels: List<Channel>, orderText: String): List<Channel> {
+        val order = orderText.lineSequence()
+            .map { it.trim() }
+            .filter { it.isNotEmpty() && !it.startsWith("#") }
+            .mapNotNull { l ->
+                val p = l.split('|')
+                val n = p.getOrNull(0)?.trim()?.toIntOrNull()
+                val id = p.getOrNull(1)?.trim()
+                if (n != null && !id.isNullOrEmpty()) id to n else null
+            }.toMap()
+        val known = channels.filter { it.id != null && order.containsKey(it.id) }
+            .onEach { it.num = order.getValue(it.id!!) }
+            .sortedBy { it.num }
+        var next = (known.maxOfOrNull { it.num } ?: 0) + 1
+        val rest = channels.filter { it.id == null || !order.containsKey(it.id) }
+            .onEach { it.num = next++ }
+        return known + rest
     }
 }

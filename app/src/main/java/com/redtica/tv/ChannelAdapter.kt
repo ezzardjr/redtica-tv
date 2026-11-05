@@ -30,7 +30,7 @@ class ChannelAdapter(
     override fun getItemCount() = channels.size
 
     override fun onBindViewHolder(h: Holder, position: Int) {
-        h.num.text = (position + 1).toString()
+        h.num.text = channels[position].num.toString()
         h.name.text = channels[position].name
         h.itemView.isSelected = position == current
         h.itemView.setOnClickListener { onPick(h.bindingAdapterPosition) }

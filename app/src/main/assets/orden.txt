@@ -1,0 +1,194 @@
+# Orden y número de los canales en RedTica TV: numero|id_astra|nombre
+# Canales del Astra que no estén aquí se agregan al final.
+
+# --- Costa Rica ---
+1|a066|FUTV HD
+2|a00q|TD+ HD
+3|a00r|TD+ 2 HD
+4|a04b|4 - Repretel
+5|a04u|FOX CR
+6|a03a|6 - Repretel
+7|a02d|Canal 7 HD
+8|a00y|Multimedios
+9|a078|Trivision HD
+10|a06x|Teleuno
+11|a03b|11 - Repretel
+12|a06v|SuperCable 5
+# --- Noticias ---
+13|a00z|13 - Sinart
+14|a025|CNN en Español
+15|a00n|CNN International
+16|a026|BBC News
+17|a027|France24
+18|a060|CNBC
+19|a05b|Canal del Congreso
+# --- Deportes ---
+20|a067|ESPN HD
+21|a068|ESPN 2 HD
+22|a069|ESPN 3 HD
+23|a02c|ESPN 4 HD
+24|a065|ESPN 5 HD
+25|a06a|ESPN 6 HD
+26|a076|FOX ESA HD
+27|a075|FOX GUA HD
+28|a074|FOX HND HD
+29|a070|FOX NIC HD
+30|a03p|Latin America Sport
+31|a02s|Golf Channel HD
+32|a03y|Deportes TVC - HND
+# --- Películas ---
+33|a018|HBO HD
+34|a019|HBO2 HD
+35|a01a|HBO Plus HD
+36|a06k|HBO Family HD
+37|a01b|HBO XTREME
+38|a05x|CineMax
+39|a04t|Cinecanal HD
+40|a04w|TNT HD
+41|a02o|Sony Movies HD
+42|a010|Extra TV 42
+43|a064|Space HD
+44|a04q|Star Channel HD
+45|a06c|Paramount HD
+46|a02f|Studio Universal HD
+47|a06j|Universal Cinema HD
+48|a03u|TCM
+49|a00u|Golden Premiere HD
+50|a00v|Golden Premiere 2 HD
+51|a03t|Golden
+52|a05w|Cine Latino
+53|a03v|Multicinema
+54|a05v|Multipremier
+55|a02n|Europa HD
+# --- Series ---
+56|a04r|Warner HD
+57|a04s|Sony HD
+58|a063|AXN HD
+59|a02m|FX HD
+60|a06d|TNT Series HD
+61|a02j|A&E HD
+62|a02k|AMC HD
+63|a050|Comedy Central HD
+64|a05u|Universal
+65|a053|Universal Premiere HD
+66|a054|Universal Premiere O HD
+67|a056|Universal Crime HD
+68|a057|Universal Comedy HD
+69|a055|Universal Reality HD
+70|a01y|Lifetime
+71|a00l|Atres Series
+# --- Novelas y entretenimiento ---
+72|a01w|TNT Novelas
+73|a06g|Pasiones HD
+74|a03g|RCN Novelas
+75|a01t|Azcorazon
+76|a04d|Azmundo
+77|a02q|AZ Clic HD
+78|a02l|Telemundo HD
+79|a06h|Univision HD
+80|a02h|E! Entertainment HD
+81|a04z|Hola! TV HD
+82|a02i|Film & Arts HD
+83|a03h|Euro Channel
+84|a03q|Sin Limites
+85|a06w|OPA
+86|a03o|PXTV
+# --- Documentales y estilo de vida ---
+87|a06e|Discovery Channel HD
+88|a06b|National Geographic HD
+89|a02a|History HD
+90|a04k|History Channel
+91|a03i|H2
+92|a02g|Animal Planet HD
+93|a00i|Discovery Science
+94|a06f|Discovery World HD
+95|a05m|Discovery Turbo
+96|a04x|Discovery Theater HD
+97|a06i|Discovery ID HD
+98|a04y|Discovery Home & Health HD
+99|a04l|TLC
+100|a00h|Home Garden Latino
+101|a03j|El Gourmet
+102|a03k|Sun Channel
+103|a00e|Mas Chic
+# --- Infantiles y anime ---
+104|a017|Cartoon Network HD
+105|a05k|Disney
+106|a01o|Disney JR
+107|a00s|Discovery Kids HD
+108|a01m|Nick Jr
+109|a01n|Cartoonito
+110|a04c|Tooncast
+111|a01r|Adult Swim
+112|a00c|Baby TV
+113|a03e|Baby First
+114|a01q|Semillitas
+115|a00d|ZooMoo
+# --- Música ---
+116|a03s|HTV
+117|a04o|Exa TV
+118|a05t|Concert Channel
+# --- Religiosos ---
+119|a028|TBN Enlace
+120|a029|EWTN
+121|a05q|La voz de Maria
+122|a062|Rhema TV
+123|a03w|Sembrador
+124|a02u|ELIM TV - ESA
+125|a030|Suyapa TV
+# --- Internacionales ---
+126|a061|TVE
+127|a02r|Star TVE HD
+128|a00f|Antena 3
+129|a00g|TVChile
+# --- Nicaragua ---
+130|a046|Canal 2 - NIC
+131|a05d|Canal 4 - NIC
+132|a036|Canal 6 - NI
+133|a031|Canal 8 - NIC
+134|a01j|Canal 12 - NI
+135|a037|Canal 13 - NI
+136|a032|Canal 14 - NIC
+137|a01p|Nicarao TV
+# --- El Salvador ---
+138|a044|Canal 2 - ESA
+139|a00p|Canal 4 HD - ESA
+140|a02y|Canal 6 - ESA
+141|a00o|Canal 10 HD - ESA
+142|a02z|Canal 12 - ESA
+143|a03d|Canal 19 - ESA
+144|a05e|Canal  21 - ESA
+145|a05f|TVM25 -  ESA
+146|a03c|VTV Canal 35 ESA
+147|a05a|TV Oriente ESA
+# --- Guatemala ---
+148|a042|Canal 3 - GUA
+149|a041|Canal 7 - GUA
+150|a02x|Canal 11 - GUA
+151|a02w|Canal 13-GUA
+152|a01e|Guatevision - GUA
+153|a03z|Canal Antigua - GUA
+154|a040|Canal Azteca - GUA
+155|a05c|RCN - GUA
+# --- Honduras ---
+156|a05g|Canal 3 Telesistemas HND
+157|a045|Canal 5 - HON
+158|a00b|Canal 8 TNH - HON
+159|a01f|Canal 11 - HON
+160|a01k|HCH - HON
+161|a05h|Canal VTV HND
+# --- República Dominicana ---
+162|a034|CDN 2 - RD
+163|a01h|Antena 7 - RD
+164|a049|Color Vision 9 - RD
+165|a033|Digital 15 - RD
+166|a04a|CDN 37 - RD
+167|a058|CERTV
+168|a00x|RNN - RD
+169|a01g|Tele Antillas - RD
+170|a048|TeleMicro - RD
+171|a038|Telecentro - RD
+172|a01i|Telesistema RD
+173|a039|Teleunion - RD
+174|a035|Teleuniverso - RD
+175|a00w|Televida RD
