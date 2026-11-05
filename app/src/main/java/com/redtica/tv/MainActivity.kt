@@ -22,8 +22,8 @@ import androidx.recyclerview.widget.RecyclerView
 class MainActivity : AppCompatActivity() {
 
     companion object {
-        /** Lista de canales del Astra (por el túnel WireGuard). */
-        const val PLAYLIST_URL = "http://10.1.1.10:4000/playlist.m3u8?ts"
+        /** Lista de canales del Astra (definida por versión en app/build.gradle.kts). */
+        val PLAYLIST_URL: String = BuildConfig.PLAYLIST_URL
         private const val REQ_VPN = 10
     }
 
@@ -32,7 +32,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var banner: TextView
     private lateinit var listPanel: LinearLayout
     private lateinit var list: RecyclerView
-    private lateinit var tunnel: TunnelManager
+    private var tunnel: TunnelManager? = null
 
     private var player: ExoPlayer? = null
     private var adapter: ChannelAdapter? = null
@@ -56,13 +56,14 @@ class MainActivity : AppCompatActivity() {
         listPanel = findViewById(R.id.listPanel)
         list = findViewById(R.id.list)
         list.layoutManager = LinearLayoutManager(this)
-        tunnel = TunnelManager(this)
+        if (BuildConfig.USA_TUNEL) tunnel = TunnelManager(this)
 
         // Toque en pantalla (teléfono): abre/cierra la lista
         playerView.setOnClickListener { if (isListVisible()) hideList() else showList() }
 
         hideSystemUi()
-        requestVpnThenConnect()
+        // Versión cliente: conexión directa por la red de REDTICA, sin VPN
+        if (BuildConfig.USA_TUNEL) requestVpnThenConnect() else connect()
     }
 
     // ---------- Túnel WireGuard ----------
@@ -99,7 +100,7 @@ class MainActivity : AppCompatActivity() {
         showStatus(getString(R.string.conectando))
         Thread {
             try {
-                tunnel.up(assets.open("redtica.conf"))
+                tunnel?.up(assets.open("redtica.conf"))
                 ui.post { showStatus(getString(R.string.cargando_lista)) }
                 val loaded = loadPlaylistWithRetry()
                 ui.post {
@@ -298,6 +299,7 @@ class MainActivity : AppCompatActivity() {
         ui.removeCallbacksAndMessages(null)
         player?.release()
         player = null
-        if (isFinishing) Thread { tunnel.down() }.start()
+        val t = tunnel
+        if (isFinishing && t != null) Thread { t.down() }.start()
     }
 }

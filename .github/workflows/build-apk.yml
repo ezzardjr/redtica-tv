@@ -20,10 +20,13 @@ jobs:
       - name: Compilar
         run: |
           chmod +x gradlew
-          ./gradlew assembleDebug --no-daemon
-          mv app/build/outputs/apk/debug/app-debug.apk RedTicaTV.apk
+          ./gradlew assembleClienteDebug assemblePruebaDebug --no-daemon
+          mv app/build/outputs/apk/cliente/debug/app-cliente-debug.apk RedTicaTV-cliente.apk
+          mv app/build/outputs/apk/prueba/debug/app-prueba-debug.apk RedTicaTV-prueba.apk
 
       - uses: actions/upload-artifact@v4
         with:
           name: RedTicaTV-apk
-          path: RedTicaTV.apk
+          path: |
+            RedTicaTV-cliente.apk
+            RedTicaTV-prueba.apk

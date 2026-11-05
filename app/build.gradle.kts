@@ -15,6 +15,28 @@ android {
         versionName = "0.1-prueba"
     }
 
+    buildFeatures {
+        buildConfig = true
+    }
+
+    flavorDimensions += "modo"
+    productFlavors {
+        // Para clientes de REDTICA: directo por la red, sin VPN ni claves.
+        create("cliente") {
+            dimension = "modo"
+            applicationId = "com.redtica.tv.cliente"
+            buildConfigField("String", "PLAYLIST_URL", "\"http://10.1.1.10:8000/playlist.m3u8?ts\"")
+            buildConfigField("boolean", "USA_TUNEL", "false")
+        }
+        // Prueba fuera de la red: túnel WireGuard embebido (src/prueba/assets/redtica.conf).
+        create("prueba") {
+            dimension = "modo"
+            applicationId = "com.redtica.tv"
+            buildConfigField("String", "PLAYLIST_URL", "\"http://10.1.1.10:4000/playlist.m3u8?ts\"")
+            buildConfigField("boolean", "USA_TUNEL", "true")
+        }
+    }
+
     buildTypes {
         release {
             isMinifyEnabled = false

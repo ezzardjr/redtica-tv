@@ -54,3 +54,13 @@ Edite solo las 3 líneas marcadas con `<<<`:
 - **Cambiar la URL de la lista:** está en `MainActivity.kt`, constante `PLAYLIST_URL`.
 - **Cambiar el ícono o banner:** reemplace `res/mipmap-xxhdpi/ic_launcher.png` y `res/drawable-xhdpi/banner.png` (320×180).
 - **Seguridad:** el APK lleva la clave privada adentro. Si un APK se pierde, borre ese peer en el MikroTik y queda inutilizado.
+
+---
+
+## Versiones del APK
+| APK | Uso | Conexión |
+|---|---|---|
+| `RedTicaTV-cliente.apk` | Clientes de REDTICA (San Ramón, Cañas Dulces, Montenegro…) | Directo por la red a `http://10.1.1.10:8000`, sin VPN y sin claves. Se puede publicar sin riesgo. |
+| `RedTicaTV-prueba.apk` | Prueba fuera de la red | Túnel WireGuard embebido. No distribuir. |
+
+La versión cliente necesita que, en Astra (Settings → HTTP Play), **HTTP Play Port** sea `8000`, y que los nodos ruteen y permitan **solo** `10.1.1.10` tcp `8000` desde las subredes de clientes.
