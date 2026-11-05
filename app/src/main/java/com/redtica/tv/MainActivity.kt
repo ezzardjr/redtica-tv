@@ -11,10 +11,14 @@ import android.view.View
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.media3.common.C
 import androidx.media3.common.MediaItem
 import androidx.media3.common.MimeTypes
 import androidx.media3.common.PlaybackException
 import androidx.media3.common.Player
+import androidx.media3.common.TrackSelectionOverride
+import androidx.media3.common.Tracks
+import java.util.Locale
 import androidx.media3.exoplayer.ExoPlayer
 import androidx.media3.ui.AspectRatioFrameLayout
 import androidx.media3.ui.PlayerView
@@ -59,6 +63,9 @@ class MainActivity : AppCompatActivity() {
     private var typed = ""
     private val goToTyped = Runnable { jumpToTyped() }
 
+    /** Canal al que ya se le aplicó el audio guardado (para hacerlo una sola vez). */
+    private var audioAppliedFor: String? = null
+
     /** Formatos de pantalla que se rotan con la flecha derecha. */
     private val formats = listOf(
         AspectRatioFrameLayout.RESIZE_MODE_FILL to R.string.formato_completa,
@@ -80,8 +87,8 @@ class MainActivity : AppCompatActivity() {
 
         // Toque en pantalla (teléfono): abre/cierra la lista
         playerView.setOnClickListener { if (isListVisible()) hideList() else showList() }
-        // Toque largo (teléfono): cambia el formato de pantalla
-        playerView.setOnLongClickListener { cycleFormat(); true }
+        // Toque largo (teléfono): cambia el audio
+        playerView.setOnLongClickListener { cycleAudio(); true }
 
         hideSystemUi()
         // Versión cliente: conexión directa por la red de REDTICA, sin VPN
@@ -205,6 +212,10 @@ class MainActivity : AppCompatActivity() {
                     ui.postDelayed(retryPlay, 3000)
                 }
 
+                override fun onTracksChanged(tracks: Tracks) {
+                    applySavedAudio()
+                }
+
                 override fun onPlaybackStateChanged(state: Int) {
                     when (state) {
                         Player.STATE_READY -> {
@@ -239,6 +250,12 @@ class MainActivity : AppCompatActivity() {
             .setUri(uri)
             .apply { if (uri.contains(".m3u8")) setMimeType(MimeTypes.APPLICATION_M3U8) }
             .build()
+        // Canal nuevo: vuelve a la preferencia (español) hasta ver si hay audio guardado
+        audioAppliedFor = null
+        player?.let { p ->
+            p.trackSelectionParameters = p.trackSelectionParameters.buildUpon()
+                .clearOverridesOfType(C.TRACK_TYPE_AUDIO).build()
+        }
         player?.run {
             setMediaItem(item)
             prepare()
@@ -290,13 +307,17 @@ class MainActivity : AppCompatActivity() {
                 KeyEvent.KEYCODE_PROG_RED -> {
                     cycleFormat(); return true
                 }
+                KeyEvent.KEYCODE_DPAD_LEFT, KeyEvent.KEYCODE_MEDIA_AUDIO_TRACK,
+                KeyEvent.KEYCODE_PROG_GREEN -> {
+                    cycleAudio(); return true
+                }
                 KeyEvent.KEYCODE_DPAD_UP, KeyEvent.KEYCODE_CHANNEL_UP -> {
                     play(current + 1); return true
                 }
                 KeyEvent.KEYCODE_DPAD_DOWN, KeyEvent.KEYCODE_CHANNEL_DOWN -> {
                     play(current - 1); return true
                 }
-                KeyEvent.KEYCODE_DPAD_LEFT, KeyEvent.KEYCODE_MENU, KeyEvent.KEYCODE_GUIDE -> {
+                KeyEvent.KEYCODE_MENU, KeyEvent.KEYCODE_GUIDE -> {
                     showList(); return true
                 }
             }
@@ -338,6 +359,65 @@ class MainActivity : AppCompatActivity() {
             banner.text = getString(R.string.canal_no_existe, n ?: 0)
             ui.postDelayed(hideBanner, 2000)
         }
+    }
+
+    // ---------- Audio (idioma) ----------
+
+    /** Pistas de audio del canal actual: (grupo, índice dentro del grupo). */
+    private fun audioTracks(): List<Pair<Tracks.Group, Int>> {
+        val p = player ?: return emptyList()
+        return p.currentTracks.groups
+            .filter { it.type == C.TRACK_TYPE_AUDIO }
+            .flatMap { g -> (0 until g.length).filter { g.isTrackSupported(it) }.map { g to it } }
+    }
+
+    private fun audioName(g: Tracks.Group, i: Int, pos: Int): String {
+        val lang = g.getTrackFormat(i).language
+        val name = if (lang.isNullOrBlank() || lang == "und" || lang.length < 2) null
+        else Locale(lang).getDisplayLanguage(Locale("es")).takeIf { it.isNotBlank() && it != lang }
+        return (name?.replaceFirstChar { it.uppercase() }) ?: getString(R.string.audio_n, pos + 1)
+    }
+
+    private fun cycleAudio() {
+        val p = player ?: return
+        if (channels.isEmpty()) return
+        val list = audioTracks()
+        if (list.size < 2) {
+            showMsg(getString(R.string.audio_unico)); return
+        }
+        val cur = list.indexOfFirst { (g, i) -> g.isTrackSelected(i) }.coerceAtLeast(0)
+        val next = (cur + 1) % list.size
+        selectAudio(list, next)
+        prefs.edit().putInt("audio_" + (channels[current].id ?: channels[current].name), next).apply()
+        audioAppliedFor = channels[current].id ?: channels[current].name
+        showMsg(getString(R.string.audio_sel, audioName(list[next].first, list[next].second, next), next + 1, list.size))
+    }
+
+    private fun selectAudio(list: List<Pair<Tracks.Group, Int>>, idx: Int) {
+        val p = player ?: return
+        val (g, i) = list[idx]
+        p.trackSelectionParameters = p.trackSelectionParameters.buildUpon()
+            .setOverrideForType(TrackSelectionOverride(g.mediaTrackGroup, i))
+            .build()
+    }
+
+    /** Si el cliente eligió otro audio para este canal, se aplica al abrirlo. */
+    private fun applySavedAudio() {
+        if (channels.isEmpty()) return
+        val key = channels[current].id ?: channels[current].name
+        if (audioAppliedFor == key) return
+        val list = audioTracks()
+        if (list.isEmpty()) return
+        audioAppliedFor = key
+        val saved = prefs.getInt("audio_$key", -1)
+        if (saved in list.indices) selectAudio(list, saved)
+    }
+
+    private fun showMsg(msg: String) {
+        banner.text = msg
+        banner.visibility = View.VISIBLE
+        ui.removeCallbacks(hideBanner)
+        ui.postDelayed(hideBanner, 2500)
     }
 
     // ---------- Formato de pantalla ----------

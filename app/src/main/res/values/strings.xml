@@ -12,4 +12,7 @@
     <string name="formato_zoom">Zoom (recorta bordes negros)</string>
     <string name="formato_original">Tamaño original</string>
     <string name="canal_no_existe">No existe el canal %1$d</string>
+    <string name="audio_unico">Este canal tiene un solo audio</string>
+    <string name="audio_sel">Audio: %1$s (%2$d de %3$d)</string>
+    <string name="audio_n">Audio %1$d</string>
 </resources>
