@@ -190,6 +190,11 @@ class MainActivity : AppCompatActivity() {
         if (player != null) return
         player = ExoPlayer.Builder(this).build().also { p ->
             playerView.player = p
+            // Audio en español siempre que el canal lo traiga (si no, el que tenga)
+            p.trackSelectionParameters = p.trackSelectionParameters.buildUpon()
+                .setPreferredAudioLanguages("es", "spa")
+                .setPreferredTextLanguages("es")
+                .build()
             p.addListener(object : Player.Listener {
                 override fun onPlayerError(error: PlaybackException) {
                     if (usingMulticast) {
