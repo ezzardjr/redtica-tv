@@ -2,6 +2,7 @@ package com.redtica.tv
 
 import android.content.Intent
 import android.net.VpnService
+import android.net.wifi.WifiManager
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -39,12 +40,18 @@ class MainActivity : AppCompatActivity() {
     private val channels = mutableListOf<Channel>()
     private var current = 0
     private var vpnDenied = false
+    /** Si el multicast no llegó una vez, el resto de la sesión se usa HTTP directo. */
+    private var multicastFailed = false
+    private var usingMulticast = false
+    private var mcastLock: WifiManager.MulticastLock? = null
     private var connecting = false
 
     private val ui = Handler(Looper.getMainLooper())
     private val prefs by lazy { getSharedPreferences("redtica", MODE_PRIVATE) }
     private val hideBanner = Runnable { banner.visibility = View.GONE }
     private val retryPlay = Runnable { play(current) }
+    /** Si en 5 s el canal multicast no arranca, se pasa a HTTP. */
+    private val multicastTimeout = Runnable { if (usingMulticast) fallbackToHttp() }
     private val retryConnect = Runnable { connect() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -57,6 +64,7 @@ class MainActivity : AppCompatActivity() {
         list = findViewById(R.id.list)
         list.layoutManager = LinearLayoutManager(this)
         if (BuildConfig.USA_TUNEL) tunnel = TunnelManager(this)
+        if (BuildConfig.USA_MULTICAST) acquireMulticastLock()
 
         // Toque en pantalla (teléfono): abre/cierra la lista
         playerView.setOnClickListener { if (isListVisible()) hideList() else showList() }
@@ -141,6 +149,12 @@ class MainActivity : AppCompatActivity() {
         }
         channels.clear()
         channels.addAll(loaded)
+        if (BuildConfig.USA_MULTICAST) {
+            try {
+                M3uParser.applyMulticast(channels, assets.open("multicast.txt").bufferedReader().use { it.readText() })
+            } catch (_: Exception) {
+            }
+        }
         adapter = ChannelAdapter(channels) { idx ->
             hideList()
             play(idx)
@@ -157,6 +171,9 @@ class MainActivity : AppCompatActivity() {
             playerView.player = p
             p.addListener(object : Player.Listener {
                 override fun onPlayerError(error: PlaybackException) {
+                    if (usingMulticast) {
+                        fallbackToHttp(); return
+                    }
                     showStatus(getString(R.string.sin_senal))
                     ui.removeCallbacks(retryPlay)
                     ui.postDelayed(retryPlay, 3000)
@@ -164,7 +181,10 @@ class MainActivity : AppCompatActivity() {
 
                 override fun onPlaybackStateChanged(state: Int) {
                     when (state) {
-                        Player.STATE_READY -> status.visibility = View.GONE
+                        Player.STATE_READY -> {
+                            status.visibility = View.GONE
+                            ui.removeCallbacks(multicastTimeout)
+                        }
                         Player.STATE_ENDED -> {
                             ui.removeCallbacks(retryPlay)
                             ui.postDelayed(retryPlay, 1000)
@@ -184,9 +204,14 @@ class MainActivity : AppCompatActivity() {
         adapter?.current = current
 
         val ch = channels[current]
+        ui.removeCallbacks(multicastTimeout)
+        val mcast = if (BuildConfig.USA_MULTICAST && !multicastFailed) ch.mcast else null
+        usingMulticast = mcast != null
+        val uri = mcast ?: ch.url
+        if (usingMulticast) ui.postDelayed(multicastTimeout, 5000)
         val item = MediaItem.Builder()
-            .setUri(ch.url)
-            .apply { if (ch.url.contains(".m3u8")) setMimeType(MimeTypes.APPLICATION_M3U8) }
+            .setUri(uri)
+            .apply { if (uri.contains(".m3u8")) setMimeType(MimeTypes.APPLICATION_M3U8) }
             .build()
         player?.run {
             setMediaItem(item)
@@ -194,6 +219,25 @@ class MainActivity : AppCompatActivity() {
             playWhenReady = true
         }
         showBanner(ch)
+    }
+
+    /** El multicast no llegó (ONU sin IPTV, red sin IGMP): se sigue por HTTP. */
+    private fun fallbackToHttp() {
+        ui.removeCallbacks(multicastTimeout)
+        multicastFailed = true
+        usingMulticast = false
+        play(current)
+    }
+
+    private fun acquireMulticastLock() {
+        try {
+            val wifi = applicationContext.getSystemService(WIFI_SERVICE) as WifiManager
+            mcastLock = wifi.createMulticastLock("redtica-tv").apply {
+                setReferenceCounted(false)
+                acquire()
+            }
+        } catch (_: Exception) {
+        }
     }
 
     // ---------- Control remoto ----------
@@ -299,6 +343,10 @@ class MainActivity : AppCompatActivity() {
         ui.removeCallbacksAndMessages(null)
         player?.release()
         player = null
+        try {
+            mcastLock?.release()
+        } catch (_: Exception) {
+        }
         val t = tunnel
         if (isFinishing && t != null) Thread { t.down() }.start()
     }

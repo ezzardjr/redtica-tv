@@ -4,7 +4,8 @@ import java.io.IOException
 import java.net.HttpURLConnection
 import java.net.URL
 
-data class Channel(val name: String, val url: String)
+/** [mcast] = dirección multicast udp://239.10.10.x:1234 si el canal la tiene, o null. */
+data class Channel(val name: String, val url: String, val id: String? = null, var mcast: String? = null)
 
 /** Descarga y lee la lista M3U del Astra. */
 object M3uParser {
@@ -33,7 +34,8 @@ object M3uParser {
                 line.startsWith("#") -> Unit
                 else -> {
                     val url = URL(URL(base), line).toString()
-                    out += Channel(pendingName ?: "Canal ${out.size + 1}", url)
+                    val id = Regex("/play/([A-Za-z0-9]+)").find(url)?.groupValues?.get(1)
+                    out += Channel(pendingName ?: "Canal ${out.size + 1}", url, id)
                     pendingName = null
                 }
             }
@@ -51,5 +53,15 @@ object M3uParser {
             }
         }
         return null
+    }
+
+    /** Lee assets/multicast.txt (id:octeto,...) y asigna la dirección multicast a cada canal. */
+    fun applyMulticast(channels: List<Channel>, mapText: String) {
+        val map = mapText.lineSequence().filter { !it.startsWith("#") }.joinToString(",")
+            .split(',').mapNotNull { e ->
+                val p = e.trim().split(':')
+                if (p.size == 2 && p[1].toIntOrNull() != null) p[0] to p[1].toInt() else null
+            }.toMap()
+        channels.forEach { ch -> ch.id?.let { map[it] }?.let { ch.mcast = "udp://239.10.10.$it:1234" } }
     }
 }
