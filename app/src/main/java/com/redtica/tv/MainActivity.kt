@@ -19,7 +19,10 @@ import androidx.media3.common.Player
 import androidx.media3.common.TrackSelectionOverride
 import androidx.media3.common.Tracks
 import java.util.Locale
+import androidx.media3.exoplayer.DefaultLoadControl
 import androidx.media3.exoplayer.ExoPlayer
+import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
 import androidx.media3.ui.AspectRatioFrameLayout
 import androidx.media3.ui.PlayerView
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -195,7 +198,13 @@ class MainActivity : AppCompatActivity() {
 
     private fun ensurePlayer() {
         if (player != null) return
-        player = ExoPlayer.Builder(this).build().also { p ->
+        // Colchón de video: arranca con 3 s guardados y, si la red se traba,
+        // espera a tener 6 s antes de seguir, para que no se vuelva a pegar enseguida.
+        val loadControl = DefaultLoadControl.Builder()
+            .setBufferDurationsMs(15_000, 40_000, 3_000, 6_000)
+            .setPrioritizeTimeOverSizeThresholds(true)
+            .build()
+        player = ExoPlayer.Builder(this).setLoadControl(loadControl).build().also { p ->
             playerView.player = p
             // Audio en español siempre que el canal lo traiga (si no, el que tenga)
             p.trackSelectionParameters = p.trackSelectionParameters.buildUpon()
@@ -242,7 +251,8 @@ class MainActivity : AppCompatActivity() {
         adapter?.current = current
         applyFormat(ch)
         ui.removeCallbacks(multicastTimeout)
-        val mcast = if (BuildConfig.USA_MULTICAST && !multicastFailed) ch.mcast else null
+        // Multicast solo por cable: por WiFi se pierden paquetes y la imagen se pega.
+        val mcast = if (BuildConfig.USA_MULTICAST && !multicastFailed && isEthernet()) ch.mcast else null
         usingMulticast = mcast != null
         val uri = mcast ?: ch.url
         if (usingMulticast) ui.postDelayed(multicastTimeout, 5000)
@@ -270,6 +280,20 @@ class MainActivity : AppCompatActivity() {
         multicastFailed = true
         usingMulticast = false
         play(current)
+    }
+
+    /** true si el TV/caja está conectado por cable de red (no WiFi). */
+    private fun isEthernet(): Boolean = try {
+        val cm = getSystemService(CONNECTIVITY_SERVICE) as ConnectivityManager
+        if (android.os.Build.VERSION.SDK_INT >= 23) {
+            cm.getNetworkCapabilities(cm.activeNetwork)
+                ?.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET) == true
+        } else {
+            @Suppress("DEPRECATION")
+            cm.activeNetworkInfo?.type == ConnectivityManager.TYPE_ETHERNET
+        }
+    } catch (_: Exception) {
+        false
     }
 
     private fun acquireMulticastLock() {
