@@ -21,13 +21,15 @@ import androidx.media3.common.Tracks
 import java.util.Locale
 import androidx.media3.exoplayer.DefaultLoadControl
 import androidx.media3.exoplayer.ExoPlayer
-import android.net.ConnectivityManager
-import android.net.NetworkCapabilities
+import androidx.media3.exoplayer.source.ProgressiveMediaSource
+import androidx.media3.datasource.DataSource
+import androidx.media3.common.util.UnstableApi
 import androidx.media3.ui.AspectRatioFrameLayout
 import androidx.media3.ui.PlayerView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
+@UnstableApi
 class MainActivity : AppCompatActivity() {
 
     companion object {
@@ -50,6 +52,8 @@ class MainActivity : AppCompatActivity() {
     private var vpnDenied = false
     /** Si el multicast no llegó una vez, el resto de la sesión se usa HTTP directo. */
     private var multicastFailed = false
+    /** El multicast ya funcionó en esta red: un corte no manda a HTTP, se reintenta multicast. */
+    private var multicastWorked = false
     private var usingMulticast = false
     private var mcastLock: WifiManager.MulticastLock? = null
     private var connecting = false
@@ -59,7 +63,7 @@ class MainActivity : AppCompatActivity() {
     private val hideBanner = Runnable { banner.visibility = View.GONE }
     private val retryPlay = Runnable { play(current) }
     /** Si en 5 s el canal multicast no arranca, se pasa a HTTP. */
-    private val multicastTimeout = Runnable { if (usingMulticast) fallbackToHttp() }
+    private val multicastTimeout = Runnable { if (usingMulticast && !multicastWorked) fallbackToHttp() }
     private val retryConnect = Runnable { connect() }
 
     /** Número que el cliente va marcando con el control (ej. 4 y 2 = canal 42). */
@@ -213,7 +217,7 @@ class MainActivity : AppCompatActivity() {
                 .build()
             p.addListener(object : Player.Listener {
                 override fun onPlayerError(error: PlaybackException) {
-                    if (usingMulticast) {
+                    if (usingMulticast && !multicastWorked) {
                         fallbackToHttp(); return
                     }
                     showStatus(getString(R.string.sin_senal))
@@ -230,6 +234,7 @@ class MainActivity : AppCompatActivity() {
                         Player.STATE_READY -> {
                             status.visibility = View.GONE
                             ui.removeCallbacks(multicastTimeout)
+                            if (usingMulticast) multicastWorked = true
                         }
                         Player.STATE_ENDED -> {
                             ui.removeCallbacks(retryPlay)
@@ -251,8 +256,8 @@ class MainActivity : AppCompatActivity() {
         adapter?.current = current
         applyFormat(ch)
         ui.removeCallbacks(multicastTimeout)
-        // Multicast solo por cable: por WiFi se pierden paquetes y la imagen se pega.
-        val mcast = if (BuildConfig.USA_MULTICAST && !multicastFailed && isEthernet()) ch.mcast else null
+        // Todo por multicast (cable y WiFi): no aumenta el consumo por cliente.
+        val mcast = if (BuildConfig.USA_MULTICAST && !multicastFailed) ch.mcast else null
         usingMulticast = mcast != null
         val uri = mcast ?: ch.url
         if (usingMulticast) ui.postDelayed(multicastTimeout, 5000)
@@ -267,7 +272,15 @@ class MainActivity : AppCompatActivity() {
                 .clearOverridesOfType(C.TRACK_TYPE_AUDIO).build()
         }
         player?.run {
-            setMediaItem(item)
+            if (usingMulticast) {
+                // Lector UDP propio con búfer de 8 MB para aguantar las ráfagas del WiFi
+                setMediaSource(
+                    ProgressiveMediaSource.Factory(DataSource.Factory { BigUdpDataSource() })
+                        .createMediaSource(item)
+                )
+            } else {
+                setMediaItem(item)
+            }
             prepare()
             playWhenReady = true
         }
@@ -282,19 +295,6 @@ class MainActivity : AppCompatActivity() {
         play(current)
     }
 
-    /** true si el TV/caja está conectado por cable de red (no WiFi). */
-    private fun isEthernet(): Boolean = try {
-        val cm = getSystemService(CONNECTIVITY_SERVICE) as ConnectivityManager
-        if (android.os.Build.VERSION.SDK_INT >= 23) {
-            cm.getNetworkCapabilities(cm.activeNetwork)
-                ?.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET) == true
-        } else {
-            @Suppress("DEPRECATION")
-            cm.activeNetworkInfo?.type == ConnectivityManager.TYPE_ETHERNET
-        }
-    } catch (_: Exception) {
-        false
-    }
 
     private fun acquireMulticastLock() {
         try {
