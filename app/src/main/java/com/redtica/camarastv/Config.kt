@@ -65,7 +65,6 @@ data class AppConfig(
     var eventTypes: String = "VMD,fielddetection,linedetection,regionEntrance",
     var retentionDays: Int = 0,
     var localMaxMB: Int = 3000,
-    var driveMaxGB: Int = 1000,
     var driveClientId: String = "",
     var driveClientSecret: String = "",
     var driveRefreshToken: String = "",
@@ -73,6 +72,7 @@ data class AppConfig(
     var driveRootName: String = "",
     var pin: String = "",
     var kiosk: Boolean = true,
+    var driveMaxGB: Int = 1000,
     var cameras: MutableList<Camera> = MutableList(MAX_CAMS) { Camera() }
 ) {
     fun allowedEvents(): Set<String> =
