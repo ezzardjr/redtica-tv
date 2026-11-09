@@ -39,7 +39,7 @@ object Drive {
     // ---------- Vinculación ----------
     fun startLink() {
         val cfg = AppState.config
-        if (cfg.driveClientId.isBlank() || cfg.driveClientSecret.isBlank()) {
+        if (cfg.clientId.isBlank() || cfg.clientSecret.isBlank()) {
             AppState.driveStatus = "Falta el Client ID / Client Secret de Google"
             AppState.changed(); return
         }
@@ -48,7 +48,7 @@ object Drive {
         Thread {
             try {
                 val r = post("https://oauth2.googleapis.com/device/code",
-                    FormBody.Builder().add("client_id", cfg.driveClientId).add("scope", SCOPE).build())
+                    FormBody.Builder().add("client_id", cfg.clientId).add("scope", SCOPE).build())
                 val deviceCode = r.getString("device_code")
                 AppState.driveUserCode = r.getString("user_code")
                 AppState.driveVerifyUrl = r.optString("verification_url", "https://www.google.com/device")
@@ -59,7 +59,7 @@ object Drive {
                 while (System.currentTimeMillis() < deadline) {
                     Thread.sleep(interval * 1000)
                     val t = postRaw("https://oauth2.googleapis.com/token", FormBody.Builder()
-                        .add("client_id", cfg.driveClientId).add("client_secret", cfg.driveClientSecret)
+                        .add("client_id", cfg.clientId).add("client_secret", cfg.clientSecret)
                         .add("device_code", deviceCode)
                         .add("grant_type", "urn:ietf:params:oauth:grant-type:device_code").build())
                     if (t.has("refresh_token")) {
@@ -103,7 +103,7 @@ object Drive {
         if (!cfg.driveLinked) throw AuthException("no vinculado")
         accessToken?.let { if (System.currentTimeMillis() < expiresAt) return it }
         val t = postRaw("https://oauth2.googleapis.com/token", FormBody.Builder()
-            .add("client_id", cfg.driveClientId).add("client_secret", cfg.driveClientSecret)
+            .add("client_id", cfg.clientId).add("client_secret", cfg.clientSecret)
             .add("refresh_token", cfg.driveRefreshToken).add("grant_type", "refresh_token").build())
         if (!t.has("access_token")) {
             if (t.optString("error") == "invalid_grant") {
@@ -194,6 +194,45 @@ object Drive {
         }
     }
 
+    /**
+     * Límite de espacio: suma todo lo que la app ha subido a Drive (de todos los TVs que usan
+     * la misma cuenta) y, si pasa del máximo, borra lo más antiguo hasta quedar en el 95 %.
+     * Devuelve el espacio usado en bytes.
+     */
+    fun enforceQuota(maxGB: Int): Long {
+        data class F(val id: String, val size: Long, val created: String)
+        val all = ArrayList<F>()
+        var pageToken: String? = null
+        do {
+            val b = "https://www.googleapis.com/drive/v3/files".toHttpUrl().newBuilder()
+                .addQueryParameter("q", "mimeType!='$FOLDER' and trashed=false")
+                .addQueryParameter("fields", "nextPageToken,files(id,size,createdTime)")
+                .addQueryParameter("orderBy", "createdTime")
+                .addQueryParameter("pageSize", "1000")
+            pageToken?.let { b.addQueryParameter("pageToken", it) }
+            val r = get(b.build().toString())
+            val arr = r.optJSONArray("files")
+            if (arr != null) for (i in 0 until arr.length()) {
+                val o = arr.getJSONObject(i)
+                all.add(F(o.getString("id"), o.optString("size", "0").toLongOrNull() ?: 0L, o.optString("createdTime")))
+            }
+            pageToken = r.optString("nextPageToken").ifBlank { null }
+        } while (pageToken != null)
+
+        var used = all.sumOf { it.size }
+        if (maxGB <= 0) return used
+        val max = maxGB.toLong() * 1_000_000_000L
+        if (used <= max) return used
+        val target = (max * 0.95).toLong()
+        for (f in all.sortedBy { it.created }) {
+            if (used <= target) break
+            val del = Request.Builder().url("https://www.googleapis.com/drive/v3/files/${f.id}")
+                .header("Authorization", "Bearer ${token()}").delete().build()
+            http.newCall(del).execute().use { if (it.isSuccessful || it.code == 404) used -= f.size }
+        }
+        return used
+    }
+
     // ---------- HTTP ----------
     private fun get(url: String): JSONObject =
         exec(Request.Builder().url(url).header("Authorization", "Bearer ${token()}").build())
@@ -266,8 +305,14 @@ class Uploader(private val ctx: Context) : Thread("subidas") {
                 AppState.changed(); return
             }
         }
-        if (System.currentTimeMillis() - lastPurge > 6 * 3600_000L) {
-            try { Drive.purgeOld(cfg.retentionDays); lastPurge = System.currentTimeMillis() } catch (_: Exception) { }
+        if (System.currentTimeMillis() - lastPurge > 3 * 3600_000L) {
+            try { Drive.purgeOld(cfg.retentionDays) } catch (_: Exception) { }
+            try {
+                val used = Drive.enforceQuota(cfg.driveMaxGB)
+                AppState.driveUsage = String.format(Locale.US, "%.1f GB de %d GB", used / 1e9, cfg.driveMaxGB)
+                AppState.changed()
+            } catch (_: Exception) { }
+            lastPurge = System.currentTimeMillis()
         }
     }
 

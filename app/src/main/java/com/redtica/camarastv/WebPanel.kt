@@ -67,6 +67,7 @@ class WebPanel(private val ctx: Context, port: Int) : NanoHTTPD(port) {
             c.clipSeconds = p["clipSeconds"]?.toIntOrNull()?.coerceIn(5, 300) ?: c.clipSeconds
             c.eventTypes = p["eventTypes"]?.trim()?.ifBlank { c.eventTypes } ?: c.eventTypes
             c.retentionDays = p["retentionDays"]?.toIntOrNull()?.coerceIn(0, 3650) ?: c.retentionDays
+            c.driveMaxGB = p["driveMaxGB"]?.toIntOrNull()?.coerceIn(0, 100_000) ?: c.driveMaxGB
             c.localMaxMB = p["localMaxMB"]?.toIntOrNull()?.coerceIn(200, 100_000) ?: c.localMaxMB
             p["newPin"]?.trim()?.let { if (it.length >= 4) c.pin = it }
             c.kiosk = p.containsKey("kiosk")
@@ -125,7 +126,7 @@ class WebPanel(private val ctx: Context, port: Int) : NanoHTTPD(port) {
 
         // Drive
         sb.append("<div class=card id=drive><h3>Respaldo en Google Drive</h3>")
-        sb.append("<p>${e(AppState.driveStatus)}<br><span class=muted>Archivos pendientes de subir: ${AppState.pendingFiles}</span></p>")
+        sb.append("<p>${e(AppState.driveStatus)}<br><span class=muted>Archivos pendientes de subir: ${AppState.pendingFiles}${if (AppState.driveUsage.isNotEmpty()) " · Uso: ${AppState.driveUsage}" else ""}</span></p>")
         if (AppState.driveUserCode.isNotEmpty()) {
             sb.append("""<p>1. Abra <a style="color:#7fc0ff" href="${e(AppState.driveVerifyUrl)}" target=_blank>${e(AppState.driveVerifyUrl)}</a>
                 con la cuenta de Google donde quiere los respaldos.<br>2. Escriba este código:</p>
@@ -135,7 +136,9 @@ class WebPanel(private val ctx: Context, port: Int) : NanoHTTPD(port) {
         if (c.driveLinked) {
             sb.append("<form method=post action=/drive/unlink><button class=sec>Desvincular Google Drive</button></form>")
         } else {
-            sb.append("""<form method=post action=/drive/link accept-charset=utf-8>
+            if (BuildConfig.GOOGLE_CLIENT_ID.isNotBlank() && c.driveClientId.isBlank()) {
+                sb.append("<form method=post action=/drive/link><button>Vincular Google Drive</button></form>")
+            } else sb.append("""<form method=post action=/drive/link accept-charset=utf-8>
                 <label>Client ID (Google Cloud · tipo "TV y dispositivos de entrada limitada")</label>
                 <input name=driveClientId value="${e(c.driveClientId)}">
                 <label>Client Secret</label>
@@ -176,8 +179,10 @@ class WebPanel(private val ctx: Context, port: Int) : NanoHTTPD(port) {
             <div><label>Calidad del clip</label><select name=recordMain>
             <option value=0 ${if (!c.recordMain) "selected" else ""}>Sub-stream (liviano)</option>
             <option value=1 ${if (c.recordMain) "selected" else ""}>Principal (alta calidad)</option></select></div></div>
-            <div class=row><div><label>Borrar de Drive después de (días)</label><input name=retentionDays type=number value=${c.retentionDays}></div>
+            <div class=row><div><label>Borrar de Drive después de (días, 0 = solo por espacio)</label><input name=retentionDays type=number value=${c.retentionDays}></div>
             <div><label>Máximo en el TV si no hay Internet (MB)</label><input name=localMaxMB type=number value=${c.localMaxMB}></div></div>
+            <label>Espacio máximo en Google Drive (GB, total de todos los TVs)</label><input name=driveMaxGB type=number value=${c.driveMaxGB}>
+            <p class=muted>Al llegar al límite se borran los clips más antiguos.</p>
             <label>Tipos de evento (Hikvision)</label><input name=eventTypes value="${e(c.eventTypes)}">
             <p class=muted>VMD = movimiento · fielddetection = intrusión · linedetection = cruce de línea</p>
             </div>""")

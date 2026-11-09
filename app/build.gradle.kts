@@ -13,6 +13,8 @@ android {
         targetSdk = 34
         versionCode = 3
         versionName = "1.2"
+        buildConfigField("String", "GOOGLE_CLIENT_ID", "\"${System.getenv("GOOGLE_CLIENT_ID") ?: ""}\"")
+        buildConfigField("String", "GOOGLE_CLIENT_SECRET", "\"${System.getenv("GOOGLE_CLIENT_SECRET") ?: ""}\"")
         ndk { abiFilters += listOf("armeabi-v7a", "arm64-v8a") }
     }
 
@@ -32,6 +34,8 @@ android {
         }
         debug { signingConfig = signingConfigs.getByName("fija") }
     }
+
+    buildFeatures { buildConfig = true }
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17

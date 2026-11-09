@@ -63,8 +63,9 @@ data class AppConfig(
     var recordMain: Boolean = false,
     var clipSeconds: Int = 30,
     var eventTypes: String = "VMD,fielddetection,linedetection,regionEntrance",
-    var retentionDays: Int = 30,
+    var retentionDays: Int = 0,
     var localMaxMB: Int = 3000,
+    var driveMaxGB: Int = 1000,
     var driveClientId: String = "",
     var driveClientSecret: String = "",
     var driveRefreshToken: String = "",
@@ -78,12 +79,15 @@ data class AppConfig(
         eventTypes.split(",").map { it.trim().lowercase() }.filter { it.isNotEmpty() }.toSet()
 
     val driveLinked get() = driveRefreshToken.isNotBlank()
+    /** Credenciales de Google: las del panel, o las que vienen incluidas en el APK. */
+    val clientId get() = driveClientId.ifBlank { BuildConfig.GOOGLE_CLIENT_ID }
+    val clientSecret get() = driveClientSecret.ifBlank { BuildConfig.GOOGLE_CLIENT_SECRET }
 
     fun toJson() = JSONObject().apply {
         put("siteName", siteName); put("defaultUser", defaultUser); put("defaultPass", defaultPass)
         put("gridSize", gridSize); put("rotateSeconds", rotateSeconds)
         put("recordEnabled", recordEnabled); put("recordMain", recordMain); put("clipSeconds", clipSeconds)
-        put("eventTypes", eventTypes); put("retentionDays", retentionDays); put("localMaxMB", localMaxMB)
+        put("eventTypes", eventTypes); put("retentionDays", retentionDays); put("localMaxMB", localMaxMB); put("driveMaxGB", driveMaxGB)
         put("driveClientId", driveClientId); put("driveClientSecret", driveClientSecret)
         put("driveRefreshToken", driveRefreshToken); put("driveRootId", driveRootId)
         put("driveRootName", driveRootName); put("pin", pin); put("kiosk", kiosk)
@@ -100,11 +104,12 @@ data class AppConfig(
                 o.optBoolean("recordEnabled", true), o.optBoolean("recordMain", false),
                 o.optInt("clipSeconds", 30),
                 o.optString("eventTypes", "VMD,fielddetection,linedetection,regionEntrance"),
-                o.optInt("retentionDays", 30), o.optInt("localMaxMB", 3000),
+                o.optInt("retentionDays", 0), o.optInt("localMaxMB", 3000),
                 o.optString("driveClientId"), o.optString("driveClientSecret"),
                 o.optString("driveRefreshToken"), o.optString("driveRootId"),
                 o.optString("driveRootName"), o.optString("pin"), o.optBoolean("kiosk", true)
             )
+            c.driveMaxGB = o.optInt("driveMaxGB", 1000)
             val arr = o.optJSONArray("cameras")
             c.cameras = MutableList(MAX_CAMS) { i ->
                 arr?.optJSONObject(i)?.let { Camera.fromJson(it) } ?: Camera()
@@ -133,6 +138,7 @@ object AppState {
     @Volatile var pendingFiles: Int = 0
     @Volatile var lastEvent: String = ""
     @Volatile var codecStatus: String = ""
+    @Volatile var driveUsage: String = ""
     @Volatile var maintenanceRequest: Boolean = false
     @Volatile var removeOwnerRequest: Boolean = false
 
