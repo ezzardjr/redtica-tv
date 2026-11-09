@@ -279,6 +279,7 @@ class MainActivity : Activity() {
 
     // ---------------- Control remoto ----------------
     override fun onKeyDown(keyCode: Int, event: KeyEvent): Boolean {
+        if (Splash.skipIfShowing()) return true
         when (keyCode) {
             KeyEvent.KEYCODE_BACK -> {
                 if (fullIndex >= 0) { closeFull(); return true }
