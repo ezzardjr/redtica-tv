@@ -89,6 +89,7 @@ class MainActivity : Activity() {
         infoBar = overlayText(16f).apply { setPadding(24, 14, 24, 14); setBackgroundColor(0xCC0B1E33.toInt()) }
         root.addView(infoBar, FrameLayout.LayoutParams(MATCH_PARENT, WRAP_CONTENT, Gravity.BOTTOM))
         setContentView(root)
+        if (savedInstanceState == null) Splash.show(this, root)
 
         CameraService.start(this)
         infoUntil = System.currentTimeMillis() + 20_000
