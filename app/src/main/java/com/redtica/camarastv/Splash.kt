@@ -111,10 +111,10 @@ class LogoAnimView(ctx: Context, private val onFinish: () -> Unit) : View(ctx) {
 
         particulas.clear()
         val rnd = Random(7)
-        repeat(70) {
+        repeat(40) {
             particulas.add(Particula(rnd.nextFloat() * w, rnd.nextFloat() * h,
                 (1.2f + rnd.nextFloat() * 2.8f) * h / 720f, (12 + rnd.nextFloat() * 30) * h / 720f,
-                rnd.nextFloat() * 6.28f, 0.15f + rnd.nextFloat() * 0.45f))
+                rnd.nextFloat() * 6.28f, 0.08f + rnd.nextFloat() * 0.27f))
         }
     }
 
