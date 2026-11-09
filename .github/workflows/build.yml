@@ -18,7 +18,8 @@ jobs:
         env:
           GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
           GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
-        run: chmod +x gradlew && ./gradlew assembleRelease --no-daemon --stacktrace
+        shell: bash
+        run: chmod +x gradlew && set -o pipefail && ./gradlew assembleRelease --no-daemon 2>&1 | tee build.log
       - name: Renombrar
         run: cp app/build/outputs/apk/release/*.apk CamarasTV.apk
       - uses: actions/upload-artifact@v4
@@ -33,3 +34,12 @@ jobs:
           target_commitish: ${{ github.sha }}
           make_latest: false
           files: CamarasTV.apk
+      - name: Publicar registro si falla
+        if: failure()
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: camaras-tv-log
+          name: Registro de compilación
+          target_commitish: ${{ github.sha }}
+          make_latest: false
+          files: build.log
