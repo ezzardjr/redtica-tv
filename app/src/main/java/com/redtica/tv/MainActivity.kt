@@ -300,7 +300,7 @@ class MainActivity : AppCompatActivity() {
         // Modo túnel: el TV sincroniza audio y video por hardware (como Netflix/YouTube).
         // Si el TV no lo soporta, ExoPlayer usa el modo normal automáticamente.
         val trackSelector = DefaultTrackSelector(this).apply {
-            setParameters(buildUponParameters().setTunnelingEnabled(true))
+            setParameters(buildUponParameters().setTunnelingEnabled(false))
         }
         player = ExoPlayer.Builder(this, renderers).setLoadControl(loadControl)
             .setTrackSelector(trackSelector).build().also { p ->
@@ -709,7 +709,7 @@ class MainActivity : AppCompatActivity() {
             appendLine("Fuente: " + if (usingMulticast) "Multicast" else "HTTP")
             appendLine("Red: " + networkInfo())
             appendLine("Video: " + (f?.let { "${it.width}x${it.height} ${it.sampleMimeType?.substringAfter('/')} ${it.bitrate.takeIf { b -> b > 0 }?.let { b -> "${b / 1000} kbps" } ?: ""}" } ?: "-"))
-            appendLine("App: v${BuildConfig.VERSION_NAME} | Modo túnel: activado")
+            appendLine("App: v${BuildConfig.VERSION_NAME} | Modo túnel: no")
             appendLine("Decodificador: $videoDecoder")
             appendLine("Cuadros del canal: " + (if (detectedFps > 0f) "%.2f fps".format(detectedFps) else "midiendo...") + " | Pantalla: " + displayHz())
             appendLine("Colchón: $buf s")
