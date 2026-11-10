@@ -72,10 +72,8 @@ class MainActivity : AppCompatActivity() {
 
     /** Animación de inicio: 10 s la primera vez del día, 3 s las demás. */
     private fun showIntro() {
-        val today = java.text.SimpleDateFormat("yyyy-MM-dd", Locale.US).format(java.util.Date())
-        val longVersion = prefs.getString("intro_dia", "") != today
-        prefs.edit().putString("intro_dia", today).apply()
-        val v = IntroView(this, longVersion) { intro = null }
+        // Se muestra completa cada vez que se abre la app
+        val v = IntroView(this, true) { intro = null }
         intro = v
         (findViewById<View>(android.R.id.content) as FrameLayout).addView(
             v, FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT)
@@ -754,6 +752,12 @@ class MainActivity : AppCompatActivity() {
         } catch (_: Exception) {
         }
         val t = tunnel
-        if (isFinishing && t != null) Thread { t.down() }.start()
+        if (isFinishing) {
+            // Cierre total: al volver a entrar arranca de cero (con la animación)
+            Thread {
+                try { t?.down() } catch (_: Exception) {}
+                android.os.Process.killProcess(android.os.Process.myPid())
+            }.start()
+        }
     }
 }
