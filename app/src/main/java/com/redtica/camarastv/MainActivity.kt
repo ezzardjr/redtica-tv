@@ -247,7 +247,7 @@ class MainActivity : Activity() {
         fullIndex = idx
         fullLayout.visibility = View.VISIBLE
         fullLabel.visibility = View.VISIBLE
-        fullLabel.text = "${idx + 1} · ${AppState.config.cameras[idx].label(idx)}  (Atrás = mosaico)"
+        fullLabel.text = "${idx + 1} · ${AppState.config.cameras[idx].label(idx)}  (Atrás = mosaico · Mantener OK = menú)"
         fullPlayer = play(fullLayout, idx, main = true) { ok ->
             fullLabel.text = "${idx + 1} · ${AppState.config.cameras[idx].label(idx)}" + if (ok) "" else "  · sin señal"
         }
@@ -277,15 +277,108 @@ class MainActivity : Activity() {
         openFull(next)
     }
 
+    // ---------------- Menú en pantalla ----------------
+    // Los controles tipo Xiaomi Mi TV Stick no tienen tecla MENU, CH+/CH- ni números,
+    // y el botón de "cuadros" lo toma el sistema. Por eso el menú se abre también
+    // manteniendo presionado OK (centro del aro).
+    private var menuBox: LinearLayout? = null
+    private var centerDownAt = 0L
+    private var centerLong = false
+
+    private fun menuOpen() = menuBox != null
+
+    private fun openMenu() {
+        if (menuOpen()) return
+        val box = LinearLayout(this).apply {
+            orientation = LinearLayout.VERTICAL
+            setPadding(36, 28, 36, 28)
+            background = GradientDrawable().apply { setColor(0xEE0B1E33.toInt()); cornerRadius = 24f }
+        }
+        val title = overlayText(20f).apply { text = "Menú · ${AppState.config.siteName}"; setPadding(8, 0, 8, 18) }
+        box.addView(title)
+        val items = ArrayList<Pair<String, () -> Unit>>()
+        if (fullIndex >= 0) items.add("Volver al mosaico" to { closeFull() })
+        val cur = AppState.config.gridSize
+        listOf(1, 4, 9, 16).forEach { n ->
+            items.add(("Mosaico de $n ${if (n == 1) "cuadro" else "cuadros"}" + if (n == cur) "  ✓" else "") to {
+                if (n != AppState.config.gridSize) AppState.update { it.gridSize = n }
+            })
+        }
+        if (pageCount() > 1) {
+            items.add("Página siguiente" to { if (fullIndex >= 0) closeFull(); changePage(+1) })
+            items.add("Página anterior" to { if (fullIndex >= 0) closeFull(); changePage(-1) })
+        }
+        items.add("Mostrar información (IP, Drive, PIN)" to {
+            infoUntil = System.currentTimeMillis() + 60_000; refreshOverlays()
+        })
+        items.add("Cerrar menú" to { })
+        var first: View? = null
+        items.forEach { (label, action) ->
+            val tv = overlayText(18f).apply {
+                text = label; setPadding(24, 14, 24, 14)
+                isFocusable = true; isFocusableInTouchMode = false
+                background = menuItemBg(false)
+                setOnFocusChangeListener { v, has -> v.background = menuItemBg(has) }
+                setOnClickListener { closeMenu(); action() }
+            }
+            box.addView(tv, LinearLayout.LayoutParams(MATCH_PARENT, WRAP_CONTENT).apply { setMargins(0, 4, 0, 4) })
+            if (first == null) first = tv
+        }
+        root.addView(box, FrameLayout.LayoutParams(WRAP_CONTENT, WRAP_CONTENT, Gravity.CENTER))
+        menuBox = box
+        first?.requestFocus()
+    }
+
+    private fun closeMenu() {
+        val box = menuBox ?: return
+        root.removeView(box)
+        menuBox = null
+        if (fullIndex < 0) (tiles.firstOrNull { it.frame.hasFocus() } ?: tiles.firstOrNull())?.frame?.requestFocus()
+    }
+
+    private fun menuItemBg(focused: Boolean) = GradientDrawable().apply {
+        setColor(if (focused) 0xFF3FA9FF.toInt() else 0x00000000)
+        cornerRadius = 12f
+    }
+
+    private fun isCenter(k: Int) = k == KeyEvent.KEYCODE_DPAD_CENTER || k == KeyEvent.KEYCODE_ENTER ||
+        k == KeyEvent.KEYCODE_NUMPAD_ENTER || k == KeyEvent.KEYCODE_BUTTON_A
+
+    override fun dispatchKeyEvent(event: KeyEvent): Boolean {
+        val k = event.keyCode
+        if (isCenter(k) && !menuOpen()) {
+            when (event.action) {
+                KeyEvent.ACTION_DOWN -> {
+                    if (event.repeatCount == 0) { centerDownAt = System.currentTimeMillis(); centerLong = false }
+                    else if (!centerLong && System.currentTimeMillis() - centerDownAt >= 600) { centerLong = true; openMenu() }
+                    return true
+                }
+                KeyEvent.ACTION_UP -> {
+                    if (Splash.skipIfShowing()) return true
+                    if (!centerLong) currentFocus?.performClick()
+                    centerLong = false
+                    return true
+                }
+            }
+        }
+        return super.dispatchKeyEvent(event)
+    }
+
     // ---------------- Control remoto ----------------
     override fun onKeyDown(keyCode: Int, event: KeyEvent): Boolean {
         if (Splash.skipIfShowing()) return true
+        if (menuOpen()) {
+            if (keyCode == KeyEvent.KEYCODE_BACK || keyCode == KeyEvent.KEYCODE_MENU || keyCode == KEYCODE_ALL_APPS) { closeMenu(); return true }
+            return super.onKeyDown(keyCode, event)
+        }
         when (keyCode) {
             KeyEvent.KEYCODE_BACK -> {
                 if (fullIndex >= 0) { closeFull(); return true }
                 if (AppState.config.kiosk) return true // en kiosco no se sale de la app
             }
-            KeyEvent.KEYCODE_MENU, KeyEvent.KEYCODE_INFO, KeyEvent.KEYCODE_SETTINGS, KeyEvent.KEYCODE_GUIDE -> {
+            KeyEvent.KEYCODE_MENU, KeyEvent.KEYCODE_SETTINGS, KeyEvent.KEYCODE_GUIDE, KEYCODE_ALL_APPS,
+            KeyEvent.KEYCODE_BUTTON_START, KeyEvent.KEYCODE_BUTTON_SELECT -> { openMenu(); return true }
+            KeyEvent.KEYCODE_INFO -> {
                 infoUntil = if (System.currentTimeMillis() < infoUntil) 0 else System.currentTimeMillis() + 60_000
                 refreshOverlays(); return true
             }
@@ -329,10 +422,16 @@ class MainActivity : Activity() {
                 append(AppState.driveStatus)
                 if (AppState.driveUserCode.isNotEmpty()) append("   ·   Código: ${AppState.driveUserCode} en ${AppState.driveVerifyUrl}")
                 append("   ·   Pendientes: ${AppState.pendingFiles}")
-                if (pages > 1) append("   ·   Página ${page + 1}/$pages (CH+/CH-)")
+                if (pages > 1) append("   ·   Página ${page + 1}/$pages")
+                append("   ·   Mantener OK = menú")
                 if (AppState.lastEvent.isNotEmpty()) append("\nÚltimo evento: ${AppState.lastEvent}")
             }
         } else infoBar.visibility = View.GONE
+    }
+
+    companion object {
+        // KeyEvent.KEYCODE_ALL_APPS (API 28); el botón de "cuadros" en algunos controles
+        private const val KEYCODE_ALL_APPS = 284
     }
 
     private fun overlayText(size: Float) = TextView(this).apply {

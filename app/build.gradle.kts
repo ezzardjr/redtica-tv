@@ -11,8 +11,8 @@ android {
         applicationId = "com.redtica.camarastv"
         minSdk = 24
         targetSdk = 34
-        versionCode = 3
-        versionName = "1.2"
+        versionCode = 4
+        versionName = "1.3"
         buildConfigField("String", "GOOGLE_CLIENT_ID", "\"${System.getenv("GOOGLE_CLIENT_ID") ?: ""}\"")
         buildConfigField("String", "GOOGLE_CLIENT_SECRET", "\"${System.getenv("GOOGLE_CLIENT_SECRET") ?: ""}\"")
         ndk { abiFilters += listOf("armeabi-v7a", "arm64-v8a") }
