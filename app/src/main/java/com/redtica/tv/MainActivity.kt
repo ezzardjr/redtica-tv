@@ -21,6 +21,9 @@ import androidx.media3.common.Tracks
 import java.util.Locale
 import androidx.media3.exoplayer.DefaultLoadControl
 import androidx.media3.exoplayer.ExoPlayer
+import androidx.media3.exoplayer.DefaultRenderersFactory
+import androidx.media3.exoplayer.video.VideoFrameMetadataListener
+import android.view.Display
 import androidx.media3.exoplayer.analytics.AnalyticsListener
 import android.graphics.Color
 import android.view.Gravity
@@ -63,6 +66,68 @@ class MainActivity : AppCompatActivity() {
 
     // ---------- Diagnóstico (tecla INFO o azul) ----------
     private var diag: TextView? = null
+
+    // ---------- Ajuste de la frecuencia de la pantalla a los cuadros del canal ----------
+    @Volatile private var fpsSamples = 0
+    @Volatile private var fpsFirstUs = -1L
+    @Volatile private var fpsLastUs = -1L
+    @Volatile private var fpsDone = false
+    private var detectedFps = 0f
+    private val frameRateProbe = VideoFrameMetadataListener { presentationTimeUs, _, format, _ ->
+        if (fpsDone) return@VideoFrameMetadataListener
+        if (format.frameRate > 0f && format.frameRate < 121f) {
+            fpsDone = true
+            ui.post { applyDisplayMode(format.frameRate) }
+            return@VideoFrameMetadataListener
+        }
+        if (fpsFirstUs < 0) fpsFirstUs = presentationTimeUs
+        if (presentationTimeUs > fpsLastUs) fpsLastUs = presentationTimeUs
+        fpsSamples++
+        if (fpsSamples >= 90 && fpsLastUs > fpsFirstUs) {
+            fpsDone = true
+            val fps = (fpsSamples - 1) * 1_000_000f / (fpsLastUs - fpsFirstUs)
+            ui.post { applyDisplayMode(fps) }
+        }
+    }
+
+    private fun resetFrameRateProbe() {
+        fpsSamples = 0; fpsFirstUs = -1L; fpsLastUs = -1L; fpsDone = false
+    }
+
+    /** Elige el modo de pantalla (misma resolución) cuya frecuencia sea múltiplo exacto de los cuadros del canal. */
+    private fun applyDisplayMode(rawFps: Float) {
+        // Redondea a valores estándar de TV (23.976, 25, 29.97, 50, 59.94...)
+        val std = floatArrayOf(23.976f, 24f, 25f, 29.97f, 30f, 50f, 59.94f, 60f)
+        val fps = std.minByOrNull { kotlin.math.abs(it - rawFps) }?.takeIf { kotlin.math.abs(it - rawFps) < 1.5f } ?: rawFps
+        detectedFps = fps
+        if (android.os.Build.VERSION.SDK_INT < 23) return
+        try {
+            @Suppress("DEPRECATION")
+            val display: Display = windowManager.defaultDisplay
+            val cur = display.mode
+            val candidates = display.supportedModes.filter {
+                it.physicalWidth == cur.physicalWidth && it.physicalHeight == cur.physicalHeight
+            }
+            fun score(hz: Float): Float {
+                val ratio = hz / fps
+                val k = kotlin.math.round(ratio)
+                return if (k < 1f) 99f else kotlin.math.abs(ratio - k) / k
+            }
+            val best = candidates.minByOrNull { score(it.refreshRate) * 1000 + (if (it.refreshRate < 48f) 1f else 0f) } ?: return
+            if (score(best.refreshRate) > 0.002f) return
+            if (best.modeId != cur.modeId && score(cur.refreshRate) > 0.0005f) {
+                val lp = window.attributes
+                lp.preferredDisplayModeId = best.modeId
+                window.attributes = lp
+            }
+        } catch (_: Exception) {
+        }
+    }
+
+    private fun displayHz(): String = try {
+        @Suppress("DEPRECATION")
+        "%.2f Hz".format(windowManager.defaultDisplay.refreshRate)
+    } catch (_: Exception) { "?" }
     private var droppedFrames = 0
     private var rebuffers = 0
     private var videoDecoder = "-"
@@ -226,7 +291,13 @@ class MainActivity : AppCompatActivity() {
             .setBufferDurationsMs(15_000, 40_000, 3_000, 6_000)
             .setPrioritizeTimeOverSizeThresholds(true)
             .build()
-        player = ExoPlayer.Builder(this).setLoadControl(loadControl).build().also { p ->
+        // Decodificación en modo asíncrono (más fluida en TVs) y respaldo a otro decodificador si falla
+        val renderers = DefaultRenderersFactory(this)
+            .forceEnableMediaCodecAsynchronousQueueing()
+            .setEnableDecoderFallback(true)
+        player = ExoPlayer.Builder(this, renderers).setLoadControl(loadControl).build().also { p ->
+            p.setVideoChangeFrameRateStrategy(C.VIDEO_CHANGE_FRAME_RATE_STRATEGY_ONLY_IF_SEAMLESS)
+            p.setVideoFrameMetadataListener(frameRateProbe)
             playerView.player = p
             // Audio en español siempre que el canal lo traiga (si no, el que tenga)
             p.trackSelectionParameters = p.trackSelectionParameters.buildUpon()
@@ -313,6 +384,7 @@ class MainActivity : AppCompatActivity() {
             prepare()
             playWhenReady = true
         }
+        resetFrameRateProbe()
         showBanner(ch)
     }
 
@@ -619,6 +691,7 @@ class MainActivity : AppCompatActivity() {
             appendLine("Red: " + networkInfo())
             appendLine("Video: " + (f?.let { "${it.width}x${it.height} ${it.sampleMimeType?.substringAfter('/')} ${it.bitrate.takeIf { b -> b > 0 }?.let { b -> "${b / 1000} kbps" } ?: ""}" } ?: "-"))
             appendLine("Decodificador: $videoDecoder")
+            appendLine("Cuadros del canal: " + (if (detectedFps > 0f) "%.2f fps".format(detectedFps) else "midiendo...") + " | Pantalla: " + displayHz())
             appendLine("Colchón: $buf s")
             appendLine("Pausas por carga: $rebuffers")
             appendLine("Cuadros perdidos: $droppedFrames")
