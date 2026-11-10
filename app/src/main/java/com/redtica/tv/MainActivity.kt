@@ -68,6 +68,7 @@ class MainActivity : AppCompatActivity() {
     // ---------- Diagnóstico (tecla INFO o azul) ----------
     private var diag: TextView? = null
     private var okPending = false
+    private var okDownAt = 0L
 
     // ---------- Ajuste de la frecuencia de la pantalla a los cuadros del canal ----------
     @Volatile private var fpsSamples = 0
@@ -453,7 +454,11 @@ class MainActivity : AppCompatActivity() {
                 KeyEvent.KEYCODE_INFO, KeyEvent.KEYCODE_PROG_BLUE -> {
                     toggleDiag(); return true
                 }
-                KeyEvent.KEYCODE_MENU, KeyEvent.KEYCODE_GUIDE -> {
+                // Botón de menú/ajustes (el cuadrado del control Xiaomi): panel de diagnóstico
+                KeyEvent.KEYCODE_MENU, KeyEvent.KEYCODE_SETTINGS -> {
+                    toggleDiag(); return true
+                }
+                KeyEvent.KEYCODE_GUIDE -> {
                     showList(); return true
                 }
             }
@@ -461,14 +466,16 @@ class MainActivity : AppCompatActivity() {
         // OK: pulsación corta = lista (o ir al número tecleado); mantenido = panel de diagnóstico
         if (isOkKey(code) && !isListVisible() && channels.isNotEmpty()) {
             if (event.action == KeyEvent.ACTION_DOWN) {
-                if (event.repeatCount == 0) okPending = true
+                if (event.repeatCount == 0) { okPending = true; okDownAt = event.eventTime }
                 else if (event.repeatCount == 1 && okPending) { okPending = false; toggleDiag() }
                 return true
             }
             if (event.action == KeyEvent.ACTION_UP) {
                 if (okPending) {
                     okPending = false
-                    if (typed.isNotEmpty()) jumpToTyped() else showList()
+                    // Controles Bluetooth que no repiten la tecla: se mide cuánto se mantuvo
+                    if (event.eventTime - okDownAt >= 700) toggleDiag()
+                    else if (typed.isNotEmpty()) jumpToTyped() else showList()
                 }
                 return true
             }
