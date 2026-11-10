@@ -21,6 +21,12 @@ import androidx.media3.common.Tracks
 import java.util.Locale
 import androidx.media3.exoplayer.DefaultLoadControl
 import androidx.media3.exoplayer.ExoPlayer
+import androidx.media3.exoplayer.analytics.AnalyticsListener
+import android.graphics.Color
+import android.view.Gravity
+import android.widget.FrameLayout
+import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
 import androidx.media3.exoplayer.source.ProgressiveMediaSource
 import androidx.media3.datasource.DataSource
 import androidx.media3.common.util.UnstableApi
@@ -54,6 +60,18 @@ class MainActivity : AppCompatActivity() {
     private var multicastFailed = false
     /** El multicast ya funcionó en esta red: un corte no manda a HTTP, se reintenta multicast. */
     private var multicastWorked = false
+
+    // ---------- Diagnóstico (tecla INFO o azul) ----------
+    private var diag: TextView? = null
+    private var droppedFrames = 0
+    private var rebuffers = 0
+    private var videoDecoder = "-"
+    private val diagTick = object : Runnable {
+        override fun run() {
+            updateDiag()
+            ui.postDelayed(this, 1000)
+        }
+    }
     private var usingMulticast = false
     private var mcastLock: WifiManager.MulticastLock? = null
     private var connecting = false
@@ -215,6 +233,17 @@ class MainActivity : AppCompatActivity() {
                 .setPreferredAudioLanguages("es", "spa")
                 .setPreferredTextLanguages("es")
                 .build()
+            p.addAnalyticsListener(object : AnalyticsListener {
+                override fun onDroppedVideoFrames(t: AnalyticsListener.EventTime, count: Int, elapsedMs: Long) {
+                    droppedFrames += count
+                }
+                override fun onVideoDecoderInitialized(t: AnalyticsListener.EventTime, name: String, initializedTimestampMs: Long, initializationDurationMs: Long) {
+                    videoDecoder = name
+                }
+                override fun onPlaybackStateChanged(t: AnalyticsListener.EventTime, state: Int) {
+                    if (state == Player.STATE_BUFFERING && p.playWhenReady && p.currentPosition > 0) rebuffers++
+                }
+            })
             p.addListener(object : Player.Listener {
                 override fun onPlayerError(error: PlaybackException) {
                     if (usingMulticast && !multicastWorked) {
@@ -340,6 +369,9 @@ class MainActivity : AppCompatActivity() {
                 }
                 KeyEvent.KEYCODE_DPAD_DOWN, KeyEvent.KEYCODE_CHANNEL_DOWN -> {
                     play(current - 1); return true
+                }
+                KeyEvent.KEYCODE_INFO, KeyEvent.KEYCODE_PROG_BLUE -> {
+                    toggleDiag(); return true
                 }
                 KeyEvent.KEYCODE_MENU, KeyEvent.KEYCODE_GUIDE -> {
                     showList(); return true
@@ -525,6 +557,73 @@ class MainActivity : AppCompatActivity() {
         super.onStop()
         ui.removeCallbacks(retryPlay)
         player?.stop()
+        // Al salir de la app (Inicio u otra app) se cierra por completo
+        if (!isChangingConfigurations) finishAndRemoveTask()
+    }
+
+    // ---------- Panel de diagnóstico ----------
+
+    private fun toggleDiag() {
+        val d = diag
+        if (d != null && d.visibility == View.VISIBLE) {
+            d.visibility = View.GONE
+            ui.removeCallbacks(diagTick)
+            return
+        }
+        if (d == null) {
+            diag = TextView(this).apply {
+                setTextColor(Color.WHITE)
+                setBackgroundColor(0xCC000000.toInt())
+                textSize = 14f
+                setPadding(24, 16, 24, 16)
+                (findViewById<View>(android.R.id.content) as FrameLayout).addView(
+                    this, FrameLayout.LayoutParams(
+                        FrameLayout.LayoutParams.WRAP_CONTENT,
+                        FrameLayout.LayoutParams.WRAP_CONTENT,
+                        Gravity.TOP or Gravity.END
+                    ).apply { setMargins(32, 32, 32, 32) }
+                )
+            }
+        }
+        droppedFrames = 0
+        rebuffers = 0
+        diag?.visibility = View.VISIBLE
+        ui.removeCallbacks(diagTick)
+        ui.post(diagTick)
+    }
+
+    private fun networkInfo(): String = try {
+        val cm = getSystemService(CONNECTIVITY_SERVICE) as ConnectivityManager
+        val caps = if (android.os.Build.VERSION.SDK_INT >= 23) cm.getNetworkCapabilities(cm.activeNetwork) else null
+        when {
+            caps?.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET) == true -> "Cable"
+            caps?.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) == true -> {
+                @Suppress("DEPRECATION")
+                val wi = (applicationContext.getSystemService(WIFI_SERVICE) as WifiManager).connectionInfo
+                val band = if (wi.frequency > 4900) "5 GHz" else "2.4 GHz"
+                "WiFi $band, señal ${wi.rssi} dBm, ${wi.linkSpeed} Mbps"
+            }
+            else -> "?"
+        }
+    } catch (_: Exception) { "?" }
+
+    private fun updateDiag() {
+        val p = player ?: return
+        val f = p.videoFormat
+        val mem = Runtime.getRuntime()
+        val am = getSystemService(ACTIVITY_SERVICE) as android.app.ActivityManager
+        val mi = android.app.ActivityManager.MemoryInfo().also { am.getMemoryInfo(it) }
+        val buf = (p.totalBufferedDuration / 100) / 10.0
+        diag?.text = buildString {
+            appendLine("Fuente: " + if (usingMulticast) "Multicast" else "HTTP")
+            appendLine("Red: " + networkInfo())
+            appendLine("Video: " + (f?.let { "${it.width}x${it.height} ${it.sampleMimeType?.substringAfter('/')} ${it.bitrate.takeIf { b -> b > 0 }?.let { b -> "${b / 1000} kbps" } ?: ""}" } ?: "-"))
+            appendLine("Decodificador: $videoDecoder")
+            appendLine("Colchón: $buf s")
+            appendLine("Pausas por carga: $rebuffers")
+            appendLine("Cuadros perdidos: $droppedFrames")
+            append("RAM libre TV: ${mi.availMem / 1048576} de ${mi.totalMem / 1048576} MB" + if (mi.lowMemory) " (BAJA)" else "")
+        }
     }
 
     override fun onDestroy() {
