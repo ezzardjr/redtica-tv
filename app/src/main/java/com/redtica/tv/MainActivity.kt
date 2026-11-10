@@ -22,6 +22,7 @@ import java.util.Locale
 import androidx.media3.exoplayer.DefaultLoadControl
 import androidx.media3.exoplayer.ExoPlayer
 import androidx.media3.exoplayer.DefaultRenderersFactory
+import androidx.media3.exoplayer.trackselection.DefaultTrackSelector
 import androidx.media3.exoplayer.video.VideoFrameMetadataListener
 import android.view.Display
 import androidx.media3.exoplayer.analytics.AnalyticsListener
@@ -66,6 +67,7 @@ class MainActivity : AppCompatActivity() {
 
     // ---------- Diagnóstico (tecla INFO o azul) ----------
     private var diag: TextView? = null
+    private var okPending = false
 
     // ---------- Ajuste de la frecuencia de la pantalla a los cuadros del canal ----------
     @Volatile private var fpsSamples = 0
@@ -295,7 +297,13 @@ class MainActivity : AppCompatActivity() {
         val renderers = DefaultRenderersFactory(this)
             .forceEnableMediaCodecAsynchronousQueueing()
             .setEnableDecoderFallback(true)
-        player = ExoPlayer.Builder(this, renderers).setLoadControl(loadControl).build().also { p ->
+        // Modo túnel: el TV sincroniza audio y video por hardware (como Netflix/YouTube).
+        // Si el TV no lo soporta, ExoPlayer usa el modo normal automáticamente.
+        val trackSelector = DefaultTrackSelector(this).apply {
+            setParameters(buildUponParameters().setTunnelingEnabled(true))
+        }
+        player = ExoPlayer.Builder(this, renderers).setLoadControl(loadControl)
+            .setTrackSelector(trackSelector).build().also { p ->
             p.setVideoChangeFrameRateStrategy(C.VIDEO_CHANGE_FRAME_RATE_STRATEGY_ONLY_IF_SEAMLESS)
             p.setVideoFrameMetadataListener(frameRateProbe)
             playerView.player = p
@@ -449,8 +457,19 @@ class MainActivity : AppCompatActivity() {
                     showList(); return true
                 }
             }
-            if (isOkKey(code)) {
-                if (typed.isNotEmpty()) jumpToTyped() else showList()
+        }
+        // OK: pulsación corta = lista (o ir al número tecleado); mantenido = panel de diagnóstico
+        if (isOkKey(code) && !isListVisible() && channels.isNotEmpty()) {
+            if (event.action == KeyEvent.ACTION_DOWN) {
+                if (event.repeatCount == 0) okPending = true
+                else if (event.repeatCount == 1 && okPending) { okPending = false; toggleDiag() }
+                return true
+            }
+            if (event.action == KeyEvent.ACTION_UP) {
+                if (okPending) {
+                    okPending = false
+                    if (typed.isNotEmpty()) jumpToTyped() else showList()
+                }
                 return true
             }
         }
@@ -690,6 +709,7 @@ class MainActivity : AppCompatActivity() {
             appendLine("Fuente: " + if (usingMulticast) "Multicast" else "HTTP")
             appendLine("Red: " + networkInfo())
             appendLine("Video: " + (f?.let { "${it.width}x${it.height} ${it.sampleMimeType?.substringAfter('/')} ${it.bitrate.takeIf { b -> b > 0 }?.let { b -> "${b / 1000} kbps" } ?: ""}" } ?: "-"))
+            appendLine("App: v${BuildConfig.VERSION_NAME} | Modo túnel: activado")
             appendLine("Decodificador: $videoDecoder")
             appendLine("Cuadros del canal: " + (if (detectedFps > 0f) "%.2f fps".format(detectedFps) else "midiendo...") + " | Pantalla: " + displayHz())
             appendLine("Colchón: $buf s")
