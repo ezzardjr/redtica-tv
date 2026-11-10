@@ -68,6 +68,20 @@ class MainActivity : AppCompatActivity() {
     // ---------- Diagnóstico (tecla INFO o azul) ----------
     private var diag: TextView? = null
     private var okPending = false
+    private var intro: IntroView? = null
+
+    /** Animación de inicio: 10 s la primera vez del día, 3 s las demás. */
+    private fun showIntro() {
+        val today = java.text.SimpleDateFormat("yyyy-MM-dd", Locale.US).format(java.util.Date())
+        val longVersion = prefs.getString("intro_dia", "") != today
+        prefs.edit().putString("intro_dia", today).apply()
+        val v = IntroView(this, longVersion) { intro = null }
+        intro = v
+        (findViewById<View>(android.R.id.content) as FrameLayout).addView(
+            v, FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT)
+        )
+        v.start()
+    }
     private var okDownAt = 0L
 
     // ---------- Ajuste de la frecuencia de la pantalla a los cuadros del canal ----------
@@ -184,6 +198,7 @@ class MainActivity : AppCompatActivity() {
         playerView.setOnLongClickListener { cycleAudio(); true }
 
         hideSystemUi()
+        showIntro()
         // Versión cliente: conexión directa por la red de REDTICA, sin VPN
         if (BuildConfig.USA_TUNEL) requestVpnThenConnect() else connect()
     }
@@ -421,6 +436,9 @@ class MainActivity : AppCompatActivity() {
 
     override fun dispatchKeyEvent(event: KeyEvent): Boolean {
         val code = event.keyCode
+
+        // Cualquier tecla salta la animación de inicio
+        intro?.let { if (event.action == KeyEvent.ACTION_UP) it.finish(); return true }
 
         // Atrás con la lista abierta: solo cierra la lista
         if (code == KeyEvent.KEYCODE_BACK && isListVisible()) {
