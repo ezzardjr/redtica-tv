@@ -73,7 +73,10 @@ class MainActivity : AppCompatActivity() {
     /** Animación de inicio: 10 s la primera vez del día, 3 s las demás. */
     private fun showIntro() {
         // Se muestra completa cada vez que se abre la app
-        val v = IntroView(this, true) { intro = null }
+        val v = IntroView(this) {
+            intro = null
+            player?.volume = 1f   // vuelve el audio del canal
+        }
         intro = v
         (findViewById<View>(android.R.id.content) as FrameLayout).addView(
             v, FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT)
@@ -318,6 +321,7 @@ class MainActivity : AppCompatActivity() {
         }
         player = ExoPlayer.Builder(this, renderers).setLoadControl(loadControl)
             .setTrackSelector(trackSelector).build().also { p ->
+            if (intro != null) p.volume = 0f   // el canal carga en silencio detrás de la animación
             p.setVideoChangeFrameRateStrategy(C.VIDEO_CHANGE_FRAME_RATE_STRATEGY_ONLY_IF_SEAMLESS)
             p.setVideoFrameMetadataListener(frameRateProbe)
             playerView.player = p
@@ -436,7 +440,7 @@ class MainActivity : AppCompatActivity() {
         val code = event.keyCode
 
         // Cualquier tecla salta la animación de inicio
-        intro?.let { if (event.action == KeyEvent.ACTION_UP) it.finish(); return true }
+        intro?.let { if (event.action == KeyEvent.ACTION_UP) it.skip(); return true }
 
         // Atrás con la lista abierta: solo cierra la lista
         if (code == KeyEvent.KEYCODE_BACK && isListVisible()) {
