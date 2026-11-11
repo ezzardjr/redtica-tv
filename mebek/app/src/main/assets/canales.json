@@ -743,18 +743,24 @@
 "s": [
 {
 "u": "https://vid.canal1cr.com:3424/multi_live/play_720.m3u8"
-}
-]
 },
-{
-"g": "Costa Rica",
-"n": "Canal 2 (576p)",
-"s": [
 {
 "u": "https://alba-cr-repretel-c2.stream.mediatiquestream.com/index.m3u8"
 },
 {
-"u": "https://d2hha8xu9trvi8.cloudfront.net/ts:abr.m3u8"
+"u": "https://dlhn7gdemxofz.cloudfront.net/ts:abr.m3u8"
+},
+{
+"u": "https://d3xpfoln9sj56.cloudfront.net/ts:abr.m3u8"
+},
+{
+"u": "https://mdstrm.com/live-stream-playlist/5a7b1e63a8da282c34d65445.m3u8"
+},
+{
+"u": "https://acceso.mediosdecostarica.com:3606/live/canal10costaricalive.m3u8"
+},
+{
+"u": "https://d3mstgwjcwqz1y.cloudfront.net/ts:abr.m3u8"
 }
 ]
 },
@@ -764,63 +770,6 @@
 "s": [
 {
 "u": "https://live20.bozztv.com/giatv/giatv-KMKTV/KMKTV/chunks.m3u8"
-}
-]
-},
-{
-"g": "Costa Rica",
-"n": "Canal 4 (720p)",
-"s": [
-{
-"u": "https://dlhn7gdemxofz.cloudfront.net/ts:abr.m3u8"
-},
-{
-"u": "https://alba-cr-repretel-c4.stream.mediatiquestream.com/index.m3u8"
-}
-]
-},
-{
-"g": "Costa Rica",
-"n": "Canal 6 (720p)",
-"s": [
-{
-"u": "https://d3xpfoln9sj56.cloudfront.net/ts:abr.m3u8"
-},
-{
-"u": "https://alba-cr-repretel-c6.stream.mediatiquestream.com/index.m3u8"
-}
-]
-},
-{
-"g": "Costa Rica",
-"n": "Canal 8 (720p)",
-"s": [
-{
-"u": "https://mdstrm.com/live-stream-playlist/5a7b1e63a8da282c34d65445.m3u8"
-}
-]
-},
-{
-"g": "Costa Rica",
-"n": "Canal 10 (720p)",
-"s": [
-{
-"u": "https://acceso.mediosdecostarica.com:3606/live/canal10costaricalive.m3u8"
-},
-{
-"u": "https://acceso.mediosdecostarica.com:3606/hybrid/play.m3u8"
-}
-]
-},
-{
-"g": "Costa Rica",
-"n": "Canal 11 (720p)",
-"s": [
-{
-"u": "https://d3mstgwjcwqz1y.cloudfront.net/ts:abr.m3u8"
-},
-{
-"u": "https://alba-cr-repretel-c11.stream.mediatiquestream.com/index.m3u8"
 }
 ]
 },
@@ -1256,15 +1205,6 @@
 },
 {
 "g": "Costa Rica",
-"n": "Tigo Sports (720p)",
-"s": [
-{
-"u": "https://live20.bozztv.com/akamaissh101/ssh101/livetigocr/playlist.m3u8"
-}
-]
-},
-{
-"g": "Costa Rica",
 "n": "Trivision 36 (720p)",
 "s": [
 {
@@ -1280,13 +1220,7 @@
 "s": [
 {
 "u": "http://tv.ticosmedia.com:1935/TVSUR/TVSUR/playlist.m3u8"
-}
-]
 },
-{
-"g": "Costa Rica",
-"n": "TV Sur Canal 14 (1080p)",
-"s": [
 {
 "u": "https://k20.usastreams.com:8081/tvsur/index.m3u8"
 }
@@ -1364,6 +1298,9 @@
 "s": [
 {
 "u": "http://138.117.4.70:8075/Canal06_CooTel/playlist.m3u8"
+},
+{
+"u": "https://cootv.cootel.com.ni:8095/Canal15_CooTel/playlist.m3u8"
 }
 ]
 },
@@ -1385,15 +1322,6 @@
 },
 {
 "u": "https://www.canal10.com.ni/envivo"
-}
-]
-},
-{
-"g": "Nicaragua",
-"n": "Canal 15 Nicaragüense (1080p)",
-"s": [
-{
-"u": "https://cootv.cootel.com.ni:8095/Canal15_CooTel/playlist.m3u8"
 }
 ]
 },
@@ -1471,15 +1399,6 @@
 },
 {
 "g": "Nicaragua",
-"n": "Radio Visión de Dios Stereo (720p)",
-"s": [
-{
-"u": "https://live.tvcontrolcp.com:1936/8286/8286/playlist.m3u8"
-}
-]
-},
-{
-"g": "Nicaragua",
 "n": "TN8 (1080p)",
 "s": [
 {
@@ -1511,15 +1430,6 @@
 "s": [
 {
 "u": "https://cdn.vivamediosni.com/viva_720p/index.m3u8"
-}
-]
-},
-{
-"g": "Nicaragua",
-"n": "Viva TV Canal 30 San Juan de Río Coco",
-"s": [
-{
-"u": "https://cdn.amixtv.com/vivatv/index.m3u8"
 }
 ]
 },
@@ -2063,13 +1973,7 @@
 "s": [
 {
 "u": "https://59d39900ebfb8.streamlock.net/top102/top102/playlist.m3u8"
-}
-]
 },
-{
-"g": "Honduras",
-"n": "La Top 107.7 (720p)",
-"s": [
 {
 "u": "https://59d39900ebfb8.streamlock.net/top107/top107/playlist.m3u8"
 }
@@ -2156,15 +2060,6 @@
 "s": [
 {
 "u": "https://5e85d90130e77.streamlock.net/6024/6024/playlist.m3u8"
-}
-]
-},
-{
-"g": "Honduras",
-"n": "Radio Fiesta de Milagros TV (1080p)",
-"s": [
-{
-"u": "https://tv.webmedialive.com/fiestatv/live/playlist.m3u8"
 }
 ]
 },
@@ -2333,13 +2228,7 @@
 "s": [
 {
 "u": "https://5e85d90130e77.streamlock.net/6028/6028/playlist.m3u8"
-}
-]
 },
-{
-"g": "Honduras",
-"n": "Televisión Metrópolis 19.2 (1080p)",
-"s": [
 {
 "u": "https://5e85d90130e77.streamlock.net/6014/6014/playlist.m3u8"
 }
@@ -2378,13 +2267,7 @@
 "s": [
 {
 "u": "https://cloud2.streaminglivehd.com:1936/8004/8004/playlist.m3u8"
-}
-]
 },
-{
-"g": "Honduras",
-"n": "TV Centro HD (720p)",
-"s": [
 {
 "u": "https://cloud2.streaminglivehd.com:1936/8032/8032/playlist.m3u8"
 }
@@ -2458,15 +2341,6 @@
 },
 {
 "g": "El Salvador",
-"n": "Árbol de Vida TV (240p)",
-"s": [
-{
-"u": "https://yupistream.top:19360/livearbol/livearbol.m3u8"
-}
-]
-},
-{
-"g": "El Salvador",
 "n": "Awapa Sports TV (1080p)",
 "s": [
 {
@@ -2489,6 +2363,12 @@
 "s": [
 {
 "u": "https://5ca3e84a76d30.streamlock.net/tves/videotves/playlist.m3u8"
+},
+{
+"u": "https://d2b5h5wyivfnfl.cloudfront.net/live/53108ffe-0b7e-46ab-bc14-3a9c30010939/ts:abr.m3u8"
+},
+{
+"u": "https://panel.streamingtv-mediacp.online:1936/tv65/tv65/playlist.m3u8"
 }
 ]
 },
@@ -2498,15 +2378,6 @@
 "s": [
 {
 "u": "https://stream.giostreaming.app/canal11/canal11.m3u8"
-}
-]
-},
-{
-"g": "El Salvador",
-"n": "Canal 12 (480p)",
-"s": [
-{
-"u": "https://d2b5h5wyivfnfl.cloudfront.net/live/53108ffe-0b7e-46ab-bc14-3a9c30010939/ts:abr.m3u8"
 }
 ]
 },
@@ -2525,15 +2396,6 @@
 "s": [
 {
 "u": "https://streaming.grupocsanetwork.com:19360/canal15/canal15.m3u8"
-}
-]
-},
-{
-"g": "El Salvador",
-"n": "Canal 65 (1080p)",
-"s": [
-{
-"u": "https://panel.streamingtv-mediacp.online:1936/tv65/tv65/playlist.m3u8"
 }
 ]
 },
@@ -2613,13 +2475,7 @@
 "s": [
 {
 "u": "https://mgvchannel19-ioriver-cdn.encoders.immergo.tv/master.m3u8"
-}
-]
 },
-{
-"g": "El Salvador",
-"n": "Megavisión Canal 21 (720p)",
-"s": [
 {
 "u": "https://mgvchannel21-ioriver-cdn.encoders.immergo.tv/master.m3u8"
 }
@@ -2679,15 +2535,6 @@
 "s": [
 {
 "u": "https://serversv.com:8080/hls/tvgetsemani.m3u8"
-}
-]
-},
-{
-"g": "El Salvador",
-"n": "TV León de Judá (720p)",
-"s": [
-{
-"u": "https://6110f70ea8d0e.streamlock.net/1838/1838/playlist.m3u8"
 }
 ]
 },
@@ -2760,18 +2607,6 @@
 },
 {
 "g": "Películas",
-"n": "Cine comedia",
-"s": [
-{
-"u": "https://jmp2.uk/plu-5f513564e4622a0007c578c0.m3u8"
-},
-{
-"u": "https://jmp2.uk/plu-5dcdde78f080d900098550e4.m3u8"
-}
-]
-},
-{
-"g": "Películas",
 "n": "Cine Premiere",
 "s": [
 {
@@ -2788,18 +2623,6 @@
 },
 {
 "u": "https://jmp2.uk/plu-5dcddf1ed95e740009fef7ab.m3u8"
-}
-]
-},
-{
-"g": "Películas",
-"n": "MovieSphere AU (1080p)",
-"s": [
-{
-"u": "https://amg00353-amg00353c32-samsung-nz-3588.playouts.now.amagi.tv/playlist.m3u8"
-},
-{
-"u": "https://amg00353-lionsgatestudio-moviesphere-xumo-zh5u0.amagi.tv/playlist.m3u8"
 }
 ]
 },
@@ -2967,15 +2790,6 @@
 },
 {
 "g": "Películas",
-"n": "Estrellas de Acción",
-"s": [
-{
-"u": "https://jmp2.uk/plu-5e972a21ad709d00074195ba.m3u8"
-}
-]
-},
-{
-"g": "Películas",
 "n": "Pluto TV A La Mexicana",
 "s": [
 {
@@ -3108,13 +2922,7 @@
 "s": [
 {
 "u": "https://live20.bozztv.com/giatvplayout7/giatv-208138/playlist.m3u8"
-}
-]
 },
-{
-"g": "Películas",
-"n": "Maxcine 2 (720p)",
-"s": [
 {
 "u": "https://live20.bozztv.com/giatvplayout7/giatv-209163/playlist.m3u8"
 }
@@ -3191,24 +2999,6 @@
 "s": [
 {
 "u": "https://jmp2.uk/plu-645a309c5a0cd5000873f609.m3u8"
-}
-]
-},
-{
-"g": "Películas",
-"n": "Pluto TV Cine Comedia",
-"s": [
-{
-"u": "https://jmp2.uk/plu-5f1ac8099c49f600076579b2.m3u8"
-}
-]
-},
-{
-"g": "Películas",
-"n": "Pluto TV Cine de autor",
-"s": [
-{
-"u": "https://jmp2.uk/plu-60cc807324d60a0007708dc8.m3u8"
 }
 ]
 },
@@ -3362,6 +3152,93 @@
 "s": [
 {
 "u": "https://live.enhdtv.com:19360/nexthd/nexthd.m3u8"
+}
+]
+},
+{
+"g": "Películas",
+"n": "Sony Canal Novelas",
+"s": [
+{
+"u": "https://a89829b8dca2471ab52ea9a57bc28a35.mediatailor.us-east-1.amazonaws.com/v1/master/0fb304b2320b25f067414d481a779b77db81760d/CanelaTV_SonyCanalNovelas/playlist.m3u8"
+}
+]
+},
+{
+"g": "Películas",
+"n": "MovieSphere by Lionsgate",
+"s": [
+{
+"u": "https://jmp2.uk/plu-645e7828e1979c00087b75b4.m3u8"
+},
+{
+"u": "https://jmp2.uk/plu-64a3d96f060e830008af6745.m3u8"
+}
+]
+},
+{
+"g": "Películas",
+"n": "Moviesphere",
+"s": [
+{
+"u": "https://jmp2.uk/plu-6401d85a49839300087b116c.m3u8"
+},
+{
+"u": "https://pb-wmei1j77c66s0.akamaized.net/MovieSphere.m3u8"
+}
+]
+},
+{
+"g": "Películas",
+"n": "Pluto TV Cine Terror",
+"s": [
+{
+"u": "https://jmp2.uk/plu-5f12111c9e6c2c00078ef3bb.m3u8"
+}
+]
+},
+{
+"g": "Películas",
+"n": "Rakuten TV Action Movies Spain",
+"s": [
+{
+"u": "https://a9c57ec7ec5e4b7daeacc6316a0bb404.mediatailor.eu-west-1.amazonaws.com/v1/master/0547f18649bd788bec7b67b746e47670f558b6b2/production-LiveChannel-6069/master.m3u8"
+}
+]
+},
+{
+"g": "Películas",
+"n": "Rakuten TV Comedy Movies Spain",
+"s": [
+{
+"u": "https://71db867f03ce4d71a29e92155f07ab87.mediatailor.eu-west-1.amazonaws.com/v1/master/0547f18649bd788bec7b67b746e47670f558b6b2/production-LiveChannel-6180/master.m3u8"
+}
+]
+},
+{
+"g": "Películas",
+"n": "Rakuten TV Drama Movies Spain",
+"s": [
+{
+"u": "https://a7089c89d85f453d850c4a1518b43076.mediatailor.eu-west-1.amazonaws.com/v1/master/0547f18649bd788bec7b67b746e47670f558b6b2/production-LiveChannel-6092/master.m3u8"
+}
+]
+},
+{
+"g": "Películas",
+"n": "Rakuten TV Family Movies Spain",
+"s": [
+{
+"u": "https://b0d59c8c98974e708e5ccb9a27cdfdfc.mediatailor.eu-west-1.amazonaws.com/v1/master/0547f18649bd788bec7b67b746e47670f558b6b2/production-LiveChannel-6205/master.m3u8"
+}
+]
+},
+{
+"g": "Películas",
+"n": "Rakuten TV Top Movies Spain",
+"s": [
+{
+"u": "https://ff335120300e4742a2b135ee9a9e7df8.mediatailor.eu-west-1.amazonaws.com/v1/master/0547f18649bd788bec7b67b746e47670f558b6b2/production-LiveChannel-5983/master.m3u8"
 }
 ]
 },
@@ -3617,6 +3494,1852 @@
 "s": [
 {
 "u": "https://wapa.hostless.app/WAPA-TV-4-2.m3u8"
+}
+]
+},
+{
+"g": "Deportes",
+"n": "World Poker Tour",
+"s": [
+{
+"u": "https://amg00218-wptenterprisesi-worldpokertour-klowdtv-5619e.amagi.tv/playlist/amg00218-wptenterprisesi-worldpokertour-klowdtv/playlist.m3u8"
+},
+{
+"u": "https://jmp2.uk/plu-617805a67267650007573ffd.m3u8"
+}
+]
+},
+{
+"g": "Deportes",
+"n": "FIFA+",
+"s": [
+{
+"u": "https://jmp2.uk/plu-660bfcd07bcd860008796ae8.m3u8"
+},
+{
+"u": "https://jmp2.uk/plu-660bfca524e1d000085b6007.m3u8"
+}
+]
+},
+{
+"g": "Deportes",
+"n": "TyC Sports",
+"s": [
+{
+"u": "https://amg26268-amg26268c14-freelivesports-emea-10267.playouts.now.amagi.tv/ts-us-e2-n2/playlist/amg26268-sportsstudio-tycsports-freelivesportsemea/playlist.m3u8"
+}
+]
+},
+{
+"g": "Deportes",
+"n": "BeIN Sports XTRA en Espanol",
+"s": [
+{
+"u": "https://bein-esp-xumo.amagi.tv/playlist.m3u8"
+},
+{
+"u": "https://dc1644a9jazgj.cloudfront.net/beIN_Sports_Xtra_Espanol.m3u8"
+},
+{
+"u": "https://aegis-cloudfront-1.tubi.video/01f6c149-449b-4248-8bda-2278799205ec/playlist.m3u8"
+}
+]
+},
+{
+"g": "Deportes",
+"n": "Claro Sports",
+"s": [
+{
+"u": "https://jmp2.uk/plu-6320d2755e54db000783fd87.m3u8",
+"ref": "https://www.clarosports.com/"
+}
+]
+},
+{
+"g": "Deportes",
+"n": "Red Bull TV ES",
+"s": [
+{
+"u": "https://jmp2.uk/plu-67813f893886aa863497733d.m3u8"
+},
+{
+"u": "https://886bd3fbc782459f8de7555d32d7e9ce.mediatailor.us-west-2.amazonaws.com/v1/master/ba62fe743df0fe93366eba3a257d792884136c7f/LINEAR-957-WORBLATAMESFAST-WHALETVPLUS/957/whaletvplus/hls/master/playlist.m3u8"
+}
+]
+},
+{
+"g": "Deportes",
+"n": "Realmadrid TV",
+"s": [
+{
+"u": "https://jmp2.uk/plu-63dac28760bc8f0008a7654b.m3u8"
+}
+]
+},
+{
+"g": "Deportes",
+"n": "Olympic Channel",
+"s": [
+{
+"u": "https://ocshls-2-olympicchannel.akamaized.net/ocshls/OCTV_32.m3u8"
+}
+]
+},
+{
+"g": "Deportes",
+"n": "Red Bull TV",
+"s": [
+{
+"u": "https://rbmn-live.akamaized.net/hls/live/590964/BoRB-AT/master.m3u8"
+},
+{
+"u": "https://d1hlbgn3fph0cz.cloudfront.net/playlist.m3u8"
+}
+]
+},
+{
+"g": "Deportes",
+"n": "Red Bull TV US",
+"s": [
+{
+"u": "https://0b73ace69ebb45eaa249bb87837cb958.mediatailor.us-west-2.amazonaws.com/v1/master/ba62fe743df0fe93366eba3a257d792884136c7f/LINEAR-644-WORBUSENFAST-LG_US/644/lgtv/hls/master/playlist.m3u8"
+}
+]
+},
+{
+"g": "Deportes",
+"n": "FIFA+ Hispanic America",
+"s": [
+{
+"u": "https://6c849fb3.wurl.com/master/f36d25e7e52f1ba8d7e56eb859c636563214f541/TEctbXhfRklGQVBsdXNTcGFuaXNoLTFfSExT/playlist.m3u8"
+}
+]
+},
+{
+"g": "Deportes",
+"n": "FIFA+ Spain",
+"s": [
+{
+"u": "https://d63fabad.wurl.com/master/f36d25e7e52f1ba8d7e56eb859c636563214f541/UmFrdXRlblRWLWVzX0ZJRkFQbHVzU3BhbmlzaF9ITFM/playlist.m3u8"
+}
+]
+},
+{
+"g": "Deportes",
+"n": "Fox Sports en Espanol",
+"s": [
+{
+"u": "https://live-manifest.production-public.tubi.io/live/d906efca-1302-4e29-b0d9-9a1d7a305d69/playlist.m3u8"
+}
+]
+},
+{
+"g": "Deportes",
+"n": "Fubo Sports Network",
+"s": [
+{
+"u": "https://aegis-cloudfront-1.tubi.video/c2ac89da-5c69-439e-b85d-d87de0548b54/playlist.m3u8"
+}
+]
+},
+{
+"g": "Series y entretenimiento",
+"n": "Buzzr",
+"s": [
+{
+"u": "https://buzzrota-ono.amagi.tv/playlist.m3u8"
+},
+{
+"u": "https://jmp2.uk/plu-5812bfbe4ced4f7b601b12e6.m3u8"
+}
+]
+},
+{
+"g": "Series y entretenimiento",
+"n": "LATV",
+"s": [
+{
+"u": "https://amg00779-latv-amg00779c1-klowdtv-us-2135.playouts.now.amagi.tv/playlist/amg00779-latvnetworkllc-latv-klowdtvus/playlist.m3u8"
+},
+{
+"u": "https://amg00779-latv-amg00779c1-cineverse-us-1746.playouts.now.amagi.tv/playlist/amg00779-latvnetworkllc-latv-cineverseus/playlist.m3u8"
+}
+]
+},
+{
+"g": "Series y entretenimiento",
+"n": "Love Nature",
+"s": [
+{
+"u": "https://bamus-klowdtv.amagi.tv/playlist.m3u8"
+},
+{
+"u": "https://jmp2.uk/plu-66df8a29b25d2b0008fc5fe0.m3u8"
+}
+]
+},
+{
+"g": "Series y entretenimiento",
+"n": "Andromeda",
+"s": [
+{
+"u": "https://jmp2.uk/plu-617807a1a3a6160007f615e4.m3u8"
+},
+{
+"u": "https://jmp2.uk/plu-6178156e54712100072d6b2b.m3u8"
+}
+]
+},
+{
+"g": "Series y entretenimiento",
+"n": "FailArmy",
+"s": [
+{
+"u": "https://jmp2.uk/plu-6178037c35922000072a2ff5.m3u8"
+},
+{
+"u": "https://jmp2.uk/plu-554158e864526b29254ff105.m3u8"
+},
+{
+"u": "https://failarmy-international-it.samsung.wurl.tv/playlist.m3u8"
+},
+{
+"u": "https://bd93cfed.wurl.com/master/f36d25e7e52f1ba8d7e56eb859c636563214f541/UmFrdXRlblRWLWV1X0ZhaWxBcm15X0hMUw/playlist.m3u8"
+}
+]
+},
+{
+"g": "Series y entretenimiento",
+"n": "Forensic Files",
+"s": [
+{
+"u": "https://jmp2.uk/plu-618124b2e53c8d00077b37f8.m3u8"
+},
+{
+"u": "https://jmp2.uk/plu-5bb1af6a268cae539bcedb0a.m3u8"
+}
+]
+},
+{
+"g": "Series y entretenimiento",
+"n": "Ice Pilots",
+"s": [
+{
+"u": "https://jmp2.uk/plu-62cdaef300a4b3000739b1bf.m3u8"
+},
+{
+"u": "https://jmp2.uk/plu-62cd9fee6187a70007784cdd.m3u8"
+}
+]
+},
+{
+"g": "Series y entretenimiento",
+"n": "Acapulco Shore",
+"s": [
+{
+"u": "https://jmp2.uk/plu-64dab1f835425100080e1e7b.m3u8"
+}
+]
+},
+{
+"g": "Series y entretenimiento",
+"n": "Comedy Central en español",
+"s": [
+{
+"u": "https://jmp2.uk/plu-5cf96dad1652631e36d43320.m3u8"
+}
+]
+},
+{
+"g": "Series y entretenimiento",
+"n": "Comedy Central Pluto TV",
+"s": [
+{
+"u": "https://jmp2.uk/plu-5ca671f215a62078d2ec0abf.m3u8"
+},
+{
+"u": "https://jmp2.uk/plu-5ffcc21a432945000762d06b.m3u8"
+}
+]
+},
+{
+"g": "Series y entretenimiento",
+"n": "CSI: Miami",
+"s": [
+{
+"u": "https://jmp2.uk/plu-62f54c11b3af68000702c304.m3u8"
+},
+{
+"u": "https://jmp2.uk/plu-63eb9255c111bc0008fe6ec4.m3u8"
+}
+]
+},
+{
+"g": "Series y entretenimiento",
+"n": "EstrellaTV",
+"s": [
+{
+"u": "https://jmp2.uk/plu-5cf0622da00ca1e2f6fac712.m3u8"
+},
+{
+"u": "https://cdn-uw2-prod.tsv2.amagi.tv/linear/amg00567-estrellamedia-estrellatv-distrotv/playlist.m3u8"
+},
+{
+"u": "https://estrellatv-glewed.amagi.tv/playlist.m3u8"
+}
+]
+},
+{
+"g": "Series y entretenimiento",
+"n": "iCarly TV",
+"s": [
+{
+"u": "https://jmp2.uk/plu-6450209d939a5900084dba1d.m3u8"
+}
+]
+},
+{
+"g": "Series y entretenimiento",
+"n": "Investiga",
+"s": [
+{
+"u": "https://jmp2.uk/plu-5cf96b8f4f1ca3f0629f4bf1.m3u8"
+}
+]
+},
+{
+"g": "Series y entretenimiento",
+"n": "Misterios sin resolver",
+"s": [
+{
+"u": "https://jmp2.uk/plu-5f4d882d5233170007ee880e.m3u8"
+},
+{
+"u": "https://jmp2.uk/plu-5f610042272f68000867685b.m3u8"
+}
+]
+},
+{
+"g": "Series y entretenimiento",
+"n": "MTV Biggest Pop",
+"s": [
+{
+"u": "https://jmp2.uk/plu-5d14fd1a252d35decbc4080c.m3u8"
+},
+{
+"u": "https://jmp2.uk/plu-6047fabfce6e8e00070bcc9f.m3u8"
+}
+]
+},
+{
+"g": "Series y entretenimiento",
+"n": "MTV en español",
+"s": [
+{
+"u": "https://jmp2.uk/plu-5cf96d351652631e36d4331f.m3u8"
+}
+]
+},
+{
+"g": "Series y entretenimiento",
+"n": "MTV Flow Latino",
+"s": [
+{
+"u": "https://jmp2.uk/plu-5d3609cd6a6c78d7672f2a81.m3u8"
+},
+{
+"u": "https://jmp2.uk/plu-62b218fc511d4b00070ddc0c.m3u8"
+}
+]
+},
+{
+"g": "Series y entretenimiento",
+"n": "MTV Pluto TV",
+"s": [
+{
+"u": "https://jmp2.uk/plu-5ca672f515a62078d2ec0ad2.m3u8"
+},
+{
+"u": "https://jmp2.uk/plu-5f1212fb81e85c00077ae9ef.m3u8"
+}
+]
+},
+{
+"g": "Series y entretenimiento",
+"n": "One Piece",
+"s": [
+{
+"u": "https://jmp2.uk/plu-5f7790b3ed0c88000720b241.m3u8"
+},
+{
+"u": "https://jmp2.uk/plu-6380c94947c72b0007ee9a13.m3u8"
+}
+]
+},
+{
+"g": "Series y entretenimiento",
+"n": "Pluto TV Anime",
+"s": [
+{
+"u": "https://jmp2.uk/plu-5812b7d3249444e05d09cc49.m3u8"
+},
+{
+"u": "https://jmp2.uk/plu-5dcde17bf6591d0009839e02.m3u8"
+}
+]
+},
+{
+"g": "Series y entretenimiento",
+"n": "Pluto TV Novelas",
+"s": [
+{
+"u": "https://jmp2.uk/plu-5cf96c0222df39f1a338d163.m3u8"
+},
+{
+"u": "https://jmp2.uk/plu-5dcde0cc2efd2700090b7ff4.m3u8"
+}
+]
+},
+{
+"g": "Series y entretenimiento",
+"n": "Pluto TV Pride",
+"s": [
+{
+"u": "https://jmp2.uk/plu-69fa3faab9c0f0d444e64de3.m3u8"
+}
+]
+},
+{
+"g": "Series y entretenimiento",
+"n": "Pluto TV Reality",
+"s": [
+{
+"u": "https://jmp2.uk/plu-5d8bf0b06d2d855ee15115e3.m3u8"
+},
+{
+"u": "https://jmp2.uk/plu-5dcde197f6591d0009839e04.m3u8"
+}
+]
+},
+{
+"g": "Series y entretenimiento",
+"n": "Star Trek",
+"s": [
+{
+"u": "https://jmp2.uk/plu-5efbd39f8c4ce900075d7698.m3u8"
+}
+]
+},
+{
+"g": "Series y entretenimiento",
+"n": "The New Detectives",
+"s": [
+{
+"u": "https://jmp2.uk/plu-5aea40b35126c2157123aa64.m3u8"
+},
+{
+"u": "https://jmp2.uk/plu-5ea71d48af1d0b0007d837f4.m3u8"
+}
+]
+},
+{
+"g": "Series y entretenimiento",
+"n": "The Pet Collective",
+"s": [
+{
+"u": "https://jmp2.uk/plu-5bb1ad55268cae539bcedb08.m3u8"
+},
+{
+"u": "https://the-pet-collective-international-nl.samsung.wurl.tv/playlist.m3u8"
+}
+]
+},
+{
+"g": "Series y entretenimiento",
+"n": "Stingray Classica",
+"s": [
+{
+"u": "https://lotus.stingray.com/manifest/classica-cla008-montreal/samsungtvplus/master.m3u8"
+}
+]
+},
+{
+"g": "Series y entretenimiento",
+"n": "RCN Mas",
+"s": [
+{
+"u": "https://rcntv-rcnmas-1-us.roku.wurl.tv/3000.m3u8"
+},
+{
+"u": "https://rcntv-rcnmas-1-us.roku.wurl.tv/playlist.m3u8"
+}
+]
+},
+{
+"g": "Series y entretenimiento",
+"n": "NatureTime",
+"s": [
+{
+"u": "https://amg00090-blueantllc-lovenatureau-samsungnz-r3iaz.amagi.tv/playlist/amg00090-blueantllc-lovenatureau-samsungnz/playlist.m3u8"
+},
+{
+"u": "https://jmp2.uk/plu-681ba2729624e6275efe0044.m3u8"
+},
+{
+"u": "https://jmp2.uk/plu-61fc0df14159c40007250432.m3u8"
+}
+]
+},
+{
+"g": "Series y entretenimiento",
+"n": "Failarmy International",
+"s": [
+{
+"u": "https://failarmy-international-fi.samsung.wurl.tv/playlist.m3u8"
+},
+{
+"u": "https://failarmy-international-nl.samsung.wurl.tv/playlist.m3u8"
+}
+]
+},
+{
+"g": "Series y entretenimiento",
+"n": "The Pet Collective International",
+"s": [
+{
+"u": "https://the-pet-collective-international-fi.samsung.wurl.tv/playlist.m3u8"
+},
+{
+"u": "https://the-pet-collective-international-au.samsung.wurl.tv/playlist.m3u8"
+}
+]
+},
+{
+"g": "Series y entretenimiento",
+"n": "BBC Drama",
+"s": [
+{
+"u": "https://jmp2.uk/plu-60d35a74c63c3c0008df6a90.m3u8"
+},
+{
+"u": "https://amg00793-amg00793c40-rakuten-es-5444.playouts.now.amagi.tv/playlist.m3u8"
+}
+]
+},
+{
+"g": "Series y entretenimiento",
+"n": "Detective Conan France",
+"s": [
+{
+"u": "https://jmp2.uk/plu-62f3e8ad2a8e8000077b013d.m3u8"
+}
+]
+},
+{
+"g": "Series y entretenimiento",
+"n": "Pluto TV Kids Classics",
+"s": [
+{
+"u": "https://jmp2.uk/plu-654a58dbf9cc82000868f0fb.m3u8"
+},
+{
+"u": "https://jmp2.uk/plu-609e7e423e9173000706a681.m3u8"
+}
+]
+},
+{
+"g": "Series y entretenimiento",
+"n": "Pluto TV Teen",
+"s": [
+{
+"u": "https://jmp2.uk/plu-5f8eb99ff17815000784a3b0.m3u8"
+},
+{
+"u": "https://jmp2.uk/plu-63eb573ba99571000897135b.m3u8"
+}
+]
+},
+{
+"g": "Series y entretenimiento",
+"n": "Pluto TV Toons",
+"s": [
+{
+"u": "https://jmp2.uk/plu-5f8eba14a4ffb8000764e950.m3u8"
+}
+]
+},
+{
+"g": "Series y entretenimiento",
+"n": "Z Nation",
+"s": [
+{
+"u": "https://jmp2.uk/plu-66b227b446762a000846c208.m3u8"
+},
+{
+"u": "https://jmp2.uk/plu-66b3af1c3a4ad200081c7d03.m3u8"
+}
+]
+},
+{
+"g": "Series y entretenimiento",
+"n": "South Park",
+"s": [
+{
+"u": "https://jmp2.uk/plu-64edf6eaa7ec0d000812f58c.m3u8"
+},
+{
+"u": "https://jmp2.uk/plu-62bc1f502b70e3000706298e.m3u8"
+}
+]
+},
+{
+"g": "Series y entretenimiento",
+"n": "Tastemade en Espanol",
+"s": [
+{
+"u": "https://tastemadees16us-xumo.amagi.tv/playlist.m3u8"
+}
+]
+},
+{
+"g": "Series y entretenimiento",
+"n": "AMC en Español",
+"s": [
+{
+"u": "https://pb-fmbyorn1d0n1n.akamaized.net/v1/amc_amcespanol_3/samsungheadend_us/latest/main/hls/playlist.m3u8"
+}
+]
+},
+{
+"g": "Series y entretenimiento",
+"n": "Canela.TV",
+"s": [
+{
+"u": "https://d3cx6yargdnl7q.cloudfront.net/canelatv.m3u8"
+}
+]
+},
+{
+"g": "Series y entretenimiento",
+"n": "Estrella Games",
+"s": [
+{
+"u": "https://d3jx4o3w9313un.cloudfront.net/Estrella_Games.m3u8"
+},
+{
+"u": "https://cdn-uw2-prod.tsv2.amagi.tv/linear/amg00567-estrellamedia-estrellagames-distrotv/playlist.m3u8"
+}
+]
+},
+{
+"g": "Series y entretenimiento",
+"n": "Historia",
+"s": [
+{
+"u": "https://d1k3vzh2ivy22k.cloudfront.net/Historia.m3u8"
+}
+]
+},
+{
+"g": "Series y entretenimiento",
+"n": "Law & Crime",
+"s": [
+{
+"u": "https://ebd6ee5f.wurl.com/master/f36d25e7e52f1ba8d7e56eb859c636563214f541/U2Ftc3VuZ19MYXdhbmRDcmltZV9ITFM/playlist_scte.m3u8"
+}
+]
+},
+{
+"g": "Series y entretenimiento",
+"n": "Love Nature 4K",
+"s": [
+{
+"u": "https://pb-ehs1glsha1juy.akamaized.net/Love_Nature_4K.m3u8"
+}
+]
+},
+{
+"g": "Series y entretenimiento",
+"n": "Mr. Bean Animated",
+"s": [
+{
+"u": "https://d2t1w90tnft92.cloudfront.net/Mr_Bean_Animated.m3u8"
+},
+{
+"u": "https://jmp2.uk/plu-69fca9f9b9c0f0d444f631ca.m3u8"
+},
+{
+"u": "https://amg00627-amg00627c23-samsung-gb-3927.playouts.now.amagi.tv/playlist.m3u8"
+}
+]
+},
+{
+"g": "Series y entretenimiento",
+"n": "Kanal D Drama",
+"s": [
+{
+"u": "https://cdn-uw2-prod.tsv2.amagi.tv/linear/amg01602-themahqfrance-vivekanald-samsungspain/playlist.m3u8"
+}
+]
+},
+{
+"g": "Series y entretenimiento",
+"n": "AFV en Español",
+"s": [
+{
+"u": "https://linear-46.frequency.stream/dist/plex/46/hls/master/playlist.m3u8"
+}
+]
+},
+{
+"g": "Series y entretenimiento",
+"n": "Estrella TV East",
+"s": [
+{
+"u": "https://estrellatv-plex.amagi.tv/playlist.m3u8"
+},
+{
+"u": "https://estrellatv-roku.amagi.tv/playlist.m3u8"
+}
+]
+},
+{
+"g": "Series y entretenimiento",
+"n": "RCN Más",
+"s": [
+{
+"u": "https://rcntv-rcnmas-1-us.plex.wurl.tv/playlist.m3u8"
+},
+{
+"u": "https://jmp2.uk/plu-69de4ad924a6d521f8b0a348.m3u8"
+}
+]
+},
+{
+"g": "Series y entretenimiento",
+"n": "Acapulco Shore Pluto TV",
+"s": [
+{
+"u": "https://jmp2.uk/plu-61a52615cbef2500072876e2.m3u8"
+}
+]
+},
+{
+"g": "Series y entretenimiento",
+"n": "Archivos Forenses",
+"s": [
+{
+"u": "https://jmp2.uk/plu-5efb8c19b2678b000780d032.m3u8"
+},
+{
+"u": "https://jmp2.uk/plu-5f984f4a09e92d0007d74647.m3u8"
+}
+]
+},
+{
+"g": "Series y entretenimiento",
+"n": "Babyfirst",
+"s": [
+{
+"u": "https://jmp2.uk/plu-5ebac49ce4dc8b00078b23bc.m3u8"
+},
+{
+"u": "https://jmp2.uk/plu-5f4fb4cf605ddf000748e16f.m3u8"
+}
+]
+},
+{
+"g": "Series y entretenimiento",
+"n": "Bob Esponja Pantalones Cuadrados",
+"s": [
+{
+"u": "https://jmp2.uk/plu-6254598f5083f800076d8563.m3u8"
+}
+]
+},
+{
+"g": "Series y entretenimiento",
+"n": "Comedy Central South Park",
+"s": [
+{
+"u": "https://jmp2.uk/plu-609ae5cd48d3200007b0a98e.m3u8"
+},
+{
+"u": "https://jmp2.uk/plu-609ae66b359b270007869ff1.m3u8"
+}
+]
+},
+{
+"g": "Series y entretenimiento",
+"n": "Concert Channel",
+"s": [
+{
+"u": "https://jmp2.uk/plu-6868152657543d1f8be4ece3.m3u8"
+}
+]
+},
+{
+"g": "Series y entretenimiento",
+"n": "Daria",
+"s": [
+{
+"u": "https://jmp2.uk/plu-62d0895ebe7a970008785244.m3u8"
+}
+]
+},
+{
+"g": "Series y entretenimiento",
+"n": "Dog el cazarrecompensas",
+"s": [
+{
+"u": "https://jmp2.uk/plu-5f9992c685a2a80007fa414a.m3u8"
+}
+]
+},
+{
+"g": "Series y entretenimiento",
+"n": "Empeños a lo bestia",
+"s": [
+{
+"u": "https://jmp2.uk/plu-5f23102d5e239d00074b092a.m3u8"
+},
+{
+"u": "https://jmp2.uk/plu-60218baa464ef900073168c1.m3u8"
+}
+]
+},
+{
+"g": "Series y entretenimiento",
+"n": "Hey Arnold!",
+"s": [
+{
+"u": "https://jmp2.uk/plu-66c79221b1a34600087e264d.m3u8"
+}
+]
+},
+{
+"g": "Series y entretenimiento",
+"n": "Karaoke por Stingray",
+"s": [
+{
+"u": "https://jmp2.uk/plu-5f85cf621d6d2200079f1de0.m3u8"
+}
+]
+},
+{
+"g": "Series y entretenimiento",
+"n": "Kenan y Kel",
+"s": [
+{
+"u": "https://jmp2.uk/plu-5fcea93ffcf94500071c4b2f.m3u8"
+}
+]
+},
+{
+"g": "Series y entretenimiento",
+"n": "Las Tortugas Ninja",
+"s": [
+{
+"u": "https://jmp2.uk/plu-63dd5d7a4e83e700088fbca8.m3u8"
+}
+]
+},
+{
+"g": "Series y entretenimiento",
+"n": "Los archivos del FBI",
+"s": [
+{
+"u": "https://jmp2.uk/plu-5e67d41b93312100076f3fca.m3u8"
+},
+{
+"u": "https://jmp2.uk/plu-5f1acbed25948a0007ffbe65.m3u8"
+}
+]
+},
+{
+"g": "Series y entretenimiento",
+"n": "MacGyver",
+"s": [
+{
+"u": "https://jmp2.uk/plu-63eb95baa99571000898a078.m3u8"
+},
+{
+"u": "https://jmp2.uk/plu-63eb9dc84e83e70008abea92.m3u8"
+}
+]
+},
+{
+"g": "Series y entretenimiento",
+"n": "Minuto Para Ganar",
+"s": [
+{
+"u": "https://jmp2.uk/plu-5e46e64dc73db400094b5f0b.m3u8"
+}
+]
+},
+{
+"g": "Series y entretenimiento",
+"n": "Misterios Medicos",
+"s": [
+{
+"u": "https://jmp2.uk/plu-5f230e416b68ff00075b0139.m3u8"
+}
+]
+},
+{
+"g": "Series y entretenimiento",
+"n": "MTV Catfish",
+"s": [
+{
+"u": "https://jmp2.uk/plu-625461ef01f27a0007976ad1.m3u8"
+},
+{
+"u": "https://jmp2.uk/plu-626c2a3502d84a0007cec817.m3u8"
+}
+]
+},
+{
+"g": "Series y entretenimiento",
+"n": "MTV Con Mi Ex",
+"s": [
+{
+"u": "https://jmp2.uk/plu-638693db857364000781b471.m3u8"
+}
+]
+},
+{
+"g": "Series y entretenimiento",
+"n": "MTV Dating",
+"s": [
+{
+"u": "https://jmp2.uk/plu-6851b909954170e0128bc71d.m3u8"
+},
+{
+"u": "https://jmp2.uk/plu-6851bb3426beced4f2f67ee6.m3u8"
+}
+]
+},
+{
+"g": "Series y entretenimiento",
+"n": "MTV Pluto TV LatAm",
+"s": [
+{
+"u": "https://jmp2.uk/plu-5fab088b3279760007d4e4fd.m3u8"
+}
+]
+},
+{
+"g": "Series y entretenimiento",
+"n": "MTV Reality",
+"s": [
+{
+"u": "https://jmp2.uk/plu-5de91b7ea86ee60009d89e75.m3u8"
+},
+{
+"u": "https://jmp2.uk/plu-6851bdfc9ac48fde5e07f5ae.m3u8"
+}
+]
+},
+{
+"g": "Series y entretenimiento",
+"n": "MTV Ridiculousness",
+"s": [
+{
+"u": "https://jmp2.uk/plu-5e98a911c881310007d7aae2.m3u8"
+},
+{
+"u": "https://jmp2.uk/plu-64f9cccf110545000837912e.m3u8"
+}
+]
+},
+{
+"g": "Series y entretenimiento",
+"n": "MTV Rocks",
+"s": [
+{
+"u": "https://jmp2.uk/plu-66a01b52a4ee27000808ea36.m3u8"
+},
+{
+"u": "https://jmp2.uk/plu-66a01e07d2d50d0008100d6a.m3u8"
+}
+]
+},
+{
+"g": "Series y entretenimiento",
+"n": "MTV Rupaul's Drag Race Untucked",
+"s": [
+{
+"u": "https://jmp2.uk/plu-64510d3ad3fdde00080951f2.m3u8"
+}
+]
+},
+{
+"g": "Series y entretenimiento",
+"n": "MTV Teen Mom",
+"s": [
+{
+"u": "https://jmp2.uk/plu-620fd9f4afb9a80007a9c6d5.m3u8"
+}
+]
+},
+{
+"g": "Series y entretenimiento",
+"n": "Naruto",
+"s": [
+{
+"u": "https://jmp2.uk/plu-5ee92e72fb286e0007285fec.m3u8"
+}
+]
+},
+{
+"g": "Series y entretenimiento",
+"n": "Naruto Shippuden",
+"s": [
+{
+"u": "https://jmp2.uk/plu-64c92fea3c3344000869e8a9.m3u8"
+},
+{
+"u": "https://jmp2.uk/plu-64c92f965580090008084968.m3u8"
+}
+]
+},
+{
+"g": "Series y entretenimiento",
+"n": "NCIS",
+"s": [
+{
+"u": "https://jmp2.uk/plu-63eb947c4e83e70008ab877b.m3u8"
+},
+{
+"u": "https://jmp2.uk/plu-63eb9fdda995710008991c54.m3u8"
+}
+]
+},
+{
+"g": "Series y entretenimiento",
+"n": "Nick Jr. Club",
+"s": [
+{
+"u": "https://jmp2.uk/plu-5ddd7cb2cbb9010009b4fe32.m3u8"
+},
+{
+"u": "https://jmp2.uk/plu-6824ce95f09106f4b18f4114.m3u8"
+}
+]
+},
+{
+"g": "Series y entretenimiento",
+"n": "Nickelodeon Clásico",
+"s": [
+{
+"u": "https://jmp2.uk/plu-6824cda00101510f9eeaa011.m3u8"
+}
+]
+},
+{
+"g": "Series y entretenimiento",
+"n": "Nickelodeon iCarly",
+"s": [
+{
+"u": "https://jmp2.uk/plu-620ff0a01f9e8700076c6f9d.m3u8"
+},
+{
+"u": "https://jmp2.uk/plu-620ff46e0a576e0007dc2f89.m3u8"
+}
+]
+},
+{
+"g": "Series y entretenimiento",
+"n": "Nickelodeon Teen",
+"s": [
+{
+"u": "https://jmp2.uk/plu-5fab09a8749b1a00077d35d2.m3u8"
+},
+{
+"u": "https://jmp2.uk/plu-60f5fabf0721880007cd50e3.m3u8"
+}
+]
+},
+{
+"g": "Series y entretenimiento",
+"n": "Nickelodeon Toons",
+"s": [
+{
+"u": "https://jmp2.uk/plu-645952687cb4b100084ed52e.m3u8"
+},
+{
+"u": "https://jmp2.uk/plu-645951c0e94c38000802d2cb.m3u8"
+}
+]
+},
+{
+"g": "Series y entretenimiento",
+"n": "Números",
+"s": [
+{
+"u": "https://jmp2.uk/plu-67f960680072d6b187a0682e.m3u8"
+}
+]
+},
+{
+"g": "Series y entretenimiento",
+"n": "Pluto TV Amor y Mentiras",
+"s": [
+{
+"u": "https://jmp2.uk/plu-698a45156dc3c71eb1ba6599.m3u8"
+}
+]
+},
+{
+"g": "Series y entretenimiento",
+"n": "Pluto TV Aventura",
+"s": [
+{
+"u": "https://jmp2.uk/plu-5ddc266f80e3550009136843.m3u8"
+}
+]
+},
+{
+"g": "Series y entretenimiento",
+"n": "Pluto TV Dramas Coreanos",
+"s": [
+{
+"u": "https://jmp2.uk/plu-6185a9a88b2ce30007de5128.m3u8"
+}
+]
+},
+{
+"g": "Series y entretenimiento",
+"n": "Pluto TV Dramas Coreanos Teen",
+"s": [
+{
+"u": "https://jmp2.uk/plu-6661d5424b10960008599fa3.m3u8"
+}
+]
+},
+{
+"g": "Series y entretenimiento",
+"n": "Pluto TV Investiga",
+"s": [
+{
+"u": "https://jmp2.uk/plu-5dcde27ffae9520009c0c75a.m3u8"
+}
+]
+},
+{
+"g": "Series y entretenimiento",
+"n": "Pluto TV Junior",
+"s": [
+{
+"u": "https://jmp2.uk/plu-5dcde2ac4bc6c500094ab45b.m3u8"
+},
+{
+"u": "https://jmp2.uk/plu-5f12141b146d760007934ea7.m3u8"
+}
+]
+},
+{
+"g": "Series y entretenimiento",
+"n": "Pluto TV Kids",
+"s": [
+{
+"u": "https://jmp2.uk/plu-5dd6dae8ce788b0009eaf77b.m3u8"
+},
+{
+"u": "https://jmp2.uk/plu-5f1214a637c6fd00079c652f.m3u8"
+}
+]
+},
+{
+"g": "Series y entretenimiento",
+"n": "Pluto TV Mi Obsesión Favorita",
+"s": [
+{
+"u": "https://jmp2.uk/plu-6109ab25b84d6a0007504886.m3u8"
+}
+]
+},
+{
+"g": "Series y entretenimiento",
+"n": "Pluto TV MTV Classic",
+"s": [
+{
+"u": "https://jmp2.uk/plu-66a11a21a79dea0008aa90ca.m3u8"
+},
+{
+"u": "https://jmp2.uk/plu-66a01dcb8561260008b0a41d.m3u8"
+}
+]
+},
+{
+"g": "Series y entretenimiento",
+"n": "Pluto TV Naturaleza",
+"s": [
+{
+"u": "https://jmp2.uk/plu-5dd85eac039bba0009e86d1d.m3u8"
+}
+]
+},
+{
+"g": "Series y entretenimiento",
+"n": "Pluto TV Series",
+"s": [
+{
+"u": "https://jmp2.uk/plu-5dcde1317578340009b751d0.m3u8"
+}
+]
+},
+{
+"g": "Series y entretenimiento",
+"n": "Pluto TV Series Latinas",
+"s": [
+{
+"u": "https://jmp2.uk/plu-5dd837642c6e9300098ad484.m3u8"
+}
+]
+},
+{
+"g": "Series y entretenimiento",
+"n": "Pluto TV Series Retro",
+"s": [
+{
+"u": "https://jmp2.uk/plu-5de802659167b10009e7deba.m3u8"
+}
+]
+},
+{
+"g": "Series y entretenimiento",
+"n": "Pluto TV Star Trek",
+"s": [
+{
+"u": "https://jmp2.uk/plu-5ec5761aabe4690007f6e047.m3u8"
+},
+{
+"u": "https://jmp2.uk/plu-5f99ac4fded33000078f29ab.m3u8"
+}
+]
+},
+{
+"g": "Series y entretenimiento",
+"n": "Rugrats",
+"s": [
+{
+"u": "https://jmp2.uk/plu-5ea7215005d66d0007e8128a.m3u8"
+},
+{
+"u": "https://jmp2.uk/plu-610c09219fc0430007a3fce6.m3u8"
+}
+]
+},
+{
+"g": "Series y entretenimiento",
+"n": "Sin Tetas No Hay Paraíso",
+"s": [
+{
+"u": "https://jmp2.uk/plu-604bdf4e6d0abc0007ba77ad.m3u8"
+}
+]
+},
+{
+"g": "Series y entretenimiento",
+"n": "Smithsonian Channel Pluto TV",
+"s": [
+{
+"u": "https://jmp2.uk/plu-63a084934734f30007457b2c.m3u8"
+},
+{
+"u": "https://jmp2.uk/plu-6298bd10d88ef000073f16b7.m3u8"
+}
+]
+},
+{
+"g": "Series y entretenimiento",
+"n": "South Park: Colección Cartman",
+"s": [
+{
+"u": "https://jmp2.uk/plu-65df731cec9fda0008b7aa8d.m3u8"
+}
+]
+},
+{
+"g": "Series y entretenimiento",
+"n": "South Park: Colección Kenny",
+"s": [
+{
+"u": "https://jmp2.uk/plu-65df7272ec9fda0008b7a970.m3u8"
+}
+]
+},
+{
+"g": "Series y entretenimiento",
+"n": "South Park: Colección Kyle",
+"s": [
+{
+"u": "https://jmp2.uk/plu-65df73520d4561000817c29b.m3u8"
+}
+]
+},
+{
+"g": "Series y entretenimiento",
+"n": "South Park: Colección Stan",
+"s": [
+{
+"u": "https://jmp2.uk/plu-65df72db18036500081a8292.m3u8"
+}
+]
+},
+{
+"g": "Series y entretenimiento",
+"n": "Kenan & Kel",
+"s": [
+{
+"u": "https://jmp2.uk/plu-5ffcc5130fd98c0007f2e216.m3u8"
+}
+]
+},
+{
+"g": "Series y entretenimiento",
+"n": "MTV Rupaul's Drag Race",
+"s": [
+{
+"u": "https://jmp2.uk/plu-645111f1d8436e00081bb2bd.m3u8"
+}
+]
+},
+{
+"g": "Series y entretenimiento",
+"n": "Pluto TV Karaokê por Stingray",
+"s": [
+{
+"u": "https://jmp2.uk/plu-604b99d633a72b00078e05ad.m3u8"
+}
+]
+},
+{
+"g": "Series y entretenimiento",
+"n": "AMC en Espanol",
+"s": [
+{
+"u": "https://amc-amcespanol-1-us.lg.wurl.tv/playlist.m3u8"
+}
+]
+},
+{
+"g": "Series y entretenimiento",
+"n": "Clubbing TV France",
+"s": [
+{
+"u": "https://d1j2csarxnwazk.cloudfront.net/v1/master/3722c60a815c199d9c0ef36c5b73da68a62b09d1/cc-uze1m6xh4fiyr-ssai-prd/master.m3u8"
+}
+]
+},
+{
+"g": "Series y entretenimiento",
+"n": "KRGV-DT2",
+"s": [
+{
+"u": "https://d3svnrf3rmq619.cloudfront.net/krgv-live/smil:krgv-somos.smil/playlist.m3u8"
+}
+]
+},
+{
+"g": "Series y entretenimiento",
+"n": "Revry LatinX",
+"s": [
+{
+"u": "https://linear-142.frequency.stream/dist/24i/142/hls/master/playlist.m3u8"
+}
+]
+},
+{
+"g": "Series y entretenimiento",
+"n": "XITE Nuevo Latino",
+"s": [
+{
+"u": "https://d3bsgqzbpkrvbb.cloudfront.net/v1/master/3722c60a815c199d9c0ef36c5b73da68a62b09d1/cc-w288eaw03izg1/XITE_Nuevo_Latino.m3u8"
+}
+]
+},
+{
+"g": "Series y entretenimiento",
+"n": "XITE Siempre Latino",
+"s": [
+{
+"u": "https://d1xc25jm9e0l4b.cloudfront.net/v1/master/3722c60a815c199d9c0ef36c5b73da68a62b09d1/cc-xplkt8i7m24dc/XITE_Siempre_Latino.m3u8"
+}
+]
+},
+{
+"g": "Series y entretenimiento",
+"n": "MeTV Toons",
+"s": [
+{
+"u": "https://sr-live-weigel1.akamaized.net/out/v1/0d1dbf29e64e47bc991796cc24fbeb97/index_2.m3u8"
+}
+]
+},
+{
+"g": "Series y entretenimiento",
+"n": "Ana y los 7",
+"s": [
+{
+"u": "https://jmp2.uk/plu-5f1acce7f17797000718f9be.m3u8"
+}
+]
+},
+{
+"g": "Series y entretenimiento",
+"n": "Bob Esponja",
+"s": [
+{
+"u": "https://jmp2.uk/plu-5f1aca0b4e448e00075e7c5e.m3u8"
+}
+]
+},
+{
+"g": "Series y entretenimiento",
+"n": "Crimen & Historia",
+"s": [
+{
+"u": "https://jmp2.uk/plu-64ddcbb14c5ed80008fad416.m3u8"
+}
+]
+},
+{
+"g": "Series y entretenimiento",
+"n": "Curro Jiménez",
+"s": [
+{
+"u": "https://jmp2.uk/plu-5f1acd36779de70007a680d1.m3u8"
+}
+]
+},
+{
+"g": "Series y entretenimiento",
+"n": "Detective Conan",
+"s": [
+{
+"u": "https://jmp2.uk/plu-629a066860ef810008267b70.m3u8"
+}
+]
+},
+{
+"g": "Series y entretenimiento",
+"n": "El Comisario",
+"s": [
+{
+"u": "https://jmp2.uk/plu-60c343007bcabe0007242aa6.m3u8"
+}
+]
+},
+{
+"g": "Series y entretenimiento",
+"n": "El Mueble",
+"s": [
+{
+"u": "https://jmp2.uk/plu-690dd10a37b131228d76d5b1.m3u8"
+}
+]
+},
+{
+"g": "Series y entretenimiento",
+"n": "Historia y Vida",
+"s": [
+{
+"u": "https://jmp2.uk/plu-67517f923a61d40008c451f0.m3u8"
+}
+]
+},
+{
+"g": "Series y entretenimiento",
+"n": "Mi Extraña Obsesión",
+"s": [
+{
+"u": "https://jmp2.uk/plu-60e4573c9f963e00077ecf25.m3u8"
+}
+]
+},
+{
+"g": "Series y entretenimiento",
+"n": "MTV Embarazada a los 16",
+"s": [
+{
+"u": "https://jmp2.uk/plu-5f98537a5a4341000733aefe.m3u8"
+}
+]
+},
+{
+"g": "Series y entretenimiento",
+"n": "MTV Geordies",
+"s": [
+{
+"u": "https://jmp2.uk/plu-627d3176d7dfa500077042f1.m3u8"
+}
+]
+},
+{
+"g": "Series y entretenimiento",
+"n": "MTV Jerseys",
+"s": [
+{
+"u": "https://jmp2.uk/plu-62ac3d7dc23b400008ae5b5a.m3u8"
+}
+]
+},
+{
+"g": "Series y entretenimiento",
+"n": "MTV Originals",
+"s": [
+{
+"u": "https://jmp2.uk/plu-5f1aadf373bed3000794d1d7.m3u8"
+}
+]
+},
+{
+"g": "Series y entretenimiento",
+"n": "MTV Vergüenza ajena",
+"s": [
+{
+"u": "https://jmp2.uk/plu-63eb9495a8b227000841bf64.m3u8"
+}
+]
+},
+{
+"g": "Series y entretenimiento",
+"n": "Pluto TV Animales",
+"s": [
+{
+"u": "https://jmp2.uk/plu-600ae6a78d801e0007117d21.m3u8"
+}
+]
+},
+{
+"g": "Series y entretenimiento",
+"n": "Pluto TV Cocina",
+"s": [
+{
+"u": "https://jmp2.uk/plu-5f1acdaa8ba90f0007d5e760.m3u8"
+}
+]
+},
+{
+"g": "Series y entretenimiento",
+"n": "Pluto TV Comedia made in Spain",
+"s": [
+{
+"u": "https://jmp2.uk/plu-5f1abce155a03d0007718834.m3u8"
+}
+]
+},
+{
+"g": "Series y entretenimiento",
+"n": "Pluto TV Diseño",
+"s": [
+{
+"u": "https://jmp2.uk/plu-64db2e0835425100080f2f5a.m3u8"
+}
+]
+},
+{
+"g": "Series y entretenimiento",
+"n": "Pluto TV Gasolina",
+"s": [
+{
+"u": "https://jmp2.uk/plu-65bd0f53dc10a40008e68b96.m3u8"
+}
+]
+},
+{
+"g": "Series y entretenimiento",
+"n": "Pluto TV Gore & Slasher",
+"s": [
+{
+"u": "https://jmp2.uk/plu-66b0dfa1d512590008bfa7fd.m3u8"
+}
+]
+},
+{
+"g": "Series y entretenimiento",
+"n": "Pluto TV Historia",
+"s": [
+{
+"u": "https://jmp2.uk/plu-61cd7b49543066000713b620.m3u8"
+}
+]
+},
+{
+"g": "Series y entretenimiento",
+"n": "Pluto TV Impacto",
+"s": [
+{
+"u": "https://jmp2.uk/plu-68adc697116b783a33f99e6c.m3u8"
+}
+]
+},
+{
+"g": "Series y entretenimiento",
+"n": "Pluto TV K-Drama",
+"s": [
+{
+"u": "https://jmp2.uk/plu-6475bfec536e0c0008858e9f.m3u8"
+}
+]
+},
+{
+"g": "Series y entretenimiento",
+"n": "Pluto TV Motor",
+"s": [
+{
+"u": "https://jmp2.uk/plu-6080345ebb49b90007ce0baf.m3u8"
+}
+]
+},
+{
+"g": "Series y entretenimiento",
+"n": "Pluto TV Series criminales",
+"s": [
+{
+"u": "https://jmp2.uk/plu-65cf6ab58145cb0008129ca8.m3u8"
+}
+]
+},
+{
+"g": "Series y entretenimiento",
+"n": "Pluto TV Telenovelas Clásicas",
+"s": [
+{
+"u": "https://jmp2.uk/plu-662a69daa0a74e00087a1c72.m3u8"
+}
+]
+},
+{
+"g": "Series y entretenimiento",
+"n": "South Park Versión Original",
+"s": [
+{
+"u": "https://jmp2.uk/plu-63d7a8e5a9957100086bfc23.m3u8"
+}
+]
+},
+{
+"g": "Series y entretenimiento",
+"n": "Vaya semanita",
+"s": [
+{
+"u": "https://jmp2.uk/plu-5f28009b150b2500077766b8.m3u8"
+}
+]
+},
+{
+"g": "Series y entretenimiento",
+"n": "Love the Planet",
+"s": [
+{
+"u": "https://amg01821-lovetvchannels-lovetheplanetuksamsung-samsunguk-apopw.amagi.tv/playlist/amg01821-lovetvchannels-lovetheplanetuksamsung-samsunguk/playlist.m3u8"
+},
+{
+"u": "https://amg01821-lovetv-amg01821c8-xumo-us-3443.playouts.now.amagi.tv/playlist.m3u8"
+}
+]
+},
+{
+"g": "Series y entretenimiento",
+"n": "Mr. Bean Anime",
+"s": [
+{
+"u": "https://amg00627-amg00627c28-rakuten-uk-3984.playouts.now.amagi.tv/playlist/amg00627-banijayfast-mrbeanukcc-rakutenuk/playlist.m3u8"
+}
+]
+},
+{
+"g": "Series y entretenimiento",
+"n": "Banijay Mr Bean Animé",
+"s": [
+{
+"u": "https://amg00627-amg00627c31-rakuten-fr-3991.playouts.now.amagi.tv/playlist/amg00627-banijayfast-mrbeanfrcc-rakutenfr/playlist.m3u8"
+}
+]
+},
+{
+"g": "Series y entretenimiento",
+"n": "Nature Time France",
+"s": [
+{
+"u": "https://bamusa-naturetime-emea-fra-rakuten.amagi.tv/playlist.m3u8"
+}
+]
+},
+{
+"g": "Series y entretenimiento",
+"n": "Anime Vision",
+"s": [
+{
+"u": "https://d1ujfw1zyymzyd.cloudfront.net/v1/master/3722c60a815c199d9c0ef36c5b73da68a62b09d1/cc-a6fukwkbxmex8/live/fast-channel-animevision-64527ec0/fast-channel-animevision-64527ec0.m3u8"
+}
+]
+},
+{
+"g": "Series y entretenimiento",
+"n": "Anime Vision Classics",
+"s": [
+{
+"u": "https://d82pyvmcw2kdc.cloudfront.net/v1/master/3722c60a815c199d9c0ef36c5b73da68a62b09d1/cc-swfivzrzwamaq/live/fast-channel-animevisionclassics-efc8dc6d/fast-channel-animevisionclassics-efc8dc6d.m3u8"
+}
+]
+},
+{
+"g": "Series y entretenimiento",
+"n": "Clan",
+"s": [
+{
+"u": "https://lge-lgla2.otteravision.com/lge/lgcla/lgcla.m3u8"
+},
+{
+"u": "https://rtvelivestream.rtve.es/rtvesec/clan/clan_main.m3u8"
+}
+]
+},
+{
+"g": "Series y entretenimiento",
+"n": "Clan Internacional Americas",
+"s": [
+{
+"u": "https://rtvelivestream-rtveplayplus.rtve.es/rtvesec/int/clan_int_main_1080.m3u8"
+}
+]
+},
+{
+"g": "Series y entretenimiento",
+"n": "Clan TVE",
+"s": [
+{
+"u": "https://ztnr.rtve.es/ztnr/5466990.m3u8"
+}
+]
+},
+{
+"g": "Series y entretenimiento",
+"n": "Historia HD",
+"s": [
+{
+"u": "https://d1k3vzh2ivy22k.cloudfront.net/Historia1080.m3u8"
+}
+]
+},
+{
+"g": "Series y entretenimiento",
+"n": "HOLA! Play",
+"s": [
+{
+"u": "https://hola-play-2108fd06-86d4-44e8-9867-c35b4895a1c1-es.fast.rakuten.tv/v1/master/0547f18649bd788bec7b67b746e47670f558b6b2/production-LiveChannel-6433/master.m3u8"
+}
+]
+},
+{
+"g": "Series y entretenimiento",
+"n": "Love The Planet ES",
+"s": [
+{
+"u": "https://amg01821-lovetv-amg01821c9-rlaxx-gb-10458.playouts.now.amagi.tv/playlist.m3u8"
+}
+]
+},
+{
+"g": "Series y entretenimiento",
+"n": "Love The Planet IT",
+"s": [
+{
+"u": "https://amg01821-amg01821c11-rlaxx-gb-10459.playouts.now.amagi.tv/playlist.m3u8"
+}
+]
+},
+{
+"g": "Series y entretenimiento",
+"n": "Rakuten Viki",
+"s": [
+{
+"u": "https://newidco-rakutenviki-2-eu.xiaomi.wurl.tv/playlist.m3u8"
+},
+{
+"u": "https://fd18f1cadd404894a31a3362c5f319bd.mediatailor.us-east-1.amazonaws.com/v1/master/04fd913bb278d8775298c26fdca9d9841f37601f/RakutenTV-eu_RakutenViki-1/playlist.m3u8"
+}
+]
+},
+{
+"g": "Series y entretenimiento",
+"n": "Sol Música",
+"s": [
+{
+"u": "https://d2glyu450vvghm.cloudfront.net/v1/master/3722c60a815c199d9c0ef36c5b73da68a62b09d1/cc-21u4g5cjglv02/sm.m3u8"
+}
+]
+},
+{
+"g": "Series y entretenimiento",
+"n": "TVE Star",
+"s": [
+{
+"u": "https://rtvelivestream-rtveplayplus.rtve.es/rtvesec/int/star_main_576.m3u8"
+}
+]
+},
+{
+"g": "Series y entretenimiento",
+"n": "TVE Star HD",
+"s": [
+{
+"u": "https://rtvelivestream-rtveplayplus.rtve.es/rtvesec/int/star_main_1080.m3u8"
+},
+{
+"u": "https://rtvelivestream-rtveplayplus.rtve.es/rtvesec/int/star_main_dvr_1080.m3u8"
+}
+]
+},
+{
+"g": "Series y entretenimiento",
+"n": "Mr. Bean Anime Spain",
+"s": [
+{
+"u": "https://amg00627-amg00627c30-rakuten-es-3990.playouts.now.amagi.tv/playlist/amg00627-banijayfast-mrbeanescc-rakutenes/playlist.m3u8"
+}
+]
+},
+{
+"g": "Series y entretenimiento",
+"n": "Zylo Todo Novelas",
+"s": [
+{
+"u": "https://dtsszjrztq9ti.cloudfront.net/v1/master/3722c60a815c199d9c0ef36c5b73da68a62b09d1/cc-yshah5p4v45g1/ToDoNovelas_ES.m3u8"
+},
+{
+"u": "https://amg00711-zylo-amg00711c3-rakuten-es-5794.playouts.now.amagi.tv/playlist/amg00711-zylofast-frecuencianovelas-rakutenes/playlist.m3u8"
+}
+]
+},
+{
+"g": "Series y entretenimiento",
+"n": "Azteca Internacional",
+"s": [
+{
+"u": "https://azt-mun.otteravision.com/azt/mun/mun.m3u8"
+}
+]
+},
+{
+"g": "Series y entretenimiento",
+"n": "Catfish",
+"s": [
+{
+"u": "https://jmp2.uk/plu-64f8a2a23a0d700008a6ed7b.m3u8"
+}
+]
+},
+{
+"g": "Series y entretenimiento",
+"n": "The Pet Collective Sweden",
+"s": [
+{
+"u": "https://the-pet-collective-international-se.samsung.wurl.tv/playlist.m3u8"
 }
 ]
 }
