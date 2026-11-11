@@ -73,6 +73,33 @@ class MainActivity : AppCompatActivity() {
     /** Animación de inicio: 10 s la primera vez del día, 3 s las demás. */
     private var outro: IntroView? = null
 
+    /** Guarda cualquier cierre inesperado para mostrarlo en la próxima apertura. */
+    private fun installCrashCatcher() {
+        val prev = Thread.getDefaultUncaughtExceptionHandler()
+        val sp = getSharedPreferences("redtica_crash", MODE_PRIVATE)
+        Thread.setDefaultUncaughtExceptionHandler { t, e ->
+            try {
+                val sw = java.io.StringWriter(); e.printStackTrace(java.io.PrintWriter(sw))
+                sp.edit().putString("last", "v${BuildConfig.VERSION_NAME} | ${t.name}\n" + sw.toString().take(1500)).commit()
+            } catch (_: Throwable) {}
+            prev?.uncaughtException(t, e)
+        }
+    }
+
+    private fun showLastCrash() {
+        val sp = getSharedPreferences("redtica_crash", MODE_PRIVATE)
+        val txt = sp.getString("last", null) ?: return
+        sp.edit().remove("last").apply()
+        val t = TextView(this).apply {
+            text = "La app se cerró por un error la vez anterior. Tome una foto de esto:\n\n$txt"
+            setTextColor(Color.WHITE); textSize = 11f
+            setBackgroundColor(0xEE400000.toInt()); setPadding(32, 24, 32, 24)
+        }
+        (findViewById<View>(android.R.id.content) as FrameLayout).addView(t,
+            FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.WRAP_CONTENT, Gravity.TOP))
+        ui.postDelayed({ (t.parent as? android.view.ViewGroup)?.removeView(t) }, 30_000)
+    }
+
     /** Video de salida: silencia el canal, lo reproduce y cierra la app al terminar. */
     private fun showOutro() {
         if (outro != null) return
@@ -95,6 +122,7 @@ class MainActivity : AppCompatActivity() {
         // Se muestra completa cada vez que se abre la app
         val v = IntroView(this) {
             intro = null
+            showLastCrash()
             player?.volume = 1f   // vuelve el audio del canal
         }
         intro = v
@@ -193,7 +221,7 @@ class MainActivity : AppCompatActivity() {
     private var videoDecoder = "-"
     private val diagTick = object : Runnable {
         override fun run() {
-            updateDiag()
+            try { updateDiag() } catch (e: Throwable) { diag?.text = "Error en diagnóstico: ${e.javaClass.simpleName}: ${e.message}" }
             ui.postDelayed(this, 1000)
         }
     }
@@ -225,6 +253,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        installCrashCatcher()
         setContentView(R.layout.activity_main)
         playerView = findViewById(R.id.player)
         status = findViewById(R.id.status)
@@ -741,7 +770,12 @@ class MainActivity : AppCompatActivity() {
 
     // ---------- Panel de diagnóstico ----------
 
-    private fun toggleDiag() {
+    private fun toggleDiag() = try { toggleDiagInner() } catch (e: Throwable) {
+        lastKeyInfo = "error panel: ${e.javaClass.simpleName}: ${e.message}"
+        android.widget.Toast.makeText(this, lastKeyInfo, android.widget.Toast.LENGTH_LONG).show()
+    }
+
+    private fun toggleDiagInner() {
         val d = diag
         if (d != null && d.visibility == View.VISIBLE) {
             d.visibility = View.GONE
