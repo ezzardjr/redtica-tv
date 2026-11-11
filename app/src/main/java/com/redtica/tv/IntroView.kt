@@ -2,6 +2,10 @@ package com.redtica.tv
 
 import android.content.Context
 import android.graphics.Color
+import android.media.MediaCodecList
+import android.media.MediaFormat
+import android.os.Build
+import android.view.WindowManager
 import android.widget.FrameLayout
 import androidx.media3.common.MediaItem
 import androidx.media3.common.Player
@@ -37,7 +41,7 @@ class IntroView(context: Context, private val onDone: () -> Unit) : FrameLayout(
     }
 
     fun start() {
-        player.setMediaItem(MediaItem.fromUri(RawResourceDataSource.buildRawResourceUri(R.raw.intro)))
+        player.setMediaItem(MediaItem.fromUri(RawResourceDataSource.buildRawResourceUri(pickVideo())))
         player.addListener(object : Player.Listener {
             override fun onPlaybackStateChanged(state: Int) {
                 if (state == Player.STATE_ENDED) fadeOut(1200)
@@ -49,6 +53,24 @@ class IntroView(context: Context, private val onDone: () -> Unit) : FrameLayout(
         // Empieza a difuminar 1 s antes del final, mientras termina el audio
         postDelayed({ fadeOut(1200) }, 9_000)
     }
+
+    /** 4K si la pantalla es 4K y el decodificador lo soporta; si no, 1080p. */
+    private fun pickVideo(): Int = if (screenIs4k() && decoderSupports4k()) R.raw.intro_4k else R.raw.intro_1080
+
+    private fun screenIs4k(): Boolean = try {
+        if (Build.VERSION.SDK_INT >= 23) {
+            @Suppress("DEPRECATION")
+            val d = (context.getSystemService(Context.WINDOW_SERVICE) as WindowManager).defaultDisplay
+            val best = (d.supportedModes + d.mode).maxOf { maxOf(it.physicalWidth, it.physicalHeight) }
+            best >= 3800
+        } else false
+    } catch (e: Exception) { false }
+
+    private fun decoderSupports4k(): Boolean = try {
+        val f = MediaFormat.createVideoFormat(MediaFormat.MIMETYPE_VIDEO_AVC, 3840, 2160)
+        f.setInteger(MediaFormat.KEY_FRAME_RATE, 24)
+        MediaCodecList(MediaCodecList.REGULAR_CODECS).findDecoderForFormat(f) != null
+    } catch (e: Exception) { false }
 
     /** Tecla del control: salta la animación. */
     fun skip() = fadeOut(500)

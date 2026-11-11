@@ -84,6 +84,28 @@ class MainActivity : AppCompatActivity() {
         v.start()
     }
     private var okDownAt = 0L
+    private var okHoldFired = false
+    private var lastKeyInfo = "-"
+    private var okHintView: TextView? = null
+    private val okHold = Runnable {
+        if (okPending) { okPending = false; okHoldFired = true; hideOkHint(); toggleDiag() }
+    }
+    private val okHint = Runnable {
+        if (!okPending) return@Runnable
+        val t = TextView(this).apply {
+            text = "Mantenga OK presionado para abrir el diagnóstico…"
+            setTextColor(android.graphics.Color.WHITE); textSize = 20f
+            setBackgroundColor(0xCC000000.toInt()); setPadding(40, 24, 40, 24)
+        }
+        okHintView = t
+        (findViewById<View>(android.R.id.content) as FrameLayout).addView(t,
+            FrameLayout.LayoutParams(FrameLayout.LayoutParams.WRAP_CONTENT, FrameLayout.LayoutParams.WRAP_CONTENT,
+                android.view.Gravity.BOTTOM or android.view.Gravity.CENTER_HORIZONTAL).apply { bottomMargin = 80 })
+    }
+    private fun hideOkHint() {
+        okHintView?.let { (it.parent as? android.view.ViewGroup)?.removeView(it) }
+        okHintView = null
+    }
 
     // ---------- Ajuste de la frecuencia de la pantalla a los cuadros del canal ----------
     @Volatile private var fpsSamples = 0
@@ -483,23 +505,32 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
-        // OK: pulsación corta = lista (o ir al número tecleado); mantenido = panel de diagnóstico
+        // OK: pulsación corta = lista (o ir al número tecleado); mantenido 5 s = panel de diagnóstico
         if (isOkKey(code) && !isListVisible() && channels.isNotEmpty()) {
             if (event.action == KeyEvent.ACTION_DOWN) {
-                if (event.repeatCount == 0) { okPending = true; okDownAt = event.eventTime }
-                else if (event.repeatCount == 1 && okPending) { okPending = false; toggleDiag() }
-                return true
+                if (!okPending && !okHoldFired) {
+                    okPending = true
+                    okDownAt = android.os.SystemClock.uptimeMillis()
+                    ui.postDelayed(okHint, 1500)
+                    ui.postDelayed(okHold, 5000)
+                }
+                return true   // las repeticiones del control se ignoran
             }
             if (event.action == KeyEvent.ACTION_UP) {
+                ui.removeCallbacks(okHint); ui.removeCallbacks(okHold)
+                hideOkHint()
+                val held = maxOf(android.os.SystemClock.uptimeMillis() - okDownAt, event.eventTime - event.downTime)
+                lastKeyInfo = "OK mantenido ${held} ms"
+                if (okHoldFired) { okHoldFired = false; return true }
                 if (okPending) {
                     okPending = false
-                    // Controles Bluetooth que no repiten la tecla: se mide cuánto se mantuvo
-                    if (event.eventTime - okDownAt >= 700) toggleDiag()
+                    if (held >= 5000) toggleDiag()
                     else if (typed.isNotEmpty()) jumpToTyped() else showList()
                 }
                 return true
             }
         }
+        if (event.action == KeyEvent.ACTION_DOWN) lastKeyInfo = "Tecla ${KeyEvent.keyCodeToString(code)} ($code)"
         return super.dispatchKeyEvent(event)
     }
 
@@ -736,7 +767,7 @@ class MainActivity : AppCompatActivity() {
             appendLine("Fuente: " + if (usingMulticast) "Multicast" else "HTTP")
             appendLine("Red: " + networkInfo())
             appendLine("Video: " + (f?.let { "${it.width}x${it.height} ${it.sampleMimeType?.substringAfter('/')} ${it.bitrate.takeIf { b -> b > 0 }?.let { b -> "${b / 1000} kbps" } ?: ""}" } ?: "-"))
-            appendLine("App: v${BuildConfig.VERSION_NAME} | Modo túnel: no")
+            appendLine("App: v${BuildConfig.VERSION_NAME} | Modo túnel: no | Última tecla: $lastKeyInfo")
             appendLine("Decodificador: $videoDecoder")
             appendLine("Cuadros del canal: " + (if (detectedFps > 0f) "%.2f fps".format(detectedFps) else "midiendo...") + " | Pantalla: " + displayHz())
             appendLine("Colchón: $buf s")
