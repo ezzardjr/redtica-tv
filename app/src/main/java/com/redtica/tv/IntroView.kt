@@ -21,7 +21,7 @@ import androidx.media3.ui.PlayerView
  * Cualquier tecla la salta (con el mismo difuminado).
  */
 @UnstableApi
-class IntroView(context: Context, private val onDone: () -> Unit) : FrameLayout(context) {
+class IntroView(context: Context, private val isExit: Boolean = false, private val onDone: () -> Unit) : FrameLayout(context) {
 
     private var finished = false
     private var fading = false
@@ -44,18 +44,22 @@ class IntroView(context: Context, private val onDone: () -> Unit) : FrameLayout(
         player.setMediaItem(MediaItem.fromUri(RawResourceDataSource.buildRawResourceUri(pickVideo())))
         player.addListener(object : Player.Listener {
             override fun onPlaybackStateChanged(state: Int) {
-                if (state == Player.STATE_ENDED) fadeOut(1200)
+                if (state == Player.STATE_ENDED) { if (isExit) finish() else fadeOut(1200) }
             }
             override fun onPlayerError(error: androidx.media3.common.PlaybackException) { fadeOut(300) }
         })
         player.prepare()
         player.playWhenReady = true
-        // Empieza a difuminar 1 s antes del final, mientras termina el audio
-        postDelayed({ fadeOut(1200) }, 9_000)
+        // Intro: empieza a difuminar 1 s antes del final, mientras termina el audio
+        if (!isExit) postDelayed({ fadeOut(1200) }, 9_000)
     }
 
     /** 4K si la pantalla es 4K y el decodificador lo soporta; si no, 1080p. */
-    private fun pickVideo(): Int = if (screenIs4k() && decoderSupports4k()) R.raw.intro_4k else R.raw.intro_1080
+    private fun pickVideo(): Int {
+        val k = screenIs4k() && decoderSupports4k()
+        return if (isExit) (if (k) R.raw.salida_4k else R.raw.salida_1080)
+        else (if (k) R.raw.intro_4k else R.raw.intro_1080)
+    }
 
     private fun screenIs4k(): Boolean = try {
         if (Build.VERSION.SDK_INT >= 23) {
@@ -73,7 +77,7 @@ class IntroView(context: Context, private val onDone: () -> Unit) : FrameLayout(
     } catch (e: Exception) { false }
 
     /** Tecla del control: salta la animación. */
-    fun skip() = fadeOut(500)
+    fun skip() = fadeOut(if (isExit) 300 else 500)
 
     private fun fadeOut(ms: Long) {
         if (fading || finished) return

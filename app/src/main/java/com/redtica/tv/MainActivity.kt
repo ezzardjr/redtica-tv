@@ -71,6 +71,26 @@ class MainActivity : AppCompatActivity() {
     private var intro: IntroView? = null
 
     /** Animación de inicio: 10 s la primera vez del día, 3 s las demás. */
+    private var outro: IntroView? = null
+
+    /** Video de salida: silencia el canal, lo reproduce y cierra la app al terminar. */
+    private fun showOutro() {
+        if (outro != null) return
+        if (diag?.visibility == View.VISIBLE) toggleDiag()
+        hideOkHint()
+        player?.volume = 0f
+        player?.pause()
+        val v = IntroView(this, isExit = true) {
+            outro = null
+            finishAndRemoveTask()
+        }
+        outro = v
+        (findViewById<View>(android.R.id.content) as FrameLayout).addView(
+            v, FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT)
+        )
+        v.start()
+    }
+
     private fun showIntro() {
         // Se muestra completa cada vez que se abre la app
         val v = IntroView(this) {
@@ -463,6 +483,15 @@ class MainActivity : AppCompatActivity() {
 
         // Cualquier tecla salta la animación de inicio
         intro?.let { if (event.action == KeyEvent.ACTION_UP) it.skip(); return true }
+
+        // Animación de salida en curso: cualquier tecla la termina y cierra
+        outro?.let { if (event.action == KeyEvent.ACTION_UP) it.skip(); return true }
+
+        // Atrás sin lista abierta: animación de salida y luego cerrar la app
+        if (code == KeyEvent.KEYCODE_BACK && !isListVisible()) {
+            if (event.action == KeyEvent.ACTION_UP) showOutro()
+            return true
+        }
 
         // Atrás con la lista abierta: solo cierra la lista
         if (code == KeyEvent.KEYCODE_BACK && isListVisible()) {
