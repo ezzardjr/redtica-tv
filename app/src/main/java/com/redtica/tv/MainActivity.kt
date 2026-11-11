@@ -72,6 +72,18 @@ class MainActivity : AppCompatActivity() {
 
     /** Animación de inicio: 10 s la primera vez del día, 3 s las demás. */
     private var outro: IntroView? = null
+    private var selector: DefaultTrackSelector? = null
+    // Modo túnel (prueba): el video pasa por el procesador de imagen del TV, que desentrelaza
+    private var tunnelOn: Boolean
+        get() = prefs.getBoolean("tunnel", false)
+        set(v) { prefs.edit().putBoolean("tunnel", v).apply() }
+
+    private fun toggleTunnel() {
+        tunnelOn = !tunnelOn
+        selector?.let { it.setParameters(it.buildUponParameters().setTunnelingEnabled(tunnelOn)) }
+        android.widget.Toast.makeText(this, "Modo túnel: " + (if (tunnelOn) "SÍ" else "NO"), android.widget.Toast.LENGTH_SHORT).show()
+        play(current)
+    }
 
     /** Guarda cualquier cierre inesperado para mostrarlo en la próxima apertura. */
     private fun installCrashCatcher() {
@@ -388,8 +400,9 @@ class MainActivity : AppCompatActivity() {
         // Modo túnel: el TV sincroniza audio y video por hardware (como Netflix/YouTube).
         // Si el TV no lo soporta, ExoPlayer usa el modo normal automáticamente.
         val trackSelector = DefaultTrackSelector(this).apply {
-            setParameters(buildUponParameters().setTunnelingEnabled(false))
+            setParameters(buildUponParameters().setTunnelingEnabled(tunnelOn))
         }
+        selector = trackSelector
         player = ExoPlayer.Builder(this, renderers).setLoadControl(loadControl)
             .setTrackSelector(trackSelector).build().also { p ->
             if (intro != null) p.volume = 0f   // el canal carga en silencio detrás de la animación
@@ -537,7 +550,12 @@ class MainActivity : AppCompatActivity() {
         if (event.action == KeyEvent.ACTION_DOWN && !isListVisible() && channels.isNotEmpty()) {
             digitOf(code)?.let { onDigit(it); return true }
             when (code) {
-                KeyEvent.KEYCODE_DPAD_RIGHT, KeyEvent.KEYCODE_TV_ZOOM_MODE,
+                KeyEvent.KEYCODE_DPAD_RIGHT -> {
+                    // Con el panel de diagnóstico abierto, Derecha prueba el modo túnel
+                    if (diag?.visibility == View.VISIBLE) toggleTunnel() else cycleFormat()
+                    return true
+                }
+                KeyEvent.KEYCODE_TV_ZOOM_MODE,
                 KeyEvent.KEYCODE_PROG_RED -> {
                     cycleFormat(); return true
                 }
@@ -830,7 +848,7 @@ class MainActivity : AppCompatActivity() {
             appendLine("Fuente: " + if (usingMulticast) "Multicast" else "HTTP")
             appendLine("Red: " + networkInfo())
             appendLine("Video: " + (f?.let { "${it.width}x${it.height} ${it.sampleMimeType?.substringAfter('/')} ${it.bitrate.takeIf { b -> b > 0 }?.let { b -> "${b / 1000} kbps" } ?: ""}" } ?: "-"))
-            appendLine("App: v${BuildConfig.VERSION_NAME} | Modo túnel: no | Última tecla: $lastKeyInfo")
+            appendLine("App: v${BuildConfig.VERSION_NAME} | Modo túnel: ${if (tunnelOn) "SÍ" else "no"} (Derecha cambia) | Última tecla: $lastKeyInfo")
             appendLine("Decodificador: $videoDecoder")
             appendLine("Cuadros del canal: " + (if (detectedFps > 0f) "%.2f fps".format(detectedFps) else "midiendo...") + " | Pantalla: " + displayHz())
             appendLine("Colchón: $buf s")
