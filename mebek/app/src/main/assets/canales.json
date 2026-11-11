@@ -1,0 +1,3623 @@
+[
+{
+"g": "Comparar con RedTica",
+"n": "Repretel 4 · ACTUAL",
+"s": [
+{
+"u": "http://10.1.1.10:8000/play/a04b"
+}
+]
+},
+{
+"g": "Comparar con RedTica",
+"n": "Repretel 4 · NUEVA 720p",
+"s": [
+{
+"u": "https://dlhn7gdemxofz.cloudfront.net/ts:abr.m3u8"
+}
+]
+},
+{
+"g": "Comparar con RedTica",
+"n": "Repretel 4 · NUEVA 720p",
+"s": [
+{
+"u": "https://alba-cr-repretel-c4.stream.mediatiquestream.com/index.m3u8"
+}
+]
+},
+{
+"g": "Comparar con RedTica",
+"n": "Repretel 6 · ACTUAL",
+"s": [
+{
+"u": "http://10.1.1.10:8000/play/a03a"
+}
+]
+},
+{
+"g": "Comparar con RedTica",
+"n": "Repretel 6 · NUEVA 720p",
+"s": [
+{
+"u": "https://d3xpfoln9sj56.cloudfront.net/ts:abr.m3u8"
+}
+]
+},
+{
+"g": "Comparar con RedTica",
+"n": "Repretel 6 · NUEVA 720p",
+"s": [
+{
+"u": "https://alba-cr-repretel-c6.stream.mediatiquestream.com/index.m3u8"
+}
+]
+},
+{
+"g": "Comparar con RedTica",
+"n": "Repretel 11 · ACTUAL",
+"s": [
+{
+"u": "http://10.1.1.10:8000/play/a03b"
+}
+]
+},
+{
+"g": "Comparar con RedTica",
+"n": "Repretel 11 · NUEVA 720p",
+"s": [
+{
+"u": "https://d3mstgwjcwqz1y.cloudfront.net/ts:abr.m3u8"
+}
+]
+},
+{
+"g": "Comparar con RedTica",
+"n": "Repretel 11 · NUEVA 720p",
+"s": [
+{
+"u": "https://alba-cr-repretel-c11.stream.mediatiquestream.com/index.m3u8"
+}
+]
+},
+{
+"g": "Comparar con RedTica",
+"n": "Teletica 7 · ACTUAL",
+"s": [
+{
+"u": "http://10.1.1.10:8000/play/a02d"
+}
+]
+},
+{
+"g": "Comparar con RedTica",
+"n": "Teletica 7 · NUEVA 720p",
+"s": [
+{
+"u": "https://cdn01.teletica.com/TeleticaLiveStream/Stream/playlist_dvr.m3u8",
+"ref": "https://bradmax.com/client/embed-player/c7c83ebb46fa89529a7383d933e2038729f8e4c9_13428?id=tv7&mediaUrl=https://cdn01.teletica.com/TeleticaLiveStream/Stream/playlist_dvr.m3u8&mediaUrl2=https://6zklxk9bdw9b-hls-live.5centscdn.com/TeleticaLiveStream/d072c3a8dde8622c607ecd258fd628e8.sdp/playlist_dvr.m3u8"
+}
+]
+},
+{
+"g": "Comparar con RedTica",
+"n": "Extra TV 42 · ACTUAL",
+"s": [
+{
+"u": "http://10.1.1.10:8000/play/a010"
+}
+]
+},
+{
+"g": "Comparar con RedTica",
+"n": "Extra TV 42 · NUEVA 720p",
+"s": [
+{
+"u": "https://d2n1wzrr0aogf5.cloudfront.net/ts:abr.m3u8"
+}
+]
+},
+{
+"g": "Comparar con RedTica",
+"n": "OPA · ACTUAL",
+"s": [
+{
+"u": "http://10.1.1.10:8000/play/a06w"
+}
+]
+},
+{
+"g": "Comparar con RedTica",
+"n": "OPA · NUEVA 720p",
+"s": [
+{
+"u": "https://5f1af61612fb5.streamlock.net/genteopa/videogenteopa_720p/playlist.m3u8"
+}
+]
+},
+{
+"g": "Comparar con RedTica",
+"n": "OPA · NUEVA 1080i",
+"s": [
+{
+"u": "https://5fc584f3f19c9.streamlock.net/genteopa/videogenteopa/playlist.m3u8"
+}
+]
+},
+{
+"g": "Comparar con RedTica",
+"n": "Teleuno · ACTUAL",
+"s": [
+{
+"u": "http://10.1.1.10:8000/play/a06x"
+}
+]
+},
+{
+"g": "Comparar con RedTica",
+"n": "Teleuno · NUEVA 720p",
+"s": [
+{
+"u": "http://tv.teleunotv.cr:1935/TVUNO/TVUNO/playlist.m3u8"
+}
+]
+},
+{
+"g": "Comparar con RedTica",
+"n": "Teleuno · NUEVA 720p",
+"s": [
+{
+"u": "https://5d16127744872.streamlock.net/TVUNO/TVUNO/playlist.m3u8"
+}
+]
+},
+{
+"g": "Comparar con RedTica",
+"n": "Trivision HD · ACTUAL",
+"s": [
+{
+"u": "http://10.1.1.10:8000/play/a078"
+}
+]
+},
+{
+"g": "Comparar con RedTica",
+"n": "Trivision HD · NUEVA 720p",
+"s": [
+{
+"u": "https://liveingesta118.cdnmedia.tv/trivisionlive/rtmp01-900/chunklist.m3u8?DVR=",
+"ref": "https://player.instantvideocloud.net/",
+"ua": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.97 Safari/537.36 CrKey/1.44.191160"
+}
+]
+},
+{
+"g": "Comparar con RedTica",
+"n": "Multimedios 8 · ACTUAL",
+"s": [
+{
+"u": "http://10.1.1.10:8000/play/a00y"
+}
+]
+},
+{
+"g": "Comparar con RedTica",
+"n": "Multimedios 8 · NUEVA 720p",
+"s": [
+{
+"u": "https://mdstrm.com/live-stream-playlist/5a7b1e63a8da282c34d65445.m3u8"
+}
+]
+},
+{
+"g": "Comparar con RedTica",
+"n": "TBN Enlace · ACTUAL",
+"s": [
+{
+"u": "http://10.1.1.10:8000/play/a028"
+}
+]
+},
+{
+"g": "Comparar con RedTica",
+"n": "TBN Enlace · NUEVA 720p",
+"s": [
+{
+"u": "https://livecdn.enlace.plus/enlace/smil:enlace-hd.smil/playlist.m3u8"
+}
+]
+},
+{
+"g": "Comparar con RedTica",
+"n": "Canal 12 - ESA · ACTUAL",
+"s": [
+{
+"u": "http://10.1.1.10:8000/play/a02z"
+}
+]
+},
+{
+"g": "Comparar con RedTica",
+"n": "Canal 12 - ESA · NUEVA 480i",
+"s": [
+{
+"u": "https://d2b5h5wyivfnfl.cloudfront.net/live/53108ffe-0b7e-46ab-bc14-3a9c30010939/ts:abr.m3u8"
+}
+]
+},
+{
+"g": "Comparar con RedTica",
+"n": "Canal 19 - ESA · ACTUAL",
+"s": [
+{
+"u": "http://10.1.1.10:8000/play/a03d"
+}
+]
+},
+{
+"g": "Comparar con RedTica",
+"n": "Canal 19 - ESA · NUEVA 720p",
+"s": [
+{
+"u": "https://mgvchannel19-ioriver-cdn.encoders.immergo.tv/master.m3u8"
+}
+]
+},
+{
+"g": "Comparar con RedTica",
+"n": "Canal 3 - GUA · ACTUAL",
+"s": [
+{
+"u": "http://10.1.1.10:8000/play/a042"
+}
+]
+},
+{
+"g": "Comparar con RedTica",
+"n": "Canal 3 - GUA · NUEVA 720p",
+"s": [
+{
+"u": "https://d3jocgwjuhw91y.cloudfront.net/ts:abr.m3u8"
+}
+]
+},
+{
+"g": "Comparar con RedTica",
+"n": "Canal 3 - GUA · NUEVA 720p",
+"s": [
+{
+"u": "https://stream.digitalgt.com:3136/live/multivisionlive.m3u8"
+}
+]
+},
+{
+"g": "Comparar con RedTica",
+"n": "Canal 7 - GUA · ACTUAL",
+"s": [
+{
+"u": "http://10.1.1.10:8000/play/a041"
+}
+]
+},
+{
+"g": "Comparar con RedTica",
+"n": "Canal 7 - GUA · NUEVA 720p",
+"s": [
+{
+"u": "https://d1zq2gydd8y59v.cloudfront.net/ts:abr.m3u8"
+}
+]
+},
+{
+"g": "Comparar con RedTica",
+"n": "Guatevision - GUA · ACTUAL",
+"s": [
+{
+"u": "http://10.1.1.10:8000/play/a01e"
+}
+]
+},
+{
+"g": "Comparar con RedTica",
+"n": "Guatevision - GUA · NUEVA 720p",
+"s": [
+{
+"u": "https://mdstrm.com/live-stream-playlist/69f8df22a762c9b1ab3eabca.m3u8"
+}
+]
+},
+{
+"g": "Comparar con RedTica",
+"n": "Canal 11 - HON · ACTUAL",
+"s": [
+{
+"u": "http://10.1.1.10:8000/play/a01f"
+}
+]
+},
+{
+"g": "Comparar con RedTica",
+"n": "Canal 11 - HON · NUEVA 1080p",
+"s": [
+{
+"u": "https://redirector.rudo.video/hls-video/c54ac2799874375c81c1672abb700870537c5223/canal11hn/canal11hn.smil/playlist.m3u8"
+}
+]
+},
+{
+"g": "Comparar con RedTica",
+"n": "HCH - HON · ACTUAL",
+"s": [
+{
+"u": "http://10.1.1.10:8000/play/a01k"
+}
+]
+},
+{
+"g": "Comparar con RedTica",
+"n": "HCH - HON · NUEVA 720p",
+"s": [
+{
+"u": "https://live.streamhch.com/live/streams/hch1.m3u8"
+}
+]
+},
+{
+"g": "Comparar con RedTica",
+"n": "Canal VTV HND · ACTUAL",
+"s": [
+{
+"u": "http://10.1.1.10:8000/play/a05h"
+}
+]
+},
+{
+"g": "Comparar con RedTica",
+"n": "Canal VTV HND · NUEVA 480p",
+"s": [
+{
+"u": "https://d3q93l5bumjyoq.cloudfront.net/index.m3u8"
+}
+]
+},
+{
+"g": "Comparar con RedTica",
+"n": "Suyapa TV · ACTUAL",
+"s": [
+{
+"u": "http://10.1.1.10:8000/play/a030"
+}
+]
+},
+{
+"g": "Comparar con RedTica",
+"n": "Suyapa TV · NUEVA 1080p",
+"s": [
+{
+"u": "https://streamingcws30.com/suyapa2/videosuyapa2/playlist.m3u8"
+}
+]
+},
+{
+"g": "Comparar con RedTica",
+"n": "Deportes TVC - HND · ACTUAL",
+"s": [
+{
+"u": "http://10.1.1.10:8000/play/a03y"
+}
+]
+},
+{
+"g": "Comparar con RedTica",
+"n": "Deportes TVC - HND · NUEVA 720p",
+"s": [
+{
+"u": "https://streaming.onnethn.com/DEPORTES_TVC/playlist.m3u8"
+}
+]
+},
+{
+"g": "Comparar con RedTica",
+"n": "Canal 13 - NI · ACTUAL",
+"s": [
+{
+"u": "http://10.1.1.10:8000/play/a037"
+}
+]
+},
+{
+"g": "Comparar con RedTica",
+"n": "Canal 13 - NI · NUEVA 720p",
+"s": [
+{
+"u": "https://cdn.vivamediosni.com/viva_720p/index.m3u8"
+}
+]
+},
+{
+"g": "Comparar con RedTica",
+"n": "Antena 7 - RD · ACTUAL",
+"s": [
+{
+"u": "http://10.1.1.10:8000/play/a01h"
+}
+]
+},
+{
+"g": "Comparar con RedTica",
+"n": "Antena 7 - RD · NUEVA 480p",
+"s": [
+{
+"u": "https://alba-do-antena7-antena7.stream.mediatiquestream.com/index.m3u8"
+}
+]
+},
+{
+"g": "Comparar con RedTica",
+"n": "Antena 7 - RD · NUEVA 1080p",
+"s": [
+{
+"u": "https://hls.tvabierta.net/hls/007.m3u8"
+}
+]
+},
+{
+"g": "Comparar con RedTica",
+"n": "Color Vision 9 - RD · ACTUAL",
+"s": [
+{
+"u": "http://10.1.1.10:8000/play/a049"
+}
+]
+},
+{
+"g": "Comparar con RedTica",
+"n": "Color Vision 9 - RD · NUEVA 720p",
+"s": [
+{
+"u": "https://cdn4.wind.do/streams/colorvision/colorvision_master.m3u8"
+}
+]
+},
+{
+"g": "Comparar con RedTica",
+"n": "Digital 15 - RD · ACTUAL",
+"s": [
+{
+"u": "http://10.1.1.10:8000/play/a033"
+}
+]
+},
+{
+"g": "Comparar con RedTica",
+"n": "Digital 15 - RD · NUEVA 1080p",
+"s": [
+{
+"u": "https://live2.telemicro.com.do/live/digital15cast_1080p/playlist.m3u8",
+"ref": "https://telemicro.com.do/players/15tv/index_pc.php",
+"ua": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:152.0) Gecko/20100101 Firefox/152.0"
+}
+]
+},
+{
+"g": "Comparar con RedTica",
+"n": "Digital 15 - RD · NUEVA 1080p",
+"s": [
+{
+"u": "https://live4.telemicro.com.do/live/digital15cast_1080p/playlist.m3u8",
+"ref": "https://telemicro.com.do/players/5tv/",
+"ua": "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.131 Safari/537.36"
+}
+]
+},
+{
+"g": "Comparar con RedTica",
+"n": "RNN - RD · ACTUAL",
+"s": [
+{
+"u": "http://10.1.1.10:8000/play/a00x"
+}
+]
+},
+{
+"g": "Comparar con RedTica",
+"n": "RNN - RD · NUEVA 720p",
+"s": [
+{
+"u": "https://2-fss-2.streamhoster.com/pl_138/206532-6829902-1/playlist.m3u8"
+}
+]
+},
+{
+"g": "Comparar con RedTica",
+"n": "Telecentro - RD · ACTUAL",
+"s": [
+{
+"u": "http://10.1.1.10:8000/play/a038"
+}
+]
+},
+{
+"g": "Comparar con RedTica",
+"n": "Telecentro - RD · NUEVA 1080p",
+"s": [
+{
+"u": "https://live2.telemicro.com.do/live/telecentrocast_1080p/playlist.m3u8",
+"ref": "https://telemicro.com.do/players/13tv/index_pc.php",
+"ua": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:152.0) Gecko/20100101 Firefox/152.0"
+}
+]
+},
+{
+"g": "Comparar con RedTica",
+"n": "Telecentro - RD · NUEVA 1080p",
+"s": [
+{
+"u": "https://live4.telemicro.com.do/live/telecentrocast_1080p/playlist.m3u8",
+"ref": "https://telemicro.com.do/players/5tv/",
+"ua": "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.131 Safari/537.36"
+}
+]
+},
+{
+"g": "Comparar con RedTica",
+"n": "Telesistema RD · ACTUAL",
+"s": [
+{
+"u": "http://10.1.1.10:8000/play/a01i"
+}
+]
+},
+{
+"g": "Comparar con RedTica",
+"n": "Telesistema RD · NUEVA 1080p",
+"s": [
+{
+"u": "https://cdn4.wind.do/streams/telesistema/telesistema_master.m3u8"
+}
+]
+},
+{
+"g": "Comparar con RedTica",
+"n": "Teleunion - RD · ACTUAL",
+"s": [
+{
+"u": "http://10.1.1.10:8000/play/a039"
+}
+]
+},
+{
+"g": "Comparar con RedTica",
+"n": "Teleunion - RD · NUEVA 1080p",
+"s": [
+{
+"u": "http://server2grupocam.com:1945/teleunion/TU/playlist.m3u8",
+"ref": "https://teleuniontvrd.com/portal/"
+}
+]
+},
+{
+"g": "Comparar con RedTica",
+"n": "Teleunion - RD · NUEVA 480p",
+"s": [
+{
+"u": "http://server3.prostudionetwork.com:1945/teleunion/TU/playlist.m3u8"
+}
+]
+},
+{
+"g": "Comparar con RedTica",
+"n": "Teleuniverso - RD · ACTUAL",
+"s": [
+{
+"u": "http://10.1.1.10:8000/play/a035"
+}
+]
+},
+{
+"g": "Comparar con RedTica",
+"n": "Teleuniverso - RD · NUEVA 720p",
+"s": [
+{
+"u": "https://hls.tvabierta.net/hls/029.m3u8"
+}
+]
+},
+{
+"g": "Comparar con RedTica",
+"n": "Televida RD · ACTUAL",
+"s": [
+{
+"u": "http://10.1.1.10:8000/play/a00w"
+}
+]
+},
+{
+"g": "Comparar con RedTica",
+"n": "Televida RD · NUEVA 1080p",
+"s": [
+{
+"u": "https://cnn.hostlagarto.com/televida/playlist.m3u8"
+}
+]
+},
+{
+"g": "Comparar con RedTica",
+"n": "TVE · ACTUAL",
+"s": [
+{
+"u": "http://10.1.1.10:8000/play/a061"
+}
+]
+},
+{
+"g": "Comparar con RedTica",
+"n": "TVE · NUEVA 1080p",
+"s": [
+{
+"u": "https://rtvelivestream-rtveplayplus.rtve.es/rtvesec/int/tvei_ame_main_1080.m3u8"
+}
+]
+},
+{
+"g": "Comparar con RedTica",
+"n": "Canal del Congreso · ACTUAL",
+"s": [
+{
+"u": "http://10.1.1.10:8000/play/a05b"
+}
+]
+},
+{
+"g": "Comparar con RedTica",
+"n": "Canal del Congreso · NUEVA",
+"s": [
+{
+"u": "https://ccstreaming.packet.mx/WebRTCAppEE/streams/45.1_kd5oiNTTWO0gEOFc431277834.m3u8"
+}
+]
+},
+{
+"g": "Costa Rica",
+"n": "88 Stereo (720p)",
+"s": [
+{
+"u": "http://k3.usastreams.com/CableLatino/88stereo/playlist.m3u8"
+}
+]
+},
+{
+"g": "Costa Rica",
+"n": "360 RFTV (576p)",
+"s": [
+{
+"u": "https://acceso.mediosdecostarica.com:3638/live/360rftvcrlive.m3u8"
+}
+]
+},
+{
+"g": "Costa Rica",
+"n": "¡OPA! (1080p)",
+"s": [
+{
+"u": "https://5fc584f3f19c9.streamlock.net/genteopa/videogenteopa/playlist.m3u8"
+},
+{
+"u": "https://5f1af61612fb5.streamlock.net/genteopa/videogenteopa_720p/playlist.m3u8"
+}
+]
+},
+{
+"g": "Costa Rica",
+"n": "Agrotendencia TV (1080p)",
+"s": [
+{
+"u": "https://5fc584f3f19c9.streamlock.net/agrotendencia/videoagrotendencia_hls1/playlist.m3u8"
+}
+]
+},
+{
+"g": "Costa Rica",
+"n": "Antena Seis TV (720p)",
+"s": [
+{
+"u": "https://video1.azulstream.com:8081/antenaseistv/index.m3u8"
+}
+]
+},
+{
+"g": "Costa Rica",
+"n": "BestClasicosTV (720p)",
+"s": [
+{
+"u": "https://acceso.mediosdecostarica.com:3873/hybrid/play.m3u8"
+},
+{
+"u": "https://acceso.mediosdecostarica.com:3873/multi_live/play.m3u8"
+}
+]
+},
+{
+"g": "Costa Rica",
+"n": "Canal 1 (720p)",
+"s": [
+{
+"u": "https://vid.canal1cr.com:3424/multi_live/play_720.m3u8"
+}
+]
+},
+{
+"g": "Costa Rica",
+"n": "Canal 2 (576p)",
+"s": [
+{
+"u": "https://alba-cr-repretel-c2.stream.mediatiquestream.com/index.m3u8"
+},
+{
+"u": "https://d2hha8xu9trvi8.cloudfront.net/ts:abr.m3u8"
+}
+]
+},
+{
+"g": "Costa Rica",
+"n": "Canal 3 KMK TV (720p)",
+"s": [
+{
+"u": "https://live20.bozztv.com/giatv/giatv-KMKTV/KMKTV/chunks.m3u8"
+}
+]
+},
+{
+"g": "Costa Rica",
+"n": "Canal 4 (720p)",
+"s": [
+{
+"u": "https://dlhn7gdemxofz.cloudfront.net/ts:abr.m3u8"
+},
+{
+"u": "https://alba-cr-repretel-c4.stream.mediatiquestream.com/index.m3u8"
+}
+]
+},
+{
+"g": "Costa Rica",
+"n": "Canal 6 (720p)",
+"s": [
+{
+"u": "https://d3xpfoln9sj56.cloudfront.net/ts:abr.m3u8"
+},
+{
+"u": "https://alba-cr-repretel-c6.stream.mediatiquestream.com/index.m3u8"
+}
+]
+},
+{
+"g": "Costa Rica",
+"n": "Canal 8 (720p)",
+"s": [
+{
+"u": "https://mdstrm.com/live-stream-playlist/5a7b1e63a8da282c34d65445.m3u8"
+}
+]
+},
+{
+"g": "Costa Rica",
+"n": "Canal 10 (720p)",
+"s": [
+{
+"u": "https://acceso.mediosdecostarica.com:3606/live/canal10costaricalive.m3u8"
+},
+{
+"u": "https://acceso.mediosdecostarica.com:3606/hybrid/play.m3u8"
+}
+]
+},
+{
+"g": "Costa Rica",
+"n": "Canal 11 (720p)",
+"s": [
+{
+"u": "https://d3mstgwjcwqz1y.cloudfront.net/ts:abr.m3u8"
+},
+{
+"u": "https://alba-cr-repretel-c11.stream.mediatiquestream.com/index.m3u8"
+}
+]
+},
+{
+"g": "Costa Rica",
+"n": "Canal 14 San Carlos (720p)",
+"s": [
+{
+"u": "http://tvn.obix.tv:1935/TVN/CH14.stream_720p/playlist.m3u8"
+}
+]
+},
+{
+"g": "Costa Rica",
+"n": "Canal 17 TV Nosara (720p)",
+"s": [
+{
+"u": "https://latamvdo.com:3870/hybrid/play.m3u8"
+}
+]
+},
+{
+"g": "Costa Rica",
+"n": "Canal 17 TV Nosara",
+"s": [
+{
+"u": "https://acceso.radiosportstv.online:3430/hybrid/play.m3u8"
+}
+]
+},
+{
+"g": "Costa Rica",
+"n": "Cartago Medios TV (720p)",
+"s": [
+{
+"u": "https://acceso.mediosdecostarica.com:3511/stream/play.m3u8"
+}
+]
+},
+{
+"g": "Costa Rica",
+"n": "Colosal TV (1080p)",
+"s": [
+{
+"u": "https://5eac7b031d945.streamlock.net/COLOSAL/COLOSAL/playlist.m3u8"
+},
+{
+"u": "http://tv.ticosmedia.com:1935/COLOSAL/COLOSAL/playlist.m3u8"
+}
+]
+},
+{
+"g": "Costa Rica",
+"n": "Conexion Positiva Television (1080p)",
+"s": [
+{
+"u": "https://tvstream.conexionpositivaradio.com/memfs/69239c4d-4116-4f4f-b065-bf17e81b1411.m3u8"
+}
+]
+},
+{
+"g": "Costa Rica",
+"n": "Costa Rica Channel (576p)",
+"s": [
+{
+"u": "https://video0.rogohosting.com:19360/8006/8006.m3u8"
+}
+]
+},
+{
+"g": "Costa Rica",
+"n": "Coto Brus TV (720p)",
+"s": [
+{
+"u": "https://cloudvideo.servers10.com:8081/8030/index.m3u8"
+}
+]
+},
+{
+"g": "Costa Rica",
+"n": "Cristo Vision Canal 31",
+"s": [
+{
+"u": "https://3a310f6ec721e6b362fcd22772b57f36a2fe6bb2.tabeelcr.com:8080/cristovision31/iptv.m3u8"
+}
+]
+},
+{
+"g": "Costa Rica",
+"n": "Enlace (1080p)",
+"s": [
+{
+"u": "http://138.121.15.230:9002/ENLACE/index.m3u8"
+},
+{
+"u": "https://livecdn.enlace.plus/enlace/smil:enlace-hd.smil/playlist.m3u8"
+}
+]
+},
+{
+"g": "Costa Rica",
+"n": "Enlace Juvenil",
+"s": [
+{
+"u": "https://livecdnusa.enlace.plus/ejtv/smil:ejtv-hd.smil/playlist.m3u8"
+}
+]
+},
+{
+"g": "Costa Rica",
+"n": "Extra TV 42 (720p)",
+"s": [
+{
+"u": "https://d2n1wzrr0aogf5.cloudfront.net/ts:abr.m3u8"
+}
+]
+},
+{
+"g": "Costa Rica",
+"n": "Extrema Kids TV (1080p)",
+"s": [
+{
+"u": "https://627bb251f23c7.streamlock.net:444/ExtremaKids/ExtremaKids/playlist.m3u8"
+}
+]
+},
+{
+"g": "Costa Rica",
+"n": "Extrema TV (720p)",
+"s": [
+{
+"u": "https://627bb251f23c7.streamlock.net:444/ExtremaTV/ExtremaTV/playlist.m3u8"
+}
+]
+},
+{
+"g": "Costa Rica",
+"n": "GAMTV.cr (720p)",
+"s": [
+{
+"u": "https://v2.azulstream.com:8081/gamtv/gamtv/index.m3u8"
+}
+]
+},
+{
+"g": "Costa Rica",
+"n": "Garabito TV (720p)",
+"s": [
+{
+"u": "https://59ef525c24caa.streamlock.net/garabitoTV/garabitotv/playlist.m3u8"
+}
+]
+},
+{
+"g": "Costa Rica",
+"n": "Gex TV (1080p)",
+"s": [
+{
+"u": "https://live20.bozztv.com/akamaissh101/ssh101/gextvaccess/playlist.m3u8"
+}
+]
+},
+{
+"g": "Costa Rica",
+"n": "Guatuso TV (720p)",
+"s": [
+{
+"u": "https://5cf4a2c2512a2.streamlock.net/8176/8176/playlist.m3u8"
+}
+]
+},
+{
+"g": "Costa Rica",
+"n": "Hope Channel PROYECTO JA (360p)",
+"s": [
+{
+"u": "https://edge1-us-miami.picarto.tv/stream/hls/golive%2bXSTUDIOCODE/0_1/index.m3u8"
+}
+]
+},
+{
+"g": "Costa Rica",
+"n": "Impact Channel (1080p)",
+"s": [
+{
+"u": "https://5fe2654d6127d.streamlock.net/impactchannel/videoimpactchannel/playlist.m3u8"
+}
+]
+},
+{
+"g": "Costa Rica",
+"n": "IQ Channel (720p)",
+"s": [
+{
+"u": "https://rtmp.info/iqtv/envivo/playlist.m3u8"
+}
+]
+},
+{
+"g": "Costa Rica",
+"n": "La Potente Radio TV",
+"s": [
+{
+"u": "https://latamvdo.com:3626/hybrid/play.m3u8"
+}
+]
+},
+{
+"g": "Costa Rica",
+"n": "Limón TV (1080p)",
+"s": [
+{
+"u": "http://k4.usastreams.com/limontv1/limontv1/playlist.m3u8"
+}
+]
+},
+{
+"g": "Costa Rica",
+"n": "Los Santos TV (1080p)",
+"s": [
+{
+"u": "https://tiquiciatv.com/hls/lstv.m3u8",
+"ref": "https://lossantostv.com"
+},
+{
+"u": "https://lstv.duckdns.org:449/hls/lstv.m3u8"
+}
+]
+},
+{
+"g": "Costa Rica",
+"n": "Luz Naciente TV",
+"s": [
+{
+"u": "https://streeming.protoscr.com:3858/live/streeminglive.m3u8"
+}
+]
+},
+{
+"g": "Costa Rica",
+"n": "Nicoya TV (720p)",
+"s": [
+{
+"u": "https://59ef525c24caa.streamlock.net/nicoyatv/nicoyatv/playlist.m3u8"
+}
+]
+},
+{
+"g": "Costa Rica",
+"n": "Norte Informativo TV (240p)",
+"s": [
+{
+"u": "https://videohd.live:19360/8076/8076.m3u8"
+}
+]
+},
+{
+"g": "Costa Rica",
+"n": "Quince UCR (720p)",
+"s": [
+{
+"u": "http://163.178.170.127:1935/quinceucr/quinceucr/playlist.m3u8"
+},
+{
+"u": "https://wowza.ucr.ac.cr/quinceucr/_definst_/quinceucr.stream/playlist.m3u8"
+}
+]
+},
+{
+"g": "Costa Rica",
+"n": "Radio Turrialba TV Sports (720p)",
+"s": [
+{
+"u": "https://live-stream.iblups.com/live/a5ae024a1bbc4a05a68debbc9d379db6bb6a6da3.m3u8",
+"ref": "https://iblups.com/",
+"ua": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+},
+{
+"u": "https://sc1.escuela4.com/live/d7316d659b5a77fb8719d49330315886807b02b0.m3u8",
+"ref": "https://www.radioturrialba.com/p/radio-turrialba-en-vivo.html",
+"ua": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+}
+]
+},
+{
+"g": "Costa Rica",
+"n": "Retrox TV (720p)",
+"s": [
+{
+"u": "https://lbgo.bozztv.com/ssh101/ssh101/retyroxtv/playlist.m3u8"
+},
+{
+"u": "https://live20.bozztv.com/giatv/giatv-TVCHANNEL/TVCHANNEL/chunks.m3u8"
+}
+]
+},
+{
+"g": "Costa Rica",
+"n": "RTTV (720p)",
+"s": [
+{
+"u": "https://cloudvideo.servers10.com:19360/8212/8212.m3u8"
+}
+]
+},
+{
+"g": "Costa Rica",
+"n": "San José TV (1080p)",
+"s": [
+{
+"u": "https://rtmp.info/sanjosetv/envivo/playlist.m3u8"
+}
+]
+},
+{
+"g": "Costa Rica",
+"n": "San Vito Television",
+"s": [
+{
+"u": "https://stream.lamegatv.com/hls/sanvitotelevision/index.m3u8"
+}
+]
+},
+{
+"g": "Costa Rica",
+"n": "Sarapiqui TV (720p)",
+"s": [
+{
+"u": "http://tiquiciatv.com:1935/stv/web/playlist.m3u8"
+},
+{
+"u": "https://lstv.duckdns.org:449/hls/stv.m3u8"
+}
+]
+},
+{
+"g": "Costa Rica",
+"n": "SOY Plancha TV (720p)",
+"s": [
+{
+"u": "https://59ef525c24caa.streamlock.net/vmtv/soyplancha/playlist.m3u8"
+}
+]
+},
+{
+"g": "Costa Rica",
+"n": "Super Cable",
+"s": [
+{
+"u": "http://191.102.39.254:5000/live/5up3r5/playlist.m3u8"
+}
+]
+},
+{
+"g": "Costa Rica",
+"n": "TDtv (720p)",
+"s": [
+{
+"u": "https://cloudvideo.servers10.com:8081/8230/index.m3u8"
+}
+]
+},
+{
+"g": "Costa Rica",
+"n": "Tele Uno (720p)",
+"s": [
+{
+"u": "http://tv.teleunotv.cr:1935/TVUNO/TVUNO/playlist.m3u8"
+},
+{
+"u": "https://5d16127744872.streamlock.net/TVUNO/TVUNO/playlist.m3u8"
+}
+]
+},
+{
+"g": "Costa Rica",
+"n": "TeleBrunca (720p)",
+"s": [
+{
+"u": "https://59ef525c24caa.streamlock.net/telebrunca/telebrunca/playlist.m3u8"
+}
+]
+},
+{
+"g": "Costa Rica",
+"n": "TeleMas (480p)",
+"s": [
+{
+"u": "https://mist01.homestream.fun/hls/tlmas904/0_1/index.m3u8"
+},
+{
+"u": "https://acceso.mediosdecostarica.com:3192/hybrid/play.m3u8"
+}
+]
+},
+{
+"g": "Costa Rica",
+"n": "Telered Television (576p)",
+"s": [
+{
+"u": "https://k20.usastreams.com:8081/telered/index.m3u8",
+"ref": "https://teleredtelevision.com/"
+}
+]
+},
+{
+"g": "Costa Rica",
+"n": "TeleSUR Costa Rica (720p)",
+"s": [
+{
+"u": "https://s1.tvdatta.com:3582/live/telesurlive.m3u8"
+}
+]
+},
+{
+"g": "Costa Rica",
+"n": "Teletica 7 (720p)",
+"s": [
+{
+"u": "https://cdn01.teletica.com/TeleticaLiveStream/Stream/playlist_dvr.m3u8",
+"ref": "https://bradmax.com/client/embed-player/c7c83ebb46fa89529a7383d933e2038729f8e4c9_13428?id=tv7&mediaUrl=https://cdn01.teletica.com/TeleticaLiveStream/Stream/playlist_dvr.m3u8&mediaUrl2=https://6zklxk9bdw9b-hls-live.5centscdn.com/TeleticaLiveStream/d072c3a8dde8622c607ecd258fd628e8.sdp/playlist_dvr.m3u8"
+}
+]
+},
+{
+"g": "Costa Rica",
+"n": "TicaVision (1080p)",
+"s": [
+{
+"u": "https://5eac7b031d945.streamlock.net/TICAVISION/TICAVISION/playlist.m3u8"
+}
+]
+},
+{
+"g": "Costa Rica",
+"n": "Tigo Sports (720p)",
+"s": [
+{
+"u": "https://live20.bozztv.com/akamaissh101/ssh101/livetigocr/playlist.m3u8"
+}
+]
+},
+{
+"g": "Costa Rica",
+"n": "Trivision 36 (720p)",
+"s": [
+{
+"u": "https://liveingesta118.cdnmedia.tv/trivisionlive/rtmp01-900/chunklist.m3u8?DVR=",
+"ref": "https://player.instantvideocloud.net/",
+"ua": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.97 Safari/537.36 CrKey/1.44.191160"
+}
+]
+},
+{
+"g": "Costa Rica",
+"n": "TV Sur Canal 9 (620p)",
+"s": [
+{
+"u": "http://tv.ticosmedia.com:1935/TVSUR/TVSUR/playlist.m3u8"
+}
+]
+},
+{
+"g": "Costa Rica",
+"n": "TV Sur Canal 14 (1080p)",
+"s": [
+{
+"u": "https://k20.usastreams.com:8081/tvsur/index.m3u8"
+}
+]
+},
+{
+"g": "Costa Rica",
+"n": "Urbano TV (720p)",
+"s": [
+{
+"u": "https://59ef525c24caa.streamlock.net/tvurbano/tvurbano/playlist.m3u8"
+}
+]
+},
+{
+"g": "Costa Rica",
+"n": "Video Tour Channel",
+"s": [
+{
+"u": "https://59ef525c24caa.streamlock.net/videotour/videotour/playlist.m3u8"
+},
+{
+"u": "http://k4.usastreams.com/videotour/videotour/playlist.m3u8"
+}
+]
+},
+{
+"g": "Costa Rica",
+"n": "Vintage Music (720p)",
+"s": [
+{
+"u": "https://59ef525c24caa.streamlock.net/vmtv/tvvintage/playlist.m3u8"
+}
+]
+},
+{
+"g": "Costa Rica",
+"n": "VM Latino (720p)",
+"s": [
+{
+"u": "https://59ef525c24caa.streamlock.net/vmtv/vmlatino/playlist.m3u8"
+}
+]
+},
+{
+"g": "Costa Rica",
+"n": "VoiceOver Radio TV (720p)",
+"s": [
+{
+"u": "https://cloudvideo.servers10.com:8081/8198/index.m3u8"
+}
+]
+},
+{
+"g": "Costa Rica",
+"n": "Zona Music TV (1080p)",
+"s": [
+{
+"u": "https://acceso.radiosportstv.online:3022/stream/play.m3u8"
+}
+]
+},
+{
+"g": "Costa Rica",
+"n": "Zurquí TV (720p)",
+"s": [
+{
+"u": "https://videoserver.tmcreativos.com:19360/gesfnvpamn/gesfnvpamn.m3u8"
+}
+]
+},
+{
+"g": "Nicaragua",
+"n": "Canal 6 Nicaragüense (480p)",
+"s": [
+{
+"u": "http://138.117.4.70:8075/Canal06_CooTel/playlist.m3u8"
+}
+]
+},
+{
+"g": "Nicaragua",
+"n": "Canal 7 Boaco (1080p)",
+"s": [
+{
+"u": "https://cdn.amixtv.com/c7boaco/index.m3u8"
+}
+]
+},
+{
+"g": "Nicaragua",
+"n": "Canal 10 (480p)",
+"s": [
+{
+"u": "https://ddycmnicl95kp.cloudfront.net/live/ja5k3h31wv9r/master.m3u8"
+},
+{
+"u": "https://www.canal10.com.ni/envivo"
+}
+]
+},
+{
+"g": "Nicaragua",
+"n": "Canal 15 Nicaragüense (1080p)",
+"s": [
+{
+"u": "https://cootv.cootel.com.ni:8095/Canal15_CooTel/playlist.m3u8"
+}
+]
+},
+{
+"g": "Nicaragua",
+"n": "Canal Cvisión (720p)",
+"s": [
+{
+"u": "https://stream.cvision.live/cvision_stream.m3u8"
+}
+]
+},
+{
+"g": "Nicaragua",
+"n": "CDNN 23 (1080p)",
+"s": [
+{
+"u": "https://cootv.cootel.com.ni:8095/Canal23_CooTel/playlist.m3u8"
+}
+]
+},
+{
+"g": "Nicaragua",
+"n": "CooTel Nicaragua (1080p)",
+"s": [
+{
+"u": "http://138.117.4.70:8075/channel9/playlist.m3u8"
+}
+]
+},
+{
+"g": "Nicaragua",
+"n": "Escúchame Radio TV (720p)",
+"s": [
+{
+"u": "https://stmv1.transmissaodigital.com/pedro9800/pedro9800/playlist.m3u8"
+}
+]
+},
+{
+"g": "Nicaragua",
+"n": "JBN Canal 39 (720p)",
+"s": [
+{
+"u": "https://hdbox.chunklistv.com/live?stream=jbn39"
+}
+]
+},
+{
+"g": "Nicaragua",
+"n": "MegaBox (720p)",
+"s": [
+{
+"u": "https://hdbox.chunklistv.com/live?stream=megabox"
+}
+]
+},
+{
+"g": "Nicaragua",
+"n": "MTV Chontales (720p)",
+"s": [
+{
+"u": "https://altair.hostingnica.net/hls/mtv_stream/index.m3u8"
+}
+]
+},
+{
+"g": "Nicaragua",
+"n": "Olam Metro TV (720p)",
+"s": [
+{
+"u": "https://netzerstreaming.com:4433/hls/olammetro/index.m3u8"
+}
+]
+},
+{
+"g": "Nicaragua",
+"n": "Radio Visión de Dios Stereo (720p)",
+"s": [
+{
+"u": "https://live.tvcontrolcp.com:1936/8286/8286/playlist.m3u8"
+}
+]
+},
+{
+"g": "Nicaragua",
+"n": "TN8 (1080p)",
+"s": [
+{
+"u": "https://streamingcws30.com/tn8/videotn8/playlist.m3u8"
+}
+]
+},
+{
+"g": "Nicaragua",
+"n": "TV45-3ABN Nicaragua (720p)",
+"s": [
+{
+"u": "https://hdbox.chunklistv.com/live?stream=3abn-nicaragua"
+}
+]
+},
+{
+"g": "Nicaragua",
+"n": "TVONE Nicaragua (720p)",
+"s": [
+{
+"u": "https://hdbox.chunklistv.com/live?stream=tvone"
+}
+]
+},
+{
+"g": "Nicaragua",
+"n": "Viva Nicaragua Canal 13 (720p)",
+"s": [
+{
+"u": "https://cdn.vivamediosni.com/viva_720p/index.m3u8"
+}
+]
+},
+{
+"g": "Nicaragua",
+"n": "Viva TV Canal 30 San Juan de Río Coco",
+"s": [
+{
+"u": "https://cdn.amixtv.com/vivatv/index.m3u8"
+}
+]
+},
+{
+"g": "Nicaragua",
+"n": "Vos TV (720p)",
+"s": [
+{
+"u": "http://ott.streann.com:8080/loadbalancer/services/public/channels/59e60c4997381ef50d15c041/playlist.m3u8"
+}
+]
+},
+{
+"g": "Nicaragua",
+"n": "WTV Canal 20 (1080p)",
+"s": [
+{
+"u": "https://cootv.cootel.com.ni:8095/Canal40_WTV/playlist.m3u8"
+},
+{
+"u": "https://cloudvideo.servers10.com:8081/8130/index.m3u8"
+}
+]
+},
+{
+"g": "Panamá",
+"n": "A&R Canal Adventista (720p)",
+"s": [
+{
+"u": "http://51.222.9.192:3589/stream/play.m3u8"
+}
+]
+},
+{
+"g": "Panamá",
+"n": "BTV Panamá (720p)",
+"s": [
+{
+"u": "https://stream.oursnetworktv.com/latin/btvpanama/playlist.m3u8"
+}
+]
+},
+{
+"g": "Panamá",
+"n": "Corazon TV",
+"s": [
+{
+"u": "https://sistemastr.tropicalmoonmedia.com/live/7FFCFEC3978B68D1A2ED0A38DE96AF76/12.m3u8"
+}
+]
+},
+{
+"g": "Panamá",
+"n": "Fabulosa Estéreo 100.5 FM (720p)",
+"s": [
+{
+"u": "https://www.streaming507.net:19360/videofabulosa/videofabulosa.m3u8"
+}
+]
+},
+{
+"g": "Panamá",
+"n": "Hosanna Vision (720p)",
+"s": [
+{
+"u": "https://1206618505.rsc.cdn77.org/LS-ATL-59020-1/playlist.m3u8"
+}
+]
+},
+{
+"g": "Panamá",
+"n": "LaXitosa Panamá (360p)",
+"s": [
+{
+"u": "https://stmvideo2.livecastv.com/lax953/lax953/playlist.m3u8"
+}
+]
+},
+{
+"g": "Panamá",
+"n": "Mas23 TV",
+"s": [
+{
+"u": "https://movil.ejeserver.com/live/mas23tv.m3u8"
+}
+]
+},
+{
+"g": "Panamá",
+"n": "MINFAV TV",
+"s": [
+{
+"u": "https://mp.panelchs.com:1936/8044/8044/playlist.m3u8"
+}
+]
+},
+{
+"g": "Panamá",
+"n": "Nex TV Canal 21",
+"s": [
+{
+"u": "https://movil.ejeserver.com/live/nextv.m3u8"
+}
+]
+},
+{
+"g": "Panamá",
+"n": "Pindin TV",
+"s": [
+{
+"u": "https://sistemastr.tropicalmoonmedia.com/live/7C452409423F57ADC960F6405635267F/7.m3u8"
+}
+]
+},
+{
+"g": "Panamá",
+"n": "Planet 100.9 FM (1080p)",
+"s": [
+{
+"u": "https://streamlov.alsolnet.com/planet1009fm/live/playlist.m3u8"
+}
+]
+},
+{
+"g": "Panamá",
+"n": "Plus TV (720p)",
+"s": [
+{
+"u": "https://vcp4.myplaytv.com:1936/plustv/plustv/playlist.m3u8"
+}
+]
+},
+{
+"g": "Panamá",
+"n": "Radio Ancón (720p)",
+"s": [
+{
+"u": "https://www.streaming507.net:19360/anconvideo/anconvideo.m3u8"
+}
+]
+},
+{
+"g": "Panamá",
+"n": "Radio Hogar (720p)",
+"s": [
+{
+"u": "https://www.streaming507.net:19360/videoradiohogar/videoradiohogar.m3u8"
+}
+]
+},
+{
+"g": "Panamá",
+"n": "Súper Q Panamá (1080p)",
+"s": [
+{
+"u": "https://vcp8.myplaytv.com:1936/superq/superq/playlist.m3u8"
+}
+]
+},
+{
+"g": "Panamá",
+"n": "Tropi Q 99.7 FM (1080p)",
+"s": [
+{
+"u": "https://www.streaming507.net:19360/videotropiq/videotropiq.m3u8"
+}
+]
+},
+{
+"g": "Panamá",
+"n": "Tropical Moon Cumbia TV (720p)",
+"s": [
+{
+"u": "https://srv2.tropicalmoonmedia.com/cumbiatv/cumbiatv/playlist.m3u8"
+}
+]
+},
+{
+"g": "Panamá",
+"n": "Tropical Moon Eventos TV (720p)",
+"s": [
+{
+"u": "https://srv2.tropicalmoonmedia.com/eventostv/eventostv/playlist.m3u8"
+}
+]
+},
+{
+"g": "Panamá",
+"n": "Tropical Moon Urban TV",
+"s": [
+{
+"u": "https://sistemastr.tropicalmoonmedia.com/live/D8E123ACA054EF85B153C354A481A406/4.m3u8"
+}
+]
+},
+{
+"g": "Panamá",
+"n": "TVMAX (720p)",
+"s": [
+{
+"u": "https://bcovlive-a.akamaihd.net/74f665e9ff8447639d4de4b8b458d8ae/us-east-1/6058004209001/playlist_dvr.m3u8"
+}
+]
+},
+{
+"g": "Panamá",
+"n": "TVN (720p)",
+"s": [
+{
+"u": "https://bcovlive-a.akamaihd.net/628aecb4fccb4c52b4f9c8d5cc57fb73/us-west-2/6058004209001/playlist_dvr.m3u8"
+}
+]
+},
+{
+"g": "Panamá",
+"n": "Vision Latina (1080p)",
+"s": [
+{
+"u": "https://cdn-cloudfront.us-east-1.prod.ingest.aws-infra.dacast.com/live/64917431-2f51-0a46-d4d0-04d111b2393f/master.m3u8"
+}
+]
+},
+{
+"g": "Honduras",
+"n": "Alfa & Omega Vision (480p)",
+"s": [
+{
+"u": "https://srv.panelcast.net/dorian/dorian/playlist.m3u8"
+}
+]
+},
+{
+"g": "Honduras",
+"n": "Alsacias Televisión (ATV | Canal 28) (720p)",
+"s": [
+{
+"u": "https://s.emisoras.tv:8081/atv/index.m3u8"
+}
+]
+},
+{
+"g": "Honduras",
+"n": "Aviva TV (288p)",
+"s": [
+{
+"u": "https://video.misistemareseller.com/atvhonduras/atvhonduras/playlist.m3u8"
+}
+]
+},
+{
+"g": "Honduras",
+"n": "AZA TV HD (1080p)",
+"s": [
+{
+"u": "https://tv.webmedialive.com/azatvhn/live/playlist.m3u8"
+}
+]
+},
+{
+"g": "Honduras",
+"n": "Azteca Honduras (720p)",
+"s": [
+{
+"u": "https://mdstrm.com/live-stream-playlist/65a1d2fd7e7f14355550d570.m3u8"
+}
+]
+},
+{
+"g": "Honduras",
+"n": "Buendia TV",
+"s": [
+{
+"u": "https://servilive.com:3508/stream/play.m3u8"
+}
+]
+},
+{
+"g": "Honduras",
+"n": "Campus TV (480p)",
+"s": [
+{
+"u": "https://5e85d90130e77.streamlock.net/6052/6052/playlist.m3u8"
+}
+]
+},
+{
+"g": "Honduras",
+"n": "Canal 5 El Líder (720p)",
+"s": [
+{
+"u": "https://mdstrm.com/live-stream-playlist/6287fda8ea3b8b397d1ca2ed.m3u8"
+}
+]
+},
+{
+"g": "Honduras",
+"n": "Canal 7 Talanga Vision (720p)",
+"s": [
+{
+"u": "https://amixtv.com:8081/talangavision/index.m3u8"
+},
+{
+"u": "https://stream.oursnetworktv.com/latin/talangatv/playlist.m3u8"
+}
+]
+},
+{
+"g": "Honduras",
+"n": "Canal 11 (1080p)",
+"s": [
+{
+"u": "https://redirector.rudo.video/hls-video/c54ac2799874375c81c1672abb700870537c5223/canal11hn/canal11hn.smil/playlist.m3u8"
+}
+]
+},
+{
+"g": "Honduras",
+"n": "Canal 32 STO (720p)",
+"s": [
+{
+"u": "https://s.emisoras.tv:8081/stocanal32hn/playlist.m3u8"
+}
+]
+},
+{
+"g": "Honduras",
+"n": "Canal 51",
+"s": [
+{
+"u": "https://live.cn51hn.com/live/cn51.m3u8"
+}
+]
+},
+{
+"g": "Honduras",
+"n": "CCI Channel (1080p)",
+"s": [
+{
+"u": "https://livestream.mediacci.com/ccitv/index.m3u8"
+}
+]
+},
+{
+"g": "Honduras",
+"n": "Cholusat Sur 36 (214p)",
+"s": [
+{
+"u": "http://audiotvserver.net:1935/livemedia/cholusat/playlist.m3u8"
+}
+]
+},
+{
+"g": "Honduras",
+"n": "Choluteca TV (1080p)",
+"s": [
+{
+"u": "https://s.emisoras.tv:8081/cholutecatv/index.m3u8"
+}
+]
+},
+{
+"g": "Honduras",
+"n": "CHTV (1080p)",
+"s": [
+{
+"u": "https://viewhn.com/chtv/live/playlist.m3u8"
+}
+]
+},
+{
+"g": "Honduras",
+"n": "CVA TV (480p)",
+"s": [
+{
+"u": "http://190.124.161.21:8086/cvatv/live.m3u8"
+}
+]
+},
+{
+"g": "Honduras",
+"n": "Deportes TVC (720p)",
+"s": [
+{
+"u": "https://streaming.onnethn.com/DEPORTES_TVC/playlist.m3u8"
+}
+]
+},
+{
+"g": "Honduras",
+"n": "Dios Te Ve (720p)",
+"s": [
+{
+"u": "https://s.emisoras.tv:8081/diostevetv/index.m3u8"
+}
+]
+},
+{
+"g": "Honduras",
+"n": "Dios Te Ve Kids (720p)",
+"s": [
+{
+"u": "https://s.emisoras.tv:8081/diostevekids/index.m3u8"
+}
+]
+},
+{
+"g": "Honduras",
+"n": "Dios Tv Talanga (1080p)",
+"s": [
+{
+"u": "https://tv.webmedialive.com/unciontv/live/playlist.m3u8"
+}
+]
+},
+{
+"g": "Honduras",
+"n": "Ebenezer TV (1080p)",
+"s": [
+{
+"u": "https://5e85d90130e77.streamlock.net/6010/ngrp:6010_all/playlist.m3u8"
+}
+]
+},
+{
+"g": "Honduras",
+"n": "EDN TV (1080p)",
+"s": [
+{
+"u": "https://60417ddeaf0d9.streamlock.net/edntv/videoedntv/playlist.m3u8"
+}
+]
+},
+{
+"g": "Honduras",
+"n": "Girasol TV (1080p)",
+"s": [
+{
+"u": "https://s.emisoras.tv:8081/girasoltv/index.m3u8"
+}
+]
+},
+{
+"g": "Honduras",
+"n": "Globo TV",
+"s": [
+{
+"u": "https://stream.radiosmundiales.com/hls/globotvhonduras/globotvhonduras.m3u8"
+},
+{
+"u": "https://panel.dattalive.com/8122/8122/playlist.m3u8"
+}
+]
+},
+{
+"g": "Honduras",
+"n": "Guayape TV",
+"s": [
+{
+"u": "https://tv.bitstreaming.net:8443/live/guayapetv.m3u8"
+}
+]
+},
+{
+"g": "Honduras",
+"n": "HCH (720p)",
+"s": [
+{
+"u": "https://live.streamhch.com/live/streams/hch1.m3u8"
+}
+]
+},
+{
+"g": "Honduras",
+"n": "ICN Digital",
+"s": [
+{
+"u": "https://streaming.icndigital.com/live_output/icn_live_stream_1.m3u8"
+}
+]
+},
+{
+"g": "Honduras",
+"n": "Inmaculada TV (720p)",
+"s": [
+{
+"u": "https://live20.bozztv.com/akamaissh101/ssh101/radiotvcholy/playlist.m3u8"
+}
+]
+},
+{
+"g": "Honduras",
+"n": "JBN TV (1080p)",
+"s": [
+{
+"u": "https://tv.webmedialive.com/jbn_live/enlace/playlist.m3u8"
+},
+{
+"u": "https://viewhn.com/jbn_live/enlace/playlist.m3u8"
+}
+]
+},
+{
+"g": "Honduras",
+"n": "Jehova TV",
+"s": [
+{
+"u": "https://mp.panelchs.com:1936/8038/8038/playlist.m3u8"
+}
+]
+},
+{
+"g": "Honduras",
+"n": "JEMR TV (1080p)",
+"s": [
+{
+"u": "https://tv.webmedialive.com/jmrtv/live/playlist.m3u8"
+}
+]
+},
+{
+"g": "Honduras",
+"n": "Kerusso TV (720p)",
+"s": [
+{
+"u": "https://s.emisoras.tv:8081/kerussotv/index.m3u8"
+}
+]
+},
+{
+"g": "Honduras",
+"n": "La 98.1 TV (720p)",
+"s": [
+{
+"u": "https://6019dcac4147f.streamlock.net:9443/la98/Invosa/playlist.m3u8"
+}
+]
+},
+{
+"g": "Honduras",
+"n": "La Top 102.9 (720p)",
+"s": [
+{
+"u": "https://59d39900ebfb8.streamlock.net/top102/top102/playlist.m3u8"
+}
+]
+},
+{
+"g": "Honduras",
+"n": "La Top 107.7 (720p)",
+"s": [
+{
+"u": "https://59d39900ebfb8.streamlock.net/top107/top107/playlist.m3u8"
+}
+]
+},
+{
+"g": "Honduras",
+"n": "Lenca Television Canal 40 (720p)",
+"s": [
+{
+"u": "https://lencatelevision.com/hls/stream.m3u8"
+}
+]
+},
+{
+"g": "Honduras",
+"n": "Litoral Atlántico HD (720p)",
+"s": [
+{
+"u": "https://cdn4.streamgato.us:3595/live/litoralhdlive.m3u8"
+}
+]
+},
+{
+"g": "Honduras",
+"n": "LTV (720p)",
+"s": [
+{
+"u": "https://5e85d90130e77.streamlock.net/6022/6022/playlist.m3u8"
+}
+]
+},
+{
+"g": "Honduras",
+"n": "Más Noticias Televisión (720p)",
+"s": [
+{
+"u": "https://www.amixtv.com:8081/mntvh/index.m3u8"
+}
+]
+},
+{
+"g": "Honduras",
+"n": "Maya TV",
+"s": [
+{
+"u": "https://media.streambrothers.com:19360/8036/8036.m3u8"
+},
+{
+"u": "https://media.streambrothers.com:19360/8356/8356.m3u8"
+}
+]
+},
+{
+"g": "Honduras",
+"n": "Metro TV (720p)",
+"s": [
+{
+"u": "https://s.emisoras.tv:8081/metrotv/index.m3u8"
+}
+]
+},
+{
+"g": "Honduras",
+"n": "Omega TV (720p)",
+"s": [
+{
+"u": "https://5caf24a595d94.streamlock.net:1937/8142/8142/playlist.m3u8"
+}
+]
+},
+{
+"g": "Honduras",
+"n": "Puringla TV",
+"s": [
+{
+"u": "https://stmv2.srvif.com/puringla/puringla/playlist.m3u8"
+}
+]
+},
+{
+"g": "Honduras",
+"n": "Q'hubo TV (410p)",
+"s": [
+{
+"u": "https://5e85d90130e77.streamlock.net/6024/6024/playlist.m3u8"
+}
+]
+},
+{
+"g": "Honduras",
+"n": "Radio Fiesta de Milagros TV (1080p)",
+"s": [
+{
+"u": "https://tv.webmedialive.com/fiestatv/live/playlist.m3u8"
+}
+]
+},
+{
+"g": "Honduras",
+"n": "Radio Ideal 104.7 FM (La Esperanza) (720p)",
+"s": [
+{
+"u": "https://www.idealfm104-7.com/hls/0/stream.m3u8"
+}
+]
+},
+{
+"g": "Honduras",
+"n": "Radio Imagen 105.1 FM (720p)",
+"s": [
+{
+"u": "https://streaming.imagenfm105-1.com/hls/stream.m3u8"
+}
+]
+},
+{
+"g": "Honduras",
+"n": "RCV TV (712p)",
+"s": [
+{
+"u": "https://59d39900ebfb8.streamlock.net/rcv/rcv/playlist.m3u8"
+}
+]
+},
+{
+"g": "Honduras",
+"n": "RSV Honduras (720p)",
+"s": [
+{
+"u": "https://stmv2.srvif.com/rsvhonduras/rsvhonduras/playlist.m3u8"
+},
+{
+"u": "https://live20.bozztv.com/dvrfl03/hondu/hondu-rsvhonduras/index.m3u8"
+}
+]
+},
+{
+"g": "Honduras",
+"n": "San Ignacio TV (720p)",
+"s": [
+{
+"u": "https://amixtv.live:3753/live/sitvlive.m3u8"
+}
+]
+},
+{
+"g": "Honduras",
+"n": "Sercano TV (720p)",
+"s": [
+{
+"u": "http://stream.grupoabchn.com:1935/SERCANOHD/SERCANOLive.smil/playlist.m3u8"
+}
+]
+},
+{
+"g": "Honduras",
+"n": "STVE Telebasica (1080p)",
+"s": [
+{
+"u": "https://streamingcws30.com/suyapa/videosuyapa/playlist.m3u8"
+}
+]
+},
+{
+"g": "Honduras",
+"n": "Sula TV (1080p)",
+"s": [
+{
+"u": "https://tv.webmedialive.com/sulatv/live/playlist.m3u8"
+}
+]
+},
+{
+"g": "Honduras",
+"n": "Suyapa TV (1080p)",
+"s": [
+{
+"u": "https://streamingcws30.com/suyapa2/videosuyapa2/playlist.m3u8"
+}
+]
+},
+{
+"g": "Honduras",
+"n": "Talanga TV Canal 39 (480p)",
+"s": [
+{
+"u": "https://stream.oursnetworktv.com/latin/Tv39Talanga/playlist.m3u8"
+}
+]
+},
+{
+"g": "Honduras",
+"n": "TDV TV (240p)",
+"s": [
+{
+"u": "https://stream.oursnetworktv.com/latin/TierraDeValientes/playlist.m3u8"
+}
+]
+},
+{
+"g": "Honduras",
+"n": "Telavisión (720p)",
+"s": [
+{
+"u": "https://stream.oursnetworktv.com/latin/telaVision/playlist.m3u8"
+}
+]
+},
+{
+"g": "Honduras",
+"n": "Teleceiba (720p)",
+"s": [
+{
+"u": "https://teleceiba.com/stream/tlcb720.m3u8"
+}
+]
+},
+{
+"g": "Honduras",
+"n": "TeleDanlí Canal 9 (720p)",
+"s": [
+{
+"u": "https://cloud2.streaminglivehd.com:1936/8224/8224/playlist.m3u8"
+},
+{
+"u": "https://live20.bozztv.com/giatv/giatv-canal9/canal9/chunks.m3u8"
+}
+]
+},
+{
+"g": "Honduras",
+"n": "Telemas (1080p)",
+"s": [
+{
+"u": "https://s.emisoras.tv:8081/telemas/index.m3u8"
+}
+]
+},
+{
+"g": "Honduras",
+"n": "Telerayo (1080p)",
+"s": [
+{
+"u": "https://s.emisoras.tv:8081/telerayo/index.m3u8"
+}
+]
+},
+{
+"g": "Honduras",
+"n": "Televisión Comayagua Canal 40 (720p)",
+"s": [
+{
+"u": "https://mediacp.us:8081/8034/index.m3u8"
+}
+]
+},
+{
+"g": "Honduras",
+"n": "Televisión Metrópolis 19.1 (1080p)",
+"s": [
+{
+"u": "https://5e85d90130e77.streamlock.net/6028/6028/playlist.m3u8"
+}
+]
+},
+{
+"g": "Honduras",
+"n": "Televisión Metrópolis 19.2 (1080p)",
+"s": [
+{
+"u": "https://5e85d90130e77.streamlock.net/6014/6014/playlist.m3u8"
+}
+]
+},
+{
+"g": "Honduras",
+"n": "Television Olanchana (1080p)",
+"s": [
+{
+"u": "https://viewhn.com/canal30/live/playlist.m3u8"
+}
+]
+},
+{
+"g": "Honduras",
+"n": "TEN Canal 10 (720p)",
+"s": [
+{
+"u": "https://raw.githubusercontent.com/BellezaEmporium/IPTV_Exception/master/channels/hn/tentv.m3u8"
+}
+]
+},
+{
+"g": "Honduras",
+"n": "TSi (720p)",
+"s": [
+{
+"u": "https://mdstrm.com/live-stream-playlist/6287fdc9303e3008289ab711.m3u8"
+}
+]
+},
+{
+"g": "Honduras",
+"n": "TV Centro 27.2 HD (720p)",
+"s": [
+{
+"u": "https://cloud2.streaminglivehd.com:1936/8004/8004/playlist.m3u8"
+}
+]
+},
+{
+"g": "Honduras",
+"n": "TV Centro HD (720p)",
+"s": [
+{
+"u": "https://cloud2.streaminglivehd.com:1936/8032/8032/playlist.m3u8"
+}
+]
+},
+{
+"g": "Honduras",
+"n": "TV Copán (720p)",
+"s": [
+{
+"u": "https://s.emisoras.tv:8081/tvcopan/index.m3u8"
+}
+]
+},
+{
+"g": "Honduras",
+"n": "TV Estrella (720p)",
+"s": [
+{
+"u": "https://s.emisoras.tv:8081/tve/index.m3u8"
+}
+]
+},
+{
+"g": "Honduras",
+"n": "UNAH UTV (360p)",
+"s": [
+{
+"u": "https://live-utv.unah.edu.hn/web/salida.m3u8"
+}
+]
+},
+{
+"g": "Honduras",
+"n": "UNE TV (720p)",
+"s": [
+{
+"u": "https://amixtv.com:8081/unetvhn/tracks-v1a1/mono.m3u8"
+}
+]
+},
+{
+"g": "Honduras",
+"n": "VTV (480p)",
+"s": [
+{
+"u": "https://d3q93l5bumjyoq.cloudfront.net/index.m3u8"
+}
+]
+},
+{
+"g": "Honduras",
+"n": "Waldivision Internacional",
+"s": [
+{
+"u": "https://media.streambrothers.com:19360/8308/8308.m3u8"
+}
+]
+},
+{
+"g": "El Salvador",
+"n": "Agape TV (720p)",
+"s": [
+{
+"u": "https://5fc584f3f19c9.streamlock.net/agape/smil:agape.smil/playlist.m3u8"
+},
+{
+"u": "https://5fc584f3f19c9.streamlock.net/agape/videoagape/chunklist_w153454298.m3u8"
+}
+]
+},
+{
+"g": "El Salvador",
+"n": "Árbol de Vida TV (240p)",
+"s": [
+{
+"u": "https://yupistream.top:19360/livearbol/livearbol.m3u8"
+}
+]
+},
+{
+"g": "El Salvador",
+"n": "Awapa Sports TV (1080p)",
+"s": [
+{
+"u": "https://mgv-awapa.akamaized.net/hls/live/2104282/MGV_CHANNEL15/master.m3u8"
+}
+]
+},
+{
+"g": "El Salvador",
+"n": "Canal 3 Impresionante (480p)",
+"s": [
+{
+"u": "https://cloud2.streaminglivehd.com:2020/hls/8036/8036.m3u8"
+}
+]
+},
+{
+"g": "El Salvador",
+"n": "Canal 10 (720p)",
+"s": [
+{
+"u": "https://5ca3e84a76d30.streamlock.net/tves/videotves/playlist.m3u8"
+}
+]
+},
+{
+"g": "El Salvador",
+"n": "Canal 11 TuTV (349p)",
+"s": [
+{
+"u": "https://stream.giostreaming.app/canal11/canal11.m3u8"
+}
+]
+},
+{
+"g": "El Salvador",
+"n": "Canal 12 (480p)",
+"s": [
+{
+"u": "https://d2b5h5wyivfnfl.cloudfront.net/live/53108ffe-0b7e-46ab-bc14-3a9c30010939/ts:abr.m3u8"
+}
+]
+},
+{
+"g": "El Salvador",
+"n": "Canal 15 El Zamorano",
+"s": [
+{
+"u": "https://vdo.tecnoservix.stream:3007/live/canal15zamoranolive.m3u8"
+}
+]
+},
+{
+"g": "El Salvador",
+"n": "Canal 15 Usulután (720p)",
+"s": [
+{
+"u": "https://streaming.grupocsanetwork.com:19360/canal15/canal15.m3u8"
+}
+]
+},
+{
+"g": "El Salvador",
+"n": "Canal 65 (1080p)",
+"s": [
+{
+"u": "https://panel.streamingtv-mediacp.online:1936/tv65/tv65/playlist.m3u8"
+}
+]
+},
+{
+"g": "El Salvador",
+"n": "Canal TRV (576p)",
+"s": [
+{
+"u": "https://stream.ontvmx.com/ontv/CNMLXR0Z6FPtGdjcI4/playlist.m3u8"
+}
+]
+},
+{
+"g": "El Salvador",
+"n": "El Camino TV (480p)",
+"s": [
+{
+"u": "https://5d32e2b9b7eed.streamlock.net:4443/ectv/ectv/playlist.m3u8"
+}
+]
+},
+{
+"g": "El Salvador",
+"n": "Elim TV (720p)",
+"s": [
+{
+"u": "https://stream.soporteccrtv.xyz/live/elimtv/main_stream.m3u8",
+"ua": "Mozilla/5.0 (Windows NT 10.0 Win64 x64) AppleWebKit/537.36 (KHTML like Gecko) Chrome/109.0.0.0 Safari/537.36"
+},
+{
+"u": "https://stream.soporteccrtv.xyz/hls/master-dveo.m3u8"
+}
+]
+},
+{
+"g": "El Salvador",
+"n": "GSG TV (720p)",
+"s": [
+{
+"u": "https://schurch1.bozztv.com/livecdn69/live/playlist.m3u8"
+},
+{
+"u": "https://rpn3.bozztv.com/schurch1/livecdn69/live/playlist.m3u8"
+}
+]
+},
+{
+"g": "El Salvador",
+"n": "JFV TV (720p)",
+"s": [
+{
+"u": "https://2nbyj587d53k-hls-live.5centscdn.com/09/25b94ec89b2aa708c3c4ad0014b09845.sdp/playlist.m3u8"
+}
+]
+},
+{
+"g": "El Salvador",
+"n": "Josué TV (1080p)",
+"s": [
+{
+"u": "https://videoserver.tmcreativos.com:19360/abbftuhxxs/abbftuhxxs.m3u8"
+}
+]
+},
+{
+"g": "El Salvador",
+"n": "Legislative Assembly of El Salvador (1080p)",
+"s": [
+{
+"u": "https://streaming.asamblea.gob.sv/hls/plenariahd.m3u8"
+}
+]
+},
+{
+"g": "El Salvador",
+"n": "Megavisión Canal 19 (720p)",
+"s": [
+{
+"u": "https://mgvchannel19-ioriver-cdn.encoders.immergo.tv/master.m3u8"
+}
+]
+},
+{
+"g": "El Salvador",
+"n": "Megavisión Canal 21 (720p)",
+"s": [
+{
+"u": "https://mgvchannel21-ioriver-cdn.encoders.immergo.tv/master.m3u8"
+}
+]
+},
+{
+"g": "El Salvador",
+"n": "RTV Canal 57 (720p)",
+"s": [
+{
+"u": "https://stream.giostreaming.app/rtvcanal57/rtvcanal57.m3u8"
+}
+]
+},
+{
+"g": "El Salvador",
+"n": "SolTV (720p)",
+"s": [
+{
+"u": "https://videostream.shockmedia.com.ar/hls/canalsoltv/canalsoltv.m3u8"
+},
+{
+"u": "http://rtmp.info:1935/soltv/envivo/playlist.m3u8"
+}
+]
+},
+{
+"g": "El Salvador",
+"n": "TCS+ (480p)",
+"s": [
+{
+"u": "https://telecorporacion.cdn.vustreams.com/live/19b307cf-3f2d-44cb-bce6-0fd65365c56a/live.isml/live.m3u8"
+}
+]
+},
+{
+"g": "El Salvador",
+"n": "TribunaTV (720p)",
+"s": [
+{
+"u": "https://cloudflare.streamgato.us:3300/live/tribunatvlive.m3u8"
+}
+]
+},
+{
+"g": "El Salvador",
+"n": "TV CRET (1080p)",
+"s": [
+{
+"u": "https://radiocret.net:8082/hls/tvcret.m3u8"
+}
+]
+},
+{
+"g": "El Salvador",
+"n": "TV Getsemaní (720p)",
+"s": [
+{
+"u": "https://serversv.com:8080/hls/tvgetsemani.m3u8"
+}
+]
+},
+{
+"g": "El Salvador",
+"n": "TV León de Judá (720p)",
+"s": [
+{
+"u": "https://6110f70ea8d0e.streamlock.net/1838/1838/playlist.m3u8"
+}
+]
+},
+{
+"g": "El Salvador",
+"n": "TVC Network (720p)",
+"s": [
+{
+"u": "https://stream.castr.com/643880749cf895435bf8eadf/live_d0b3cf70e24111ed8ed2951b4c7d1b75/index.m3u8",
+"ref": "https://player.castr.com/live_d0b3cf70e24111ed8ed2951b4c7d1b75"
+}
+]
+},
+{
+"g": "El Salvador",
+"n": "TVCa Televisión Católica Arquidiocesana (720p)",
+"s": [
+{
+"u": "https://live20.bozztv.com/akamaissh101/ssh101/tvcaelsalvador/playlist.m3u8"
+}
+]
+},
+{
+"g": "El Salvador",
+"n": "TVM El Salvador",
+"s": [
+{
+"u": "http://201.247.102.189/tmp_hls/stream/index.m3u8"
+}
+]
+},
+{
+"g": "El Salvador",
+"n": "TVO Canal 23 (720p)",
+"s": [
+{
+"u": "https://tvo.flynetwifi.com/5crjmr1645tqt71ovagufgc1x3d/playlist.m3u8"
+}
+]
+},
+{
+"g": "El Salvador",
+"n": "WOW TV (1080p)",
+"s": [
+{
+"u": "https://cdn-edge1.cef-technology.com/wow/wow_tv/playlist.m3u8"
+},
+{
+"u": "https://service.cdn-stream.com/wow/wow_tv/playlist.m3u8"
+}
+]
+},
+{
+"g": "Películas",
+"n": "Cine adrenalina",
+"s": [
+{
+"u": "https://jmp2.uk/plu-5d8d164d92e97a5e107638d2.m3u8"
+}
+]
+},
+{
+"g": "Películas",
+"n": "Cine Amor",
+"s": [
+{
+"u": "https://jmp2.uk/plu-5f5136317aedfb0007016f93.m3u8"
+}
+]
+},
+{
+"g": "Películas",
+"n": "Cine comedia",
+"s": [
+{
+"u": "https://jmp2.uk/plu-5f513564e4622a0007c578c0.m3u8"
+},
+{
+"u": "https://jmp2.uk/plu-5dcdde78f080d900098550e4.m3u8"
+}
+]
+},
+{
+"g": "Películas",
+"n": "Cine Premiere",
+"s": [
+{
+"u": "https://jmp2.uk/plu-5cf968040ab7d8f181e6a68b.m3u8"
+}
+]
+},
+{
+"g": "Películas",
+"n": "Cine terror",
+"s": [
+{
+"u": "https://jmp2.uk/plu-5d8d180092e97a5e107638d3.m3u8"
+},
+{
+"u": "https://jmp2.uk/plu-5dcddf1ed95e740009fef7ab.m3u8"
+}
+]
+},
+{
+"g": "Películas",
+"n": "MovieSphere AU (1080p)",
+"s": [
+{
+"u": "https://amg00353-amg00353c32-samsung-nz-3588.playouts.now.amagi.tv/playlist.m3u8"
+},
+{
+"u": "https://amg00353-lionsgatestudio-moviesphere-xumo-zh5u0.amagi.tv/playlist.m3u8"
+}
+]
+},
+{
+"g": "Películas",
+"n": "Pluto TV Sci-Fi",
+"s": [
+{
+"u": "https://jmp2.uk/plu-5b4fc274694c027be6ed3eea.m3u8"
+},
+{
+"u": "https://jmp2.uk/plu-5f2817d3d7573a00080f9175.m3u8"
+}
+]
+},
+{
+"g": "Películas",
+"n": "Canal Cine Dios",
+"s": [
+{
+"u": "https://canal.mediaserver.com.co/live/cinedios.m3u8"
+}
+]
+},
+{
+"g": "Películas",
+"n": "MCI Televisión (1080p)",
+"s": [
+{
+"u": "https://video.ejeserver.com/live/mcitelevision.m3u8"
+}
+]
+},
+{
+"g": "Películas",
+"n": "Persiana Latino",
+"s": [
+{
+"u": "https://latinohls.persiana.live/hls/stream.m3u8"
+}
+]
+},
+{
+"g": "Películas",
+"n": "Alterna TV (720p)",
+"s": [
+{
+"u": "https://tv.alterna.ar/stream/hls/live.m3u8"
+}
+]
+},
+{
+"g": "Películas",
+"n": "Cosmos Tv",
+"s": [
+{
+"u": "https://canaletaplus.com:3922/live/cosmoslive.m3u8"
+},
+{
+"u": "https://tv.mediacp.eu:19360/cosmos/cosmos.m3u8"
+}
+]
+},
+{
+"g": "Películas",
+"n": "Xtrema Accion",
+"s": [
+{
+"u": "https://stmv6.voxtvhd.com.br/cineaccion/cineaccion/playlist.m3u8",
+"ref": "https://xtrematv.com/?p=1434"
+}
+]
+},
+{
+"g": "Películas",
+"n": "Xtrema Cine Clasico",
+"s": [
+{
+"u": "https://stmv6.voxtvhd.com.br/cineclasico/cineclasico/playlist.m3u8",
+"ref": "https://xtrematv.com/?p=1460"
+}
+]
+},
+{
+"g": "Películas",
+"n": "Xtrema Terror",
+"s": [
+{
+"u": "https://stmv6.voxtvhd.com.br/cineterror/cineterror/playlist.m3u8",
+"ref": "https://xtrematv.com/?p=1456"
+}
+]
+},
+{
+"g": "Películas",
+"n": "Filmex (Xumo) (1080p)",
+"s": [
+{
+"u": "https://filmex-filmex-xumo.amagi.tv/playlist.m3u8"
+}
+]
+},
+{
+"g": "Películas",
+"n": "Filmex Clásico (1080p)",
+"s": [
+{
+"u": "https://filmex-filmexclasico-xumo.amagi.tv/playlist.m3u8"
+}
+]
+},
+{
+"g": "Películas",
+"n": "Pluto TV Western",
+"s": [
+{
+"u": "https://jmp2.uk/plu-62e7fb67478a5b0007e6c50c.m3u8"
+},
+{
+"u": "https://jmp2.uk/plu-630dd3b2605f140007e002f5.m3u8"
+}
+]
+},
+{
+"g": "Películas",
+"n": "Star Trek: Voyager",
+"s": [
+{
+"u": "https://jmp2.uk/plu-65cb73d33ba51e00084cabad.m3u8"
+},
+{
+"u": "https://jmp2.uk/plu-65787f2eb228b7000843fa5c.m3u8"
+}
+]
+},
+{
+"g": "Películas",
+"n": "Star Trek: The Next Generation",
+"s": [
+{
+"u": "https://jmp2.uk/plu-69776ce979545c21a1220bff.m3u8"
+}
+]
+},
+{
+"g": "Películas",
+"n": "Runtime Espanol (720p)",
+"s": [
+{
+"u": "https://run-rt-uh-roku.otteravision.com/run/rt_uh/rt_uh.m3u8"
+}
+]
+},
+{
+"g": "Películas",
+"n": "Adrenalina Pura TV (720p)",
+"s": [
+{
+"u": "https://jmp2.uk/plu-61b793ccf571b80007b7a610.m3u8"
+},
+{
+"u": "https://jmp2.uk/plu-61b790b985706b00072cb797.m3u8"
+}
+]
+},
+{
+"g": "Películas",
+"n": "Estrellas de Acción",
+"s": [
+{
+"u": "https://jmp2.uk/plu-5e972a21ad709d00074195ba.m3u8"
+}
+]
+},
+{
+"g": "Películas",
+"n": "Pluto TV A La Mexicana",
+"s": [
+{
+"u": "https://jmp2.uk/plu-5dfcde52d28b09000a42d7a2.m3u8"
+}
+]
+},
+{
+"g": "Películas",
+"n": "Pluto TV Cine Acción",
+"s": [
+{
+"u": "https://jmp2.uk/plu-5dcb62e63d4d8f0009f36881.m3u8"
+}
+]
+},
+{
+"g": "Películas",
+"n": "Pluto TV Cine Clásico",
+"s": [
+{
+"u": "https://jmp2.uk/plu-609059dc63be6e0007b4eca6.m3u8"
+}
+]
+},
+{
+"g": "Películas",
+"n": "Pluto TV Cine Crimen",
+"s": [
+{
+"u": "https://jmp2.uk/plu-624af40c004f8000079b784d.m3u8"
+}
+]
+},
+{
+"g": "Películas",
+"n": "Pluto TV Cine Drama",
+"s": [
+{
+"u": "https://jmp2.uk/plu-5dcddfcb229eff00091b6bdf.m3u8"
+},
+{
+"u": "https://jmp2.uk/plu-5f1210d14ae1f80007bafb1d.m3u8"
+}
+]
+},
+{
+"g": "Películas",
+"n": "Pluto TV Cine Estelar",
+"s": [
+{
+"u": "https://jmp2.uk/plu-5dcde437229eff00091b6c30.m3u8"
+}
+]
+},
+{
+"g": "Películas",
+"n": "Pluto TV Cine Familia",
+"s": [
+{
+"u": "https://jmp2.uk/plu-5dd6ddb30a1d8a000908ed4c.m3u8"
+},
+{
+"u": "https://jmp2.uk/plu-5f171f032cd22e0007f17f3d.m3u8"
+}
+]
+},
+{
+"g": "Películas",
+"n": "Pluto TV Cine Inspirador",
+"s": [
+{
+"u": "https://jmp2.uk/plu-6806d519fea7414f33f57016.m3u8"
+}
+]
+},
+{
+"g": "Películas",
+"n": "Pluto TV Cine Romance",
+"s": [
+{
+"u": "https://jmp2.uk/plu-5dd7ea2aeab5230009986735.m3u8"
+},
+{
+"u": "https://jmp2.uk/plu-5f171f988ab9780007fa95ea.m3u8"
+}
+]
+},
+{
+"g": "Películas",
+"n": "Pluto TV Cine Suspenso",
+"s": [
+{
+"u": "https://jmp2.uk/plu-5ddc4e8bcbb9010009b4e84f.m3u8"
+}
+]
+},
+{
+"g": "Películas",
+"n": "Pluto TV Nuestro Cine",
+"s": [
+{
+"u": "https://jmp2.uk/plu-5defde6d6c07b50009cf0757.m3u8"
+}
+]
+},
+{
+"g": "Películas",
+"n": "Aneflix Live (720p)",
+"s": [
+{
+"u": "https://stream-cdn-iad.vaughnsoft.net/play/live_a_neflix01.flv",
+"ref": "https://vaughn.live/",
+"ua": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.97 Safari/537.36"
+}
+]
+},
+{
+"g": "Películas",
+"n": "Charge! (1080p)",
+"s": [
+{
+"u": "https://fast-channels.sinclairstoryline.com/CHARGE/index.m3u8"
+}
+]
+},
+{
+"g": "Películas",
+"n": "Maxcine (720p)",
+"s": [
+{
+"u": "https://live20.bozztv.com/giatvplayout7/giatv-208138/playlist.m3u8"
+}
+]
+},
+{
+"g": "Películas",
+"n": "Maxcine 2 (720p)",
+"s": [
+{
+"u": "https://live20.bozztv.com/giatvplayout7/giatv-209163/playlist.m3u8"
+}
+]
+},
+{
+"g": "Películas",
+"n": "Maxcine Comedy (720p)",
+"s": [
+{
+"u": "https://live20.bozztv.com/giatvplayout7/giatv-208730/playlist.m3u8"
+}
+]
+},
+{
+"g": "Películas",
+"n": "Maxcine Family (720p)",
+"s": [
+{
+"u": "https://live20.bozztv.com/giatvplayout7/giatv-208817/playlist.m3u8"
+}
+]
+},
+{
+"g": "Películas",
+"n": "Maxcine Kids (720p)",
+"s": [
+{
+"u": "https://live20.bozztv.com/giatvplayout7/giatv-209909/playlist.m3u8"
+}
+]
+},
+{
+"g": "Películas",
+"n": "Mega Extreno HD (720p)",
+"s": [
+{
+"u": "https://stream-cdn-iad3.vaughnsoft.net/play/live_mega_extremo.flv",
+"ref": "https://vaughn.live/",
+"ua": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.97 Safari/537.36"
+}
+]
+},
+{
+"g": "Películas",
+"n": "WFXT-DT2 (1080p)",
+"s": [
+{
+"u": "https://cdn-uw2-prod.tsv2.amagi.tv/linear/amg01438-ewscrippscompan-ionmystery-tablo/playlist.m3u8"
+}
+]
+},
+{
+"g": "Películas",
+"n": "MyTime Movie Network Mexico (720p)",
+"s": [
+{
+"u": "https://appletree-mytime-samsungmexico.amagi.tv/playlist.m3u8"
+}
+]
+},
+{
+"g": "Películas",
+"n": "Medium",
+"s": [
+{
+"u": "https://jmp2.uk/plu-6578808014fbe400086e21bc.m3u8"
+}
+]
+},
+{
+"g": "Películas",
+"n": "Pluto TV Catástrofes",
+"s": [
+{
+"u": "https://jmp2.uk/plu-645a309c5a0cd5000873f609.m3u8"
+}
+]
+},
+{
+"g": "Películas",
+"n": "Pluto TV Cine Comedia",
+"s": [
+{
+"u": "https://jmp2.uk/plu-5f1ac8099c49f600076579b2.m3u8"
+}
+]
+},
+{
+"g": "Películas",
+"n": "Pluto TV Cine de autor",
+"s": [
+{
+"u": "https://jmp2.uk/plu-60cc807324d60a0007708dc8.m3u8"
+}
+]
+},
+{
+"g": "Películas",
+"n": "Pluto TV Cine Romántico",
+"s": [
+{
+"u": "https://jmp2.uk/plu-5f1ac9a2d3611d0007a844bb.m3u8"
+}
+]
+},
+{
+"g": "Películas",
+"n": "Pluto TV Comedias Románticas",
+"s": [
+{
+"u": "https://jmp2.uk/plu-655b5d865812e80008843bd1.m3u8"
+}
+]
+},
+{
+"g": "Películas",
+"n": "Pluto TV Invasión Alien",
+"s": [
+{
+"u": "https://jmp2.uk/plu-654a35ce346f420008d5c36e.m3u8"
+}
+]
+},
+{
+"g": "Películas",
+"n": "Pluto TV Psycho",
+"s": [
+{
+"u": "https://jmp2.uk/plu-65ce480a78df2200131c597b.m3u8"
+}
+]
+},
+{
+"g": "Películas",
+"n": "Pluto TV Zombies",
+"s": [
+{
+"u": "https://jmp2.uk/plu-65786888b228b7000843ad9a.m3u8"
+}
+]
+},
+{
+"g": "Películas",
+"n": "SensaCine TV x Pluto",
+"s": [
+{
+"u": "https://jmp2.uk/plu-676e7b4a4bd636000819c6a7.m3u8"
+}
+]
+},
+{
+"g": "Películas",
+"n": "CINDIE TV (1080p)",
+"s": [
+{
+"u": "https://cc-hqw8u5r1nshjc.akamaized.net/scheduler/scheduleMaster/352.m3u8"
+},
+{
+"u": "https://d20xuwbyc4yoag.cloudfront.net/v1/master/9d062541f2ff39b5c0f48b743c6411d25f62fc25/DistroTV-MuxIP-CINDIE/387.m3u8?ads.vf=grWTpG3NQNi"
+}
+]
+},
+{
+"g": "Películas",
+"n": "Boreal (720p)",
+"s": [
+{
+"u": "https://edge.essastream.com/borealtelevision/tracks-v1a1/mono.m3u8"
+}
+]
+},
+{
+"g": "Películas",
+"n": "Mega Cine TV (1080p)",
+"s": [
+{
+"u": "https://cnn.hostlagarto.com/megacinetv/playlist.m3u8"
+}
+]
+},
+{
+"g": "Películas",
+"n": "Aurora Media Films (720p)",
+"s": [
+{
+"u": "https://cdn.streamhispanatv.net:3417/live/auroramflive.m3u8"
+}
+]
+},
+{
+"g": "Películas",
+"n": "Pantalla Clásica EC (512p)",
+"s": [
+{
+"u": "https://live21.bozztv.com/akamaissh101/ssh101/pantallaclasics/playlist.m3u8"
+}
+]
+},
+{
+"g": "Películas",
+"n": "MyTime movie network Spain (1080p)",
+"s": [
+{
+"u": "https://appletree-mytimespain-rakuten.amagi.tv/playlist.m3u8"
+}
+]
+},
+{
+"g": "Películas",
+"n": "Zylo Cine Friki (1080p)",
+"s": [
+{
+"u": "https://d2mr4fu91mjx9m.cloudfront.net/v1/master/3722c60a815c199d9c0ef36c5b73da68a62b09d1/cc-rb0tx75ojbc5u/CineFriki_ES.m3u8"
+},
+{
+"u": "https://zylo-cinefriki-rakuten.amagi.tv/playlist.m3u8"
+}
+]
+},
+{
+"g": "Películas",
+"n": "Zylo Cine Western (1080p)",
+"s": [
+{
+"u": "https://d2nq34q0i1r3la.cloudfront.net/v1/master/3722c60a815c199d9c0ef36c5b73da68a62b09d1/cc-awohw8g217ho8/CineWestern_ES.m3u8"
+},
+{
+"u": "https://amg00711-zylo-amg00711c9-rakuten-es-5783.playouts.now.amagi.tv/playlist/amg00711-zylofast-cinewesternes-rakutenes/playlist.m3u8"
+}
+]
+},
+{
+"g": "Películas",
+"n": "Popcorn Central (1080p)",
+"s": [
+{
+"u": "https://oly-ftvpc.otteravision.com/oly/ftvpc/ftvpc.m3u8"
+}
+]
+},
+{
+"g": "Películas",
+"n": "Next HD (480p)",
+"s": [
+{
+"u": "https://live.enhdtv.com:19360/nexthd/nexthd.m3u8"
+}
+]
+},
+{
+"g": "Deportes",
+"n": "World Poker Tour (1080p)",
+"s": [
+{
+"u": "https://amg00218-wptenterprisesi-worldpokertour-xumo-us.amagi.tv/playlist.m3u8"
+},
+{
+"u": "https://amg00477-samsungelectron-worldpokertour-samsunguk-81igb.amagi.tv/playlist/amg00477-samsungelectron-worldpokertour-samsunguk/playlist.m3u8"
+}
+]
+},
+{
+"g": "Deportes",
+"n": "FIFA+ (720p)",
+"s": [
+{
+"u": "https://jmp2.uk/plu-660bfc7b2433010008def3e3.m3u8"
+},
+{
+"u": "https://jmp2.uk/plu-660c2a2d2433010008df7e92.m3u8"
+}
+]
+},
+{
+"g": "Deportes",
+"n": "ITV Deportes (720p)",
+"s": [
+{
+"u": "https://jmp2.uk/plu-63f7e3f9dff38e00082a57af.m3u8"
+},
+{
+"u": "https://thm-it-roku.otteravision.com/thm/it/it.m3u8"
+}
+]
+},
+{
+"g": "Deportes",
+"n": "CRTV (720p)",
+"s": [
+{
+"u": "https://stmv2.voxtvhd.com.br/crtvchile/crtvchile/playlist.m3u8"
+}
+]
+},
+{
+"g": "Deportes",
+"n": "Turf Movil (720p)",
+"s": [
+{
+"u": "https://tvturf4.janus.cl/playlist/stream.m3u8?d=w&id="
+}
+]
+},
+{
+"g": "Deportes",
+"n": "Multivisión Sports (720p)",
+"s": [
+{
+"u": "https://stream.digitalgt.com:3605/live/multivisionsportslive.m3u8"
+}
+]
+},
+{
+"g": "Deportes",
+"n": "Monterrico TV",
+"s": [
+{
+"u": "https://h.jcp.live.opencaster.com/play_src/index.m3u8"
+}
+]
+},
+{
+"g": "Deportes",
+"n": "Ovacion TV (720p)",
+"s": [
+{
+"u": "http://cdn2.ujjina.com:1935/iptvovacion1/liveovacion1tv/playlist.m3u8"
+}
+]
+},
+{
+"g": "Deportes",
+"n": "Sqala TV (720p)",
+"s": [
+{
+"u": "https://live-evg8.tv360.bitel.com.pe/bitel/studiotvhuanta/playlist.m3u8"
+}
+]
+},
+{
+"g": "Deportes",
+"n": "Bicolor+ Premium",
+"s": [
+{
+"u": "https://live-evg10.tv360.bitel.com.pe/bitel/bicolorpremium_abr/bitel/bicolorpremium_720p/chunks.m3u8"
+}
+]
+},
+{
+"g": "Deportes",
+"n": "Canal Showsport (720p)",
+"s": [
+{
+"u": "https://livestream.lumpentv.com.ar/hls/lumpen.m3u8"
+}
+]
+},
+{
+"g": "Deportes",
+"n": "fubo Sports Network (1080p)",
+"s": [
+{
+"u": "https://dnf08l6u6uxnz.cloudfront.net/master.m3u8"
+},
+{
+"u": "https://aegis-cloudfront-1.tubi.video/c2ac89da-5c69-439e-b85d-d87de0548b54/5.m3u8"
+}
+]
+},
+{
+"g": "Deportes",
+"n": "Red Bull TV (1080p)",
+"s": [
+{
+"u": "https://3ea22335.wurl.com/master/f36d25e7e52f1ba8d7e56eb859c636563214f541/UmFrdXRlblRWLWdiX1JlZEJ1bGxUVl9ITFM/playlist.m3u8"
+},
+{
+"u": "https://76b17ec8b2424026b8e1523836cc90e7.mediatailor.us-west-2.amazonaws.com/v1/master/ba62fe743df0fe93366eba3a257d792884136c7f/LINEAR-641-WORBEUENFAST-WHALETVPLUS/641/whaletvplus/hls/master/playlist.m3u8"
+}
+]
+},
+{
+"g": "Deportes",
+"n": "AS3 Sport TV (1080p)",
+"s": [
+{
+"u": "https://streamtv.as3sport.online:3394/hybrid/play.m3u8"
+}
+]
+},
+{
+"g": "Deportes",
+"n": "Pluto TV Deportes",
+"s": [
+{
+"u": "https://jmp2.uk/plu-5dcde07af1c85b0009b18651.m3u8"
+}
+]
+},
+{
+"g": "Deportes",
+"n": "Pluto TV E-Sports",
+"s": [
+{
+"u": "https://jmp2.uk/plu-5ff3934600d4c7000733ff49.m3u8"
+}
+]
+},
+{
+"g": "Deportes",
+"n": "Real Madrid TV (726p)",
+"s": [
+{
+"u": "https://rmtv.akamaized.net/hls/live/2043153/rmtv-es-web/master.m3u8"
+}
+]
+},
+{
+"g": "Deportes",
+"n": "Olympics Channel (1080p)",
+"s": [
+{
+"u": "https://ocshls-2-olympicchannel.akamaized.net/ocshls/OCTV_1.m3u8"
+},
+{
+"u": "https://ocshls-2-olympicchannel.akamaized.net/ocshls/OCTV_2.m3u8"
+}
+]
+},
+{
+"g": "Deportes",
+"n": "CDN Deportes (720p)",
+"s": [
+{
+"u": "https://hls.tvabierta.net/hls/036.m3u8"
+}
+]
+},
+{
+"g": "Deportes",
+"n": "ColimdoT TV (720p)",
+"s": [
+{
+"u": "https://cnn.livestreaminggroup.info:3132/live/colimdotvlive.m3u8"
+}
+]
+},
+{
+"g": "Deportes",
+"n": "Tour Spot TV (1280p)",
+"s": [
+{
+"u": "https://fox.hostlagarto.com:8081/toursporttv/playlist.m3u8"
+}
+]
+},
+{
+"g": "Deportes",
+"n": "Real Madrid TV English",
+"s": [
+{
+"u": "https://rmtv.akamaized.net/hls/live/2043154/rmtv-en-web/bitrate_3.m3u8"
+}
+]
+},
+{
+"g": "Deportes",
+"n": "Teledeporte",
+"s": [
+{
+"u": "https://rtve01p.origin.c21livecloud.com/live-origin/tdp-hls/bitrate_1.m3u8"
+},
+{
+"u": "https://rtvelivestream.rtve.es/rtvesec/tdp/tdp_main.m3u8"
+}
+]
+},
+{
+"g": "Deportes",
+"n": "Azteca Deportes Network (720p)",
+"s": [
+{
+"u": "https://live-manifest.production-public.tubi.io/live/6bf131c3-d664-424c-93c9-49188a788980/playlist.m3u8"
+}
+]
+},
+{
+"g": "Deportes",
+"n": "TV Cuatro 4.3 (1080p)",
+"s": [
+{
+"u": "https://5ca3e84a76d30.streamlock.net/tv43gto/tv43gto.smil/.m3u8"
+}
+]
+},
+{
+"g": "Deportes",
+"n": "WAPA-TV 4.2 (720p)",
+"s": [
+{
+"u": "https://wapa.hostless.app/WAPA-TV-4-2.m3u8"
+}
+]
+}
+]

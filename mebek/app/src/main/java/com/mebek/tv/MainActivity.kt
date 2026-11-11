@@ -28,7 +28,12 @@ import androidx.recyclerview.widget.RecyclerView
 /** App de prueba Mebek TV: lista fija de canales (assets/canales.m3u), arriba/abajo cambia, OK abre la lista. */
 @UnstableApi
 class MainActivity : Activity() {
-    data class Ch(val name: String, val url: String, val referer: String? = null, val ua: String? = null)
+    data class Src(val url: String, val referer: String?, val ua: String?)
+    data class Ch(val group: String, val name: String, val srcs: List<Src>)
+    /** Fila de la lista: encabezado de grupo o canal. */
+    private data class Row(val header: String?, val idx: Int)
+    private val rows = mutableListOf<Row>()
+    private var srcIdx = 0
 
     private val ui = Handler(Looper.getMainLooper())
     private val channels = mutableListOf<Ch>()
@@ -59,23 +64,20 @@ class MainActivity : Activity() {
     }
 
     private fun loadChannels() {
-        val lines = assets.open("canales.m3u").bufferedReader().readLines()
-        var name: String? = null; var ref: String? = null; var ua: String? = null
-        for (l in lines) {
-            val t = l.trim()
-            when {
-                t.startsWith("#EXTINF") -> { name = t.substringAfter(",").trim(); ref = null; ua = null }
-                t.startsWith("#EXTVLCOPT:http-referrer=") -> ref = t.substringAfter("=")
-                t.startsWith("#EXTVLCOPT:http-user-agent=") -> ua = t.substringAfter("=")
-                t.isNotEmpty() && !t.startsWith("#") -> { channels.add(Ch(name ?: t, t, ref, ua)); name = null; ref = null; ua = null }
-            }
+        val arr = org.json.JSONArray(assets.open("canales.json").bufferedReader().readText())
+        for (i in 0 until arr.length()) {
+            val o = arr.getJSONObject(i); val sa = o.getJSONArray("s")
+            val srcs = (0 until sa.length()).map { j -> sa.getJSONObject(j).let { Src(it.getString("u"), it.optString("ref").ifEmpty { null }, it.optString("ua").ifEmpty { null }) } }
+            channels.add(Ch(o.getString("g"), o.getString("n"), srcs))
         }
+        var last = ""
+        channels.forEachIndexed { i, c -> if (c.group != last) { rows.add(Row(c.group, -1)); last = c.group }; rows.add(Row(null, i)) }
     }
 
     private lateinit var extractors: DefaultExtractorsFactory
 
     /** Fuente con los encabezados que pide cada canal (referer / navegador). */
-    private fun sourceFor(ch: Ch) = DefaultMediaSourceFactory(
+    private fun sourceFor(ch: Src) = DefaultMediaSourceFactory(
         DefaultHttpDataSource.Factory()
             .setUserAgent(ch.ua ?: "Mozilla/5.0 (Linux; Android 10) AppleWebKit/537.36 Chrome/120 Safari/537.36")
             .setConnectTimeoutMs(8000).setReadTimeoutMs(8000).setAllowCrossProtocolRedirects(true)
@@ -92,8 +94,9 @@ class MainActivity : Activity() {
                 playerView.player = p
                 p.addListener(object : Player.Listener {
                     override fun onPlayerError(error: PlaybackException) {
-                        showBanner("${channels[current].name}\nSin señal: ${error.errorCodeName}", 6000)
-                        ui.postDelayed({ play(current) }, 5000)
+                        val ch = channels[current]
+                        if (srcIdx + 1 < ch.srcs.size) { srcIdx++; startSource(); return }   // probar fuente alterna
+                        showBanner("${ch.name}\nSin señal (${error.errorCodeName}). Pruebe otro canal.", 6000)
                     }
                     override fun onPlaybackStateChanged(state: Int) {
                         if (state == Player.STATE_READY) ui.postDelayed({ showInfo() }, 1500)
@@ -108,12 +111,22 @@ class MainActivity : Activity() {
         prefs.edit().putInt("ultimo", current).apply()
         ui.removeCallbacksAndMessages(null)
         val ch = channels[current]
-        player?.apply {
-            setMediaSource(sourceFor(ch))
-            prepare(); playWhenReady = true
-        }
-        showBanner("${current + 1}  ${ch.name}", 4000)
+        srcIdx = 0
+        startSource()
+        showBanner("${current + 1}  ${ch.name}\n${ch.group}", 4000)
         list.adapter?.notifyDataSetChanged()
+    }
+
+    private fun startSource() {
+        val ch = channels[current]
+        player?.apply { setMediaSource(sourceFor(ch.srcs[srcIdx])); prepare(); playWhenReady = true }
+    }
+
+    /** Salta al primer canal del grupo siguiente/anterior. */
+    private fun jumpGroup(dir: Int) {
+        val groups = channels.map { it.group }.distinct()
+        val gi = (groups.indexOf(channels[current].group) + dir + groups.size) % groups.size
+        play(channels.indexOfFirst { it.group == groups[gi] })
     }
 
     private fun showBanner(text: String, ms: Long) {
@@ -136,8 +149,9 @@ class MainActivity : Activity() {
     private fun listVisible() = listPanel.visibility == View.VISIBLE
     private fun showList() {
         listPanel.visibility = View.VISIBLE
-        list.scrollToPosition(current)
-        list.post { list.findViewHolderForAdapterPosition(current)?.itemView?.requestFocus() }
+        val pos = rows.indexOfFirst { it.idx == current }
+        (list.layoutManager as LinearLayoutManager).scrollToPositionWithOffset(pos, 200)
+        list.post { list.findViewHolderForAdapterPosition(pos)?.itemView?.requestFocus() }
     }
     private fun hideList() { listPanel.visibility = View.GONE; playerView.requestFocus() }
 
@@ -150,7 +164,9 @@ class MainActivity : Activity() {
         if (event.action == KeyEvent.ACTION_DOWN) when (code) {
             KeyEvent.KEYCODE_DPAD_UP, KeyEvent.KEYCODE_CHANNEL_UP -> { play(current + 1); return true }
             KeyEvent.KEYCODE_DPAD_DOWN, KeyEvent.KEYCODE_CHANNEL_DOWN -> { play(current - 1); return true }
-            KeyEvent.KEYCODE_DPAD_RIGHT, KeyEvent.KEYCODE_DPAD_LEFT, KeyEvent.KEYCODE_INFO, KeyEvent.KEYCODE_MENU -> { showInfo(); return true }
+            KeyEvent.KEYCODE_DPAD_RIGHT -> { jumpGroup(1); return true }
+            KeyEvent.KEYCODE_DPAD_LEFT -> { jumpGroup(-1); return true }
+            KeyEvent.KEYCODE_INFO, KeyEvent.KEYCODE_MENU, KeyEvent.KEYCODE_PROG_BLUE -> { showInfo(); return true }
             KeyEvent.KEYCODE_DPAD_CENTER, KeyEvent.KEYCODE_ENTER, KeyEvent.KEYCODE_NUMPAD_ENTER -> { showList(); return true }
         }
         return super.dispatchKeyEvent(event)
@@ -177,11 +193,18 @@ class MainActivity : Activity() {
             }
             return VH(t)
         }
-        override fun getItemCount() = channels.size
+        override fun getItemCount() = rows.size
         override fun onBindViewHolder(h: VH, pos: Int) {
-            h.t.text = "${pos + 1}  ${channels[pos].name}"
-            h.t.setTextColor(if (pos == current) 0xFF7CC242.toInt() else Color.WHITE)
-            h.t.setOnClickListener { hideList(); play(pos) }
+            val r = rows[pos]
+            if (r.header != null) {
+                h.t.text = r.header.uppercase(); h.t.setTextColor(0xFF7CC242.toInt()); h.t.textSize = 15f
+                h.t.isFocusable = false; h.t.setOnClickListener(null); h.t.setBackgroundColor(0xFF1C2228.toInt())
+            } else {
+                h.t.text = "${r.idx + 1}  ${channels[r.idx].name}"; h.t.textSize = 18f
+                h.t.setTextColor(if (r.idx == current) 0xFF7CC242.toInt() else Color.WHITE)
+                h.t.isFocusable = true; h.t.setBackgroundColor(Color.TRANSPARENT)
+                h.t.setOnClickListener { hideList(); play(r.idx) }
+            }
         }
     }
 }
