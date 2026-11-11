@@ -14,7 +14,7 @@
     <LinearLayout android:id="@+id/listPanel" android:layout_width="420dp" android:layout_height="match_parent"
         android:orientation="vertical" android:background="#E6101418" android:visibility="gone">
         <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:padding="20dp"
-            android:text="Mebek TV · Prueba" android:textColor="#7CC242" android:textSize="22sp" android:textStyle="bold" />
+            android:id="@+id/listTitle" android:text="Mebek TV · Prueba" android:textColor="#7CC242" android:textSize="22sp" android:textStyle="bold" />
         <androidx.recyclerview.widget.RecyclerView android:id="@+id/list"
             android:layout_width="match_parent" android:layout_height="match_parent" />
     </LinearLayout>

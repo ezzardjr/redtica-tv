@@ -34,6 +34,11 @@ class MainActivity : Activity() {
     private data class Row(val header: String?, val idx: Int)
     private val rows = mutableListOf<Row>()
     private var srcIdx = 0
+    /** Estado por canal: -1 sin verificar, -2 caído, >=0 fuente que funciona. */
+    private lateinit var status: IntArray
+    private var lastDir = 1
+    private var checked = 0
+    private val pool = java.util.concurrent.Executors.newFixedThreadPool(12)
 
     private val ui = Handler(Looper.getMainLooper())
     private val channels = mutableListOf<Ch>()
@@ -56,11 +61,87 @@ class MainActivity : Activity() {
         listPanel = findViewById(R.id.listPanel)
         list = findViewById(R.id.list)
         loadChannels()
+        status = IntArray(channels.size) { -1 }
+        loadCache()
+        rebuildRows()
         list.layoutManager = LinearLayoutManager(this)
         list.adapter = Adapter()
         buildPlayer()
         current = prefs.getInt("ultimo", 0).coerceIn(0, (channels.size - 1).coerceAtLeast(0))
-        if (channels.isNotEmpty()) play(current)
+        if (channels.isNotEmpty()) play(if (status[current] == -2) nextAlive(current, 1) else current)
+        checkAll()
+    }
+
+    // ---------- Verificación de canales desde el propio TV ----------
+    private fun cacheKey() = "estado_" + channels.size
+    private fun loadCache() {
+        val txt = prefs.getString(cacheKey(), null) ?: return
+        val age = System.currentTimeMillis() - prefs.getLong(cacheKey() + "_t", 0)
+        if (age > 12 * 3600_000L) return   // más de 12 h: se vuelve a verificar todo
+        txt.split(",").forEachIndexed { i, v -> if (i < status.size) status[i] = v.toIntOrNull() ?: -1 }
+    }
+    private fun saveCache() {
+        prefs.edit().putString(cacheKey(), status.joinToString(","))
+            .putLong(cacheKey() + "_t", System.currentTimeMillis()).apply()
+    }
+
+    private fun rebuildRows() {
+        rows.clear()
+        var last = ""
+        channels.forEachIndexed { i, c ->
+            if (status[i] == -2) return@forEachIndexed
+            if (c.group != last) { rows.add(Row(c.group, -1)); last = c.group }
+            rows.add(Row(null, i))
+        }
+        list.adapter?.notifyDataSetChanged()
+    }
+
+    private fun alive() = status.count { it != -2 }
+    private fun nextAlive(from: Int, dir: Int): Int {
+        var i = from
+        repeat(channels.size) {
+            i = ((i + dir) % channels.size + channels.size) % channels.size
+            if (status[i] != -2) return i
+        }
+        return from
+    }
+
+    /** Prueba si una fuente responde con una lista HLS o con video TS. */
+    private fun probe(src: Src): Boolean = try {
+        val c = java.net.URL(src.url).openConnection() as java.net.HttpURLConnection
+        c.connectTimeout = 6000; c.readTimeout = 6000; c.instanceFollowRedirects = true
+        c.setRequestProperty("User-Agent", src.ua ?: "Mozilla/5.0 (Linux; Android 10) AppleWebKit/537.36 Chrome/120 Safari/537.36")
+        src.referer?.let { c.setRequestProperty("Referer", it) }
+        val ok = c.responseCode in 200..299 && c.inputStream.use { ins ->
+            val b = ByteArray(2048); val n = ins.read(b)
+            n > 0 && (b[0] == 0x47.toByte() || String(b, 0, n).contains("#EXTM3U") || String(b, 0, n).contains("#EXT-X"))
+        }
+        c.disconnect(); ok
+    } catch (_: Throwable) { false }
+
+    private fun checkAll() {
+        checked = 0
+        channels.forEachIndexed { i, ch ->
+            pool.execute {
+                var res = -2
+                for ((k, src) in ch.srcs.withIndex()) if (probe(src)) { res = k; break }
+                ui.post {
+                    status[i] = res; checked++
+                    if (checked % 25 == 0 || checked == channels.size) {
+                        rebuildRows(); updateTitle()
+                        if (checked == channels.size) {
+                            saveCache()
+                            showBanner("Canales funcionando: ${alive()} de ${channels.size}", 5000)
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    private fun updateTitle() {
+        findViewById<TextView>(R.id.listTitle)?.text =
+            if (checked < channels.size) "Mebek TV · verificando ${checked}/${channels.size}" else "Mebek TV · ${alive()} canales"
     }
 
     private fun loadChannels() {
@@ -70,8 +151,6 @@ class MainActivity : Activity() {
             val srcs = (0 until sa.length()).map { j -> sa.getJSONObject(j).let { Src(it.getString("u"), it.optString("ref").ifEmpty { null }, it.optString("ua").ifEmpty { null }) } }
             channels.add(Ch(o.getString("g"), o.getString("n"), srcs))
         }
-        var last = ""
-        channels.forEachIndexed { i, c -> if (c.group != last) { rows.add(Row(c.group, -1)); last = c.group }; rows.add(Row(null, i)) }
     }
 
     private lateinit var extractors: DefaultExtractorsFactory
@@ -96,7 +175,10 @@ class MainActivity : Activity() {
                     override fun onPlayerError(error: PlaybackException) {
                         val ch = channels[current]
                         if (srcIdx + 1 < ch.srcs.size) { srcIdx++; startSource(); return }   // probar fuente alterna
-                        showBanner("${ch.name}\nSin señal (${error.errorCodeName}). Pruebe otro canal.", 6000)
+                        // Caído: se esconde y se pasa al siguiente en la misma dirección
+                        status[current] = -2; rebuildRows(); saveCache()
+                        showBanner("${ch.name}: no disponible, pasando al siguiente…", 2500)
+                        ui.postDelayed({ play(nextAlive(current, lastDir)) }, 1500)
                     }
                     override fun onPlaybackStateChanged(state: Int) {
                         if (state == Player.STATE_READY) ui.postDelayed({ showInfo() }, 1500)
@@ -111,7 +193,7 @@ class MainActivity : Activity() {
         prefs.edit().putInt("ultimo", current).apply()
         ui.removeCallbacksAndMessages(null)
         val ch = channels[current]
-        srcIdx = 0
+        srcIdx = status[current].coerceAtLeast(0)
         startSource()
         showBanner("${current + 1}  ${ch.name}\n${ch.group}", 4000)
         list.adapter?.notifyDataSetChanged()
@@ -126,7 +208,8 @@ class MainActivity : Activity() {
     private fun jumpGroup(dir: Int) {
         val groups = channels.map { it.group }.distinct()
         val gi = (groups.indexOf(channels[current].group) + dir + groups.size) % groups.size
-        play(channels.indexOfFirst { it.group == groups[gi] })
+        val first = channels.indexOfFirst { it.group == groups[gi] }
+        play(if (status[first] == -2) nextAlive(first, 1) else first)
     }
 
     private fun showBanner(text: String, ms: Long) {
@@ -162,8 +245,8 @@ class MainActivity : Activity() {
             return super.dispatchKeyEvent(event)
         }
         if (event.action == KeyEvent.ACTION_DOWN) when (code) {
-            KeyEvent.KEYCODE_DPAD_UP, KeyEvent.KEYCODE_CHANNEL_UP -> { play(current + 1); return true }
-            KeyEvent.KEYCODE_DPAD_DOWN, KeyEvent.KEYCODE_CHANNEL_DOWN -> { play(current - 1); return true }
+            KeyEvent.KEYCODE_DPAD_UP, KeyEvent.KEYCODE_CHANNEL_UP -> { lastDir = 1; play(nextAlive(current, 1)); return true }
+            KeyEvent.KEYCODE_DPAD_DOWN, KeyEvent.KEYCODE_CHANNEL_DOWN -> { lastDir = -1; play(nextAlive(current, -1)); return true }
             KeyEvent.KEYCODE_DPAD_RIGHT -> { jumpGroup(1); return true }
             KeyEvent.KEYCODE_DPAD_LEFT -> { jumpGroup(-1); return true }
             KeyEvent.KEYCODE_INFO, KeyEvent.KEYCODE_MENU, KeyEvent.KEYCODE_PROG_BLUE -> { showInfo(); return true }
@@ -179,6 +262,7 @@ class MainActivity : Activity() {
 
     override fun onDestroy() {
         super.onDestroy()
+        pool.shutdownNow()
         ui.removeCallbacksAndMessages(null)
         player?.release(); player = null
     }
