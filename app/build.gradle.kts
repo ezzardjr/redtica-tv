@@ -11,8 +11,8 @@ android {
         applicationId = "com.redtica.tv"
         minSdk = 21
         targetSdk = 35
-        versionCode = 22
-        versionName = "2.2"
+        versionCode = 23
+        versionName = "2.3"
     }
 
     buildFeatures {

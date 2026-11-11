@@ -44,14 +44,15 @@ class IntroView(context: Context, private val isExit: Boolean = false, private v
         player.setMediaItem(MediaItem.fromUri(RawResourceDataSource.buildRawResourceUri(pickVideo())))
         player.addListener(object : Player.Listener {
             override fun onPlaybackStateChanged(state: Int) {
-                if (state == Player.STATE_ENDED) { if (isExit) finish() else fadeOut(1200) }
+                // Se espera al final real del video (voz completa); queda el último cuadro y se difumina
+                if (state == Player.STATE_ENDED) { if (isExit) finish() else postDelayed({ fadeOut(1200) }, 400) }
             }
             override fun onPlayerError(error: androidx.media3.common.PlaybackException) { fadeOut(300) }
         })
         player.prepare()
         player.playWhenReady = true
-        // Intro: empieza a difuminar 1 s antes del final, mientras termina el audio
-        if (!isExit) postDelayed({ fadeOut(1200) }, 9_000)
+        // Seguridad: si el video no arranca, no dejar la pantalla tapada
+        postDelayed({ fadeOut(600) }, 25_000)
     }
 
     /** 4K si la pantalla es 4K y el decodificador lo soporta; si no, 1080p. */
