@@ -73,15 +73,17 @@ class MainActivity : AppCompatActivity() {
     /** Animación de inicio: 10 s la primera vez del día, 3 s las demás. */
     private var outro: IntroView? = null
     private var selector: DefaultTrackSelector? = null
-    // Modo túnel (prueba): el video pasa por el procesador de imagen del TV, que desentrelaza
-    private var tunnelOn: Boolean
-        get() = prefs.getBoolean("tunnel", false)
-        set(v) { prefs.edit().putBoolean("tunnel", v).apply() }
+    // Modo de video (prueba): 0 normal, 1 túnel (procesador del TV), 2 filtro desentrelazador de la app
+    private var videoMode: Int
+        get() = prefs.getInt("vmode", 0)
+        set(v) { prefs.edit().putInt("vmode", v).apply() }
+    private fun modeName(m: Int = videoMode) = when (m) { 1 -> "Túnel"; 2 -> "Filtro desentrelazado"; else -> "Normal" }
 
     private fun toggleTunnel() {
-        tunnelOn = !tunnelOn
-        selector?.let { it.setParameters(it.buildUponParameters().setTunnelingEnabled(tunnelOn)) }
-        android.widget.Toast.makeText(this, "Modo túnel: " + (if (tunnelOn) "SÍ" else "NO"), android.widget.Toast.LENGTH_SHORT).show()
+        videoMode = (videoMode + 1) % 3
+        android.widget.Toast.makeText(this, "Modo de video: " + modeName(), android.widget.Toast.LENGTH_SHORT).show()
+        player?.release(); player = null
+        ensurePlayer()
         play(current)
     }
 
@@ -394,18 +396,20 @@ class MainActivity : AppCompatActivity() {
             .setPrioritizeTimeOverSizeThresholds(true)
             .build()
         // Decodificación en modo asíncrono (más fluida en TVs) y respaldo a otro decodificador si falla
+        val mode = videoMode
         val renderers = DefaultRenderersFactory(this)
-            .forceEnableMediaCodecAsynchronousQueueing()
             .setEnableDecoderFallback(true)
+            .apply { if (mode != 1) forceEnableMediaCodecAsynchronousQueueing() }
         // Modo túnel: el TV sincroniza audio y video por hardware (como Netflix/YouTube).
         // Si el TV no lo soporta, ExoPlayer usa el modo normal automáticamente.
         val trackSelector = DefaultTrackSelector(this).apply {
-            setParameters(buildUponParameters().setTunnelingEnabled(tunnelOn))
+            setParameters(buildUponParameters().setTunnelingEnabled(mode == 1))
         }
         selector = trackSelector
         player = ExoPlayer.Builder(this, renderers).setLoadControl(loadControl)
             .setTrackSelector(trackSelector).build().also { p ->
             if (intro != null) p.volume = 0f   // el canal carga en silencio detrás de la animación
+            if (mode == 2) try { p.setVideoEffects(listOf(DeinterlaceEffect())) } catch (e: Throwable) { lastKeyInfo = "filtro: ${e.message}" }
             p.setVideoChangeFrameRateStrategy(C.VIDEO_CHANGE_FRAME_RATE_STRATEGY_ONLY_IF_SEAMLESS)
             p.setVideoFrameMetadataListener(frameRateProbe)
             playerView.player = p
@@ -848,7 +852,7 @@ class MainActivity : AppCompatActivity() {
             appendLine("Fuente: " + if (usingMulticast) "Multicast" else "HTTP")
             appendLine("Red: " + networkInfo())
             appendLine("Video: " + (f?.let { "${it.width}x${it.height} ${it.sampleMimeType?.substringAfter('/')} ${it.bitrate.takeIf { b -> b > 0 }?.let { b -> "${b / 1000} kbps" } ?: ""}" } ?: "-"))
-            appendLine("App: v${BuildConfig.VERSION_NAME} | Modo túnel: ${if (tunnelOn) "SÍ" else "no"} (Derecha cambia) | Última tecla: $lastKeyInfo")
+            appendLine("App: v${BuildConfig.VERSION_NAME} | Modo video: ${modeName()} (Derecha cambia) | Última tecla: $lastKeyInfo")
             appendLine("Decodificador: $videoDecoder")
             appendLine("Cuadros del canal: " + (if (detectedFps > 0f) "%.2f fps".format(detectedFps) else "midiendo...") + " | Pantalla: " + displayHz())
             appendLine("Colchón: $buf s")
