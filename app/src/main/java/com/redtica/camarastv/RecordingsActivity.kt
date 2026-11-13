@@ -108,15 +108,15 @@ class RecordingsActivity : Activity() {
         val base = ArrayList<Item>()
         if (local.isNotEmpty()) base.add(Item("En este TV, pendientes de subir (${local.size})", folder = true, id = "local"))
         show("Grabaciones · ${AppState.config.siteName}", base,
-            if (AppState.config.driveLinked) "Cargando días desde Google Drive…" else "Google Drive no está vinculado: solo se muestran los clips de este TV.")
+            if (AppState.config.driveLinked) "Cargando días…" else "El respaldo no está vinculado: solo se muestran los clips de este TV.")
         if (!AppState.config.driveLinked) return
         io.execute {
             try {
                 val days = Drive.listDays().map { Item(prettyDay(it.second), id = it.first, folder = true, name = it.second) }
                 ui(seq) { show("Grabaciones · ${AppState.config.siteName}", base + days,
-                    if (days.isEmpty()) "Todavía no hay grabaciones en Google Drive." else "${days.size} día(s) con grabaciones", dayPos) }
+                    if (days.isEmpty()) "Todavía no hay grabaciones guardadas." else "${days.size} día(s) con grabaciones", dayPos) }
             } catch (e: Exception) {
-                ui(seq) { statusView.text = "No se pudo leer Google Drive: ${e.message?.take(90)}" }
+                ui(seq) { statusView.text = "No se pudieron cargar las grabaciones. Revise la conexión a Internet." }
             }
         }
     }
@@ -135,7 +135,7 @@ class RecordingsActivity : Activity() {
                 val clips = Drive.listClips(day.id).map { Item(prettyClip(it.name), id = it.id, name = it.name, size = it.size) }
                 ui(seq) { show(day.label, clips, "${clips.count { it.name.endsWith(".mp4") }} video(s) y ${clips.count { it.name.endsWith(".jpg") }} foto(s)") }
             } catch (e: Exception) {
-                ui(seq) { statusView.text = "No se pudo leer Google Drive: ${e.message?.take(90)}" }
+                ui(seq) { statusView.text = "No se pudieron cargar las grabaciones. Revise la conexión a Internet." }
             }
         }
     }
@@ -155,7 +155,7 @@ class RecordingsActivity : Activity() {
                 dir.listFiles()?.sortedByDescending { c -> c.lastModified() }?.drop(15)?.forEach { c -> c.delete() }
                 ui(seq) { statusView.text = ""; view(f, it.label) }
             } catch (e: Exception) {
-                ui(seq) { statusView.text = "No se pudo descargar: ${e.message?.take(90)}" }
+                ui(seq) { statusView.text = "No se pudo abrir el video. Revise la conexión a Internet." }
             }
         }
     }

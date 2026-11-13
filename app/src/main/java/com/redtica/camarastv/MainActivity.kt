@@ -102,7 +102,7 @@ class MainActivity : Activity() {
             setPadding(48, 40, 48, 40); visibility = View.GONE
             background = GradientDrawable().apply { setColor(Color.WHITE); cornerRadius = 28f }
             addView(TextView(this@MainActivity).apply {
-                text = "Vincular Google Drive"; textSize = 26f; setTextColor(Color.BLACK); gravity = Gravity.CENTER
+                text = "Vincular respaldo de grabaciones"; textSize = 26f; setTextColor(Color.BLACK); gravity = Gravity.CENTER
                 setPadding(0, 0, 0, 20)
             })
             val lado = (resources.displayMetrics.heightPixels * 0.42).toInt()
@@ -325,7 +325,7 @@ class MainActivity : Activity() {
         when {
             AppState.driveUserCode.isNotEmpty() -> { }
             AppState.config.driveLinked -> { }
-            else -> items.add("Vincular Google Drive (código QR)" to {
+            else -> items.add("Vincular respaldo de grabaciones (código QR)" to {
                 Drive.startLink(); infoUntil = System.currentTimeMillis() + 60_000; refreshOverlays()
             })
         }
@@ -339,7 +339,7 @@ class MainActivity : Activity() {
             items.add("Página siguiente" to { if (fullIndex >= 0) closeFull(); changePage(+1) })
             items.add("Página anterior" to { if (fullIndex >= 0) closeFull(); changePage(-1) })
         }
-        items.add("Mostrar información (IP, Drive, PIN)" to {
+        items.add("Mostrar información (IP, grabación, PIN)" to {
             infoUntil = System.currentTimeMillis() + 60_000; refreshOverlays()
         })
         items.add("Cerrar menú" to { })
@@ -451,8 +451,8 @@ class MainActivity : Activity() {
             val pages = pageCount()
             infoBar.text = buildString {
                 append("${cfg.siteName}   ·   Configurar desde el celular: http://${AppState.localIp()}:8080   ·   PIN ${cfg.pin}\n")
-                append(AppState.driveStatus)
-                if (AppState.driveUserCode.isNotEmpty()) append("   ·   Código: ${AppState.driveUserCode} en ${AppState.driveVerifyUrl}")
+                append(estadoGrabacion())
+                if (AppState.driveUserCode.isNotEmpty()) append("   ·   Código de vinculación: ${AppState.driveUserCode}")
                 append("   ·   Pendientes: ${AppState.pendingFiles}")
                 if (pages > 1) append("   ·   Página ${page + 1}/$pages")
                 append("   ·   Atrás o mantener OK = menú y grabaciones")
@@ -464,6 +464,14 @@ class MainActivity : Activity() {
     companion object {
         // KeyEvent.KEYCODE_ALL_APPS (API 28); el botón de "cuadros" en algunos controles
         private const val KEYCODE_ALL_APPS = 284
+    }
+
+    /** Estado que ven los oficiales en el TV: no menciona el servicio de nube que hay detrás. */
+    private fun estadoGrabacion(): String = when {
+        AppState.driveUserCode.isNotEmpty() -> "Grabación: esperando vinculación"
+        !AppState.config.driveLinked -> "Grabación: solo local (respaldo sin vincular)"
+        AppState.driveStatus.startsWith("Error") -> "Grabación: sin conexión, se reintentará"
+        else -> "Grabación: en línea"
     }
 
     /** Muestra el QR de vinculación mientras Google espera la autorización. */
@@ -484,8 +492,8 @@ class MainActivity : Activity() {
             linkQr.setImageBitmap(android.graphics.Bitmap.createBitmap(px, n, n, android.graphics.Bitmap.Config.RGB_565))
         } catch (_: Exception) { }
         linkText.text = "1. Escanee el código con la cámara del celular\n" +
-            "2. Elija la cuenta de Google y toque Permitir\n\n" +
-            "O entre a google.com/device y escriba:  $code"
+            "2. Elija la cuenta y toque Permitir\n\n" +
+            "Código:  $code"
         linkCard.visibility = View.VISIBLE
         linkCard.bringToFront()
     }
