@@ -464,6 +464,8 @@ class MainActivity : Activity() {
     companion object {
         // KeyEvent.KEYCODE_ALL_APPS (API 28); el botón de "cuadros" en algunos controles
         private const val KEYCODE_ALL_APPS = 284
+    }
+
     /** Muestra el QR de vinculación mientras Google espera la autorización. */
     private fun refreshLinkCard() {
         val code = AppState.driveUserCode
