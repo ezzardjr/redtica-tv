@@ -131,6 +131,7 @@ class WebPanel(private val ctx: Context, port: Int) : NanoHTTPD(port) {
             sb.append("""<p>1. Abra <a style="color:#7fc0ff" href="${e(AppState.driveVerifyUrl)}" target=_blank>${e(AppState.driveVerifyUrl)}</a>
                 con la cuenta de Google donde quiere los respaldos.<br>2. Escriba este código:</p>
                 <div class=code>${e(AppState.driveUserCode)}</div>
+                <p><a style="color:#7fc0ff" href="${e(AppState.driveVerifyUrl)}?user_code=${e(AppState.driveUserCode)}" target=_blank>O toque aquí para abrirlo con el código ya puesto</a>. En el TV también aparece un código QR.</p>
                 <p class=muted>Esta página se actualiza sola.</p><meta http-equiv=refresh content=6>""")
         }
         if (c.driveLinked) {

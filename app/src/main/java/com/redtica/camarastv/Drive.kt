@@ -233,6 +233,63 @@ object Drive {
         return used
     }
 
+    // ---------- Lectura de grabaciones ----------
+    class Clip(val id: String, val name: String, val size: Long)
+
+    /** Carpetas de días (id, "aaaa-mm-dd") de este sitio, del más reciente al más antiguo. */
+    fun listDays(): List<Pair<String, String>> {
+        val root = rootFolder()
+        val out = ArrayList<Pair<String, String>>()
+        var pageToken: String? = null
+        do {
+            val b = "https://www.googleapis.com/drive/v3/files".toHttpUrl().newBuilder()
+                .addQueryParameter("q", "'$root' in parents and mimeType='$FOLDER' and trashed=false")
+                .addQueryParameter("fields", "nextPageToken,files(id,name)")
+                .addQueryParameter("pageSize", "1000")
+            pageToken?.let { b.addQueryParameter("pageToken", it) }
+            val r = get(b.build().toString())
+            val arr = r.optJSONArray("files")
+            if (arr != null) for (i in 0 until arr.length()) {
+                val o = arr.getJSONObject(i); out.add(o.getString("id") to o.getString("name"))
+            }
+            pageToken = r.optString("nextPageToken").ifBlank { null }
+        } while (pageToken != null)
+        return out.sortedByDescending { it.second }
+    }
+
+    /** Clips y fotos de un día, del más reciente al más antiguo. */
+    fun listClips(folderId: String): List<Clip> {
+        val out = ArrayList<Clip>()
+        var pageToken: String? = null
+        do {
+            val b = "https://www.googleapis.com/drive/v3/files".toHttpUrl().newBuilder()
+                .addQueryParameter("q", "'$folderId' in parents and mimeType!='$FOLDER' and trashed=false")
+                .addQueryParameter("fields", "nextPageToken,files(id,name,size)")
+                .addQueryParameter("pageSize", "1000")
+            pageToken?.let { b.addQueryParameter("pageToken", it) }
+            val r = get(b.build().toString())
+            val arr = r.optJSONArray("files")
+            if (arr != null) for (i in 0 until arr.length()) {
+                val o = arr.getJSONObject(i)
+                out.add(Clip(o.getString("id"), o.getString("name"), o.optString("size", "0").toLongOrNull() ?: 0L))
+            }
+            pageToken = r.optString("nextPageToken").ifBlank { null }
+        } while (pageToken != null)
+        return out.sortedByDescending { it.name }
+    }
+
+    /** Descarga un archivo de Drive al TV para reproducirlo. */
+    fun download(fileId: String, dest: File) {
+        val tmp = File(dest.parentFile, dest.name + ".part")
+        val req = Request.Builder().url("https://www.googleapis.com/drive/v3/files/$fileId?alt=media")
+            .header("Authorization", "Bearer ${token()}").build()
+        http.newCall(req).execute().use { r ->
+            if (!r.isSuccessful) throw Exception("Drive ${r.code}")
+            tmp.outputStream().use { out -> r.body!!.byteStream().copyTo(out) }
+        }
+        dest.delete(); tmp.renameTo(dest)
+    }
+
     // ---------- HTTP ----------
     private fun get(url: String): JSONObject =
         exec(Request.Builder().url(url).header("Authorization", "Bearer ${token()}").build())

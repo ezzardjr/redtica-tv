@@ -11,8 +11,8 @@ android {
         applicationId = "com.redtica.camarastv"
         minSdk = 24
         targetSdk = 34
-        versionCode = 4
-        versionName = "1.3"
+        versionCode = 5
+        versionName = "1.4"
         buildConfigField("String", "GOOGLE_CLIENT_ID", "\"${System.getenv("GOOGLE_CLIENT_ID") ?: ""}\"")
         buildConfigField("String", "GOOGLE_CLIENT_SECRET", "\"${System.getenv("GOOGLE_CLIENT_SECRET") ?: ""}\"")
         ndk { abiFilters += listOf("armeabi-v7a", "arm64-v8a") }
@@ -53,4 +53,5 @@ dependencies {
     implementation("org.videolan.android:libvlc-all:3.6.0")
     implementation("com.squareup.okhttp3:okhttp:4.12.0")
     implementation("org.nanohttpd:nanohttpd:2.3.1")
+    implementation("com.google.zxing:core:3.5.3")
 }

@@ -31,6 +31,10 @@ class MainActivity : Activity() {
     private lateinit var fullLayout: VLCVideoLayout
     private lateinit var fullLabel: TextView
     private lateinit var infoBar: TextView
+    private lateinit var linkCard: LinearLayout
+    private lateinit var linkQr: android.widget.ImageView
+    private lateinit var linkText: TextView
+    private var linkShown = ""
     private val ui = Handler(Looper.getMainLooper())
     private val releaser = Executors.newSingleThreadExecutor()
 
@@ -88,6 +92,25 @@ class MainActivity : Activity() {
 
         infoBar = overlayText(16f).apply { setPadding(24, 14, 24, 14); setBackgroundColor(0xCC0B1E33.toInt()) }
         root.addView(infoBar, FrameLayout.LayoutParams(MATCH_PARENT, WRAP_CONTENT, Gravity.BOTTOM))
+        // Tarjeta para vincular Google Drive escaneando un código QR (como en las apps de streaming)
+        linkQr = android.widget.ImageView(this)
+        linkText = TextView(this).apply {
+            textSize = 20f; setTextColor(Color.BLACK); gravity = Gravity.CENTER; setPadding(0, 20, 0, 0)
+        }
+        linkCard = LinearLayout(this).apply {
+            orientation = LinearLayout.VERTICAL; gravity = Gravity.CENTER_HORIZONTAL
+            setPadding(48, 40, 48, 40); visibility = View.GONE
+            background = GradientDrawable().apply { setColor(Color.WHITE); cornerRadius = 28f }
+            addView(TextView(this@MainActivity).apply {
+                text = "Vincular Google Drive"; textSize = 26f; setTextColor(Color.BLACK); gravity = Gravity.CENTER
+                setPadding(0, 0, 0, 20)
+            })
+            val lado = (resources.displayMetrics.heightPixels * 0.42).toInt()
+            addView(linkQr, LinearLayout.LayoutParams(lado, lado))
+            addView(linkText)
+        }
+        root.addView(linkCard, FrameLayout.LayoutParams(WRAP_CONTENT, WRAP_CONTENT, Gravity.CENTER))
+
         setContentView(root)
         if (savedInstanceState == null) Splash.show(this, root)
 
@@ -298,6 +321,14 @@ class MainActivity : Activity() {
         box.addView(title)
         val items = ArrayList<Pair<String, () -> Unit>>()
         if (fullIndex >= 0) items.add("Volver al mosaico" to { closeFull() })
+        items.add("Ver grabaciones" to { startActivity(android.content.Intent(this, RecordingsActivity::class.java)) })
+        when {
+            AppState.driveUserCode.isNotEmpty() -> { }
+            AppState.config.driveLinked -> { }
+            else -> items.add("Vincular Google Drive (código QR)" to {
+                Drive.startLink(); infoUntil = System.currentTimeMillis() + 60_000; refreshOverlays()
+            })
+        }
         val cur = AppState.config.gridSize
         listOf(1, 4, 9, 16).forEach { n ->
             items.add(("Mosaico de $n ${if (n == 1) "cuadro" else "cuadros"}" + if (n == cur) "  ✓" else "") to {
@@ -374,7 +405,7 @@ class MainActivity : Activity() {
         when (keyCode) {
             KeyEvent.KEYCODE_BACK -> {
                 if (fullIndex >= 0) { closeFull(); return true }
-                if (AppState.config.kiosk) return true // en kiosco no se sale de la app
+                openMenu(); return true
             }
             KeyEvent.KEYCODE_MENU, KeyEvent.KEYCODE_SETTINGS, KeyEvent.KEYCODE_GUIDE, KEYCODE_ALL_APPS,
             KeyEvent.KEYCODE_BUTTON_START, KeyEvent.KEYCODE_BUTTON_SELECT -> { openMenu(); return true }
@@ -412,6 +443,7 @@ class MainActivity : Activity() {
                     (if (st != null) " · $st" else "")
             }
         }
+        refreshLinkCard()
         val cfg = AppState.config
         val show = System.currentTimeMillis() < infoUntil || activeCams().isEmpty()
         if (show) {
@@ -423,7 +455,7 @@ class MainActivity : Activity() {
                 if (AppState.driveUserCode.isNotEmpty()) append("   ·   Código: ${AppState.driveUserCode} en ${AppState.driveVerifyUrl}")
                 append("   ·   Pendientes: ${AppState.pendingFiles}")
                 if (pages > 1) append("   ·   Página ${page + 1}/$pages")
-                append("   ·   Mantener OK = menú")
+                append("   ·   Atrás o mantener OK = menú y grabaciones")
                 if (AppState.lastEvent.isNotEmpty()) append("\nÚltimo evento: ${AppState.lastEvent}")
             }
         } else infoBar.visibility = View.GONE
@@ -432,6 +464,28 @@ class MainActivity : Activity() {
     companion object {
         // KeyEvent.KEYCODE_ALL_APPS (API 28); el botón de "cuadros" en algunos controles
         private const val KEYCODE_ALL_APPS = 284
+    /** Muestra el QR de vinculación mientras Google espera la autorización. */
+    private fun refreshLinkCard() {
+        val code = AppState.driveUserCode
+        if (code.isEmpty()) {
+            if (linkShown.isNotEmpty()) { linkShown = ""; linkCard.visibility = View.GONE }
+            return
+        }
+        if (code == linkShown) return
+        linkShown = code
+        val base = AppState.driveVerifyUrl.ifBlank { "https://www.google.com/device" }
+        val url = "$base?user_code=$code"
+        try {
+            val n = 640
+            val m = com.google.zxing.qrcode.QRCodeWriter().encode(url, com.google.zxing.BarcodeFormat.QR_CODE, n, n)
+            val px = IntArray(n * n) { i -> if (m.get(i % n, i / n)) Color.BLACK else Color.WHITE }
+            linkQr.setImageBitmap(android.graphics.Bitmap.createBitmap(px, n, n, android.graphics.Bitmap.Config.RGB_565))
+        } catch (_: Exception) { }
+        linkText.text = "1. Escanee el código con la cámara del celular\n" +
+            "2. Elija la cuenta de Google y toque Permitir\n\n" +
+            "O entre a google.com/device y escriba:  $code"
+        linkCard.visibility = View.VISIBLE
+        linkCard.bringToFront()
     }
 
     private fun overlayText(size: Float) = TextView(this).apply {
