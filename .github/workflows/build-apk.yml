@@ -33,11 +33,12 @@ jobs:
           RELEASE_KEYSTORE_PASSWORD: ${{ secrets.RELEASE_KEYSTORE_PASSWORD }}
         run: |
           chmod +x gradlew
-          ./gradlew assembleClienteRelease bundleClienteRelease assemblePruebaDebug --no-daemon
+          ./gradlew assembleClienteRelease bundleClienteRelease assemblePruebaDebug assembleEzzardRelease --no-daemon
           mkdir -p salida
           mv app/build/outputs/apk/cliente/release/app-cliente-release.apk salida/RedTicaTV-cliente.apk
           mv app/build/outputs/bundle/clienteRelease/app-cliente-release.aab salida/RedTicaTV-cliente-GooglePlay.aab
           mv app/build/outputs/apk/prueba/debug/app-prueba-debug.apk salida/RedTicaTV-prueba.apk
+          mv app/build/outputs/apk/ezzard/release/app-ezzard-release.apk salida/EzzardTV.apk
 
       - name: Apps de TV (LG y Samsung)
         run: |

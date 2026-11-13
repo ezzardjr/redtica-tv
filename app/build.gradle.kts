@@ -37,6 +37,14 @@ android {
             buildConfigField("boolean", "USA_TUNEL", "true")
             buildConfigField("boolean", "USA_MULTICAST", "false")
         }
+        // Versión personal de Ezzard: túnel WireGuard propio y solo canales abiertos.
+        create("ezzard") {
+            dimension = "modo"
+            applicationId = "com.redtica.tv.ezzard"
+            buildConfigField("String", "PLAYLIST_URL", "\"http://10.1.1.10:8000/playlist.m3u8?ts\"")
+            buildConfigField("boolean", "USA_TUNEL", "true")
+            buildConfigField("boolean", "USA_MULTICAST", "false")
+        }
     }
 
     // Llave de publicación: GitHub Actions la crea desde los secretos

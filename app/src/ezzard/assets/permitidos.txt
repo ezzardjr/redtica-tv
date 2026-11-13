@@ -1,0 +1,35 @@
+# Canales abiertos (de señal libre) que muestra Ezzard TV, por id del Astra
+a04b # 4 Repretel
+a03a # 6 Repretel
+a03b # 11 Repretel
+a02d # Canal 7 HD (Teletica)
+a010 # Extra TV 42
+a06w # OPA
+a06x # Teleuno
+a078 # Trivision HD
+a00y # Multimedios
+a028 # TBN Enlace
+a00o # Canal 10 HD - ESA
+a02z # Canal 12 - ESA
+a03d # Canal 19 - ESA
+a042 # Canal 3 - GUA
+a041 # Canal 7 - GUA
+a01e # Guatevision - GUA
+a01f # Canal 11 - HON
+a01k # HCH - HON
+a05h # Canal VTV HND
+a030 # Suyapa TV
+a03y # Deportes TVC - HND
+a037 # Canal 13 - NI
+a01h # Antena 7 - RD
+a049 # Color Vision 9 - RD
+a033 # Digital 15 - RD
+a00x # RNN - RD
+a038 # Telecentro - RD
+a01i # Telesistema RD
+a039 # Teleunion - RD
+a035 # Teleuniverso - RD
+a00w # Televida RD
+a061 # TVE
+a027 # France24
+a05b # Canal del Congreso

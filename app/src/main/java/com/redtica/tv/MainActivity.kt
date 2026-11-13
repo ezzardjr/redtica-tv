@@ -357,7 +357,13 @@ class MainActivity : AppCompatActivity() {
 
     // ---------- Canales y reproducción ----------
 
-    private fun onChannels(loaded: List<Channel>) {
+    private fun onChannels(all: List<Channel>) {
+        // Versión personal: solo los canales de assets/permitidos.txt (si existe)
+        val loaded = try {
+            val ok = assets.open("permitidos.txt").bufferedReader().readLines()
+                .map { it.substringBefore("#").trim() }.filter { it.isNotEmpty() }.toSet()
+            all.filter { it.id != null && it.id in ok }
+        } catch (_: Exception) { all }
         if (loaded.isEmpty()) {
             showStatus(getString(R.string.lista_vacia))
             return
