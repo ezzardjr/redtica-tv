@@ -133,6 +133,39 @@ class MainActivity : AppCompatActivity() {
     }
     private var okDownAt = 0L
     private var okHoldFired = false
+
+    // ---------- Izquierda + Derecha a la vez = panel de diagnóstico ----------
+    // Cada flecha actúa al soltarla (con una espera corta). Si la otra flecha se toca
+    // mientras tanto, o ambas están presionadas juntas, se abre/cierra el diagnóstico.
+    private var leftDown = false
+    private var rightDown = false
+    private var arrowComboUsed = false
+    private var pendingArrow: Runnable? = null
+    private val ARROW_COMBO_MS = 350L
+
+    private fun onArrowDown(isLeft: Boolean) {
+        if (isLeft) leftDown = true else rightDown = true
+        val otherDown = if (isLeft) rightDown else leftDown
+        if (otherDown || pendingArrow != null) {
+            pendingArrow?.let { ui.removeCallbacks(it) }
+            pendingArrow = null
+            if (!arrowComboUsed) { arrowComboUsed = true; toggleDiag() }
+        }
+    }
+
+    private fun onArrowUp(isLeft: Boolean) {
+        if (isLeft) leftDown = false else rightDown = false
+        if (arrowComboUsed) {
+            if (!leftDown && !rightDown) arrowComboUsed = false
+            return
+        }
+        val action = Runnable {
+            pendingArrow = null
+            if (isLeft) cycleAudio() else cycleFormat()
+        }
+        pendingArrow = action
+        ui.postDelayed(action, ARROW_COMBO_MS)
+    }
     private var lastKeyInfo = "-"
     private var okHintView: TextView? = null
     private val okHold = Runnable {
@@ -541,14 +574,25 @@ class MainActivity : AppCompatActivity() {
             return true
         }
 
+        // Flechas izquierda/derecha: solas cambian audio/formato; juntas abren el diagnóstico
+        if ((code == KeyEvent.KEYCODE_DPAD_LEFT || code == KeyEvent.KEYCODE_DPAD_RIGHT)
+            && !isListVisible() && channels.isNotEmpty()) {
+            val isLeft = code == KeyEvent.KEYCODE_DPAD_LEFT
+            if (event.action == KeyEvent.ACTION_DOWN && event.repeatCount == 0) {
+                lastKeyInfo = "Tecla ${KeyEvent.keyCodeToString(code)} ($code)"
+                onArrowDown(isLeft)
+            } else if (event.action == KeyEvent.ACTION_UP) onArrowUp(isLeft)
+            return true
+        }
+
         if (event.action == KeyEvent.ACTION_DOWN && !isListVisible() && channels.isNotEmpty()) {
             digitOf(code)?.let { onDigit(it); return true }
             when (code) {
-                KeyEvent.KEYCODE_DPAD_RIGHT, KeyEvent.KEYCODE_TV_ZOOM_MODE,
+                KeyEvent.KEYCODE_TV_ZOOM_MODE,
                 KeyEvent.KEYCODE_PROG_RED -> {
                     cycleFormat(); return true
                 }
-                KeyEvent.KEYCODE_DPAD_LEFT, KeyEvent.KEYCODE_MEDIA_AUDIO_TRACK,
+                KeyEvent.KEYCODE_MEDIA_AUDIO_TRACK,
                 KeyEvent.KEYCODE_PROG_GREEN -> {
                     cycleAudio(); return true
                 }
