@@ -906,6 +906,52 @@ class MainActivity : AppCompatActivity() {
         }
     } catch (_: Exception) { "?" }
 
+    // ---------- Procesador y RAM del TV ----------
+    private var cpuLastApp = -1L; private var cpuLastNs = 0L
+    private var sysLastIdle = -1L; private var sysLastTotal = 0L
+    private val cores = Runtime.getRuntime().availableProcessors()
+
+    private fun readText(path: String): String? = try { java.io.File(path).readText().trim() } catch (_: Throwable) { null }
+
+    /** % del procesador total del TV que usa esta app (siempre se puede leer). */
+    private fun appCpu(): String {
+        val f = readText("/proc/self/stat")?.substringAfterLast(") ")?.split(" ") ?: return "?"
+        val ticks = (f.getOrNull(11)?.toLongOrNull() ?: 0) + (f.getOrNull(12)?.toLongOrNull() ?: 0)
+        val now = System.nanoTime()
+        val r = if (cpuLastApp >= 0) {
+            val usedMs = (ticks - cpuLastApp) * 10.0   // 100 ticks por segundo
+            val wallMs = (now - cpuLastNs) / 1e6
+            "%.0f%%".format(usedMs * 100 / (wallMs * cores))
+        } else "midiendo..."
+        cpuLastApp = ticks; cpuLastNs = now
+        return r
+    }
+
+    /** % del procesador de todo el TV (Android 8+ suele bloquearlo). */
+    private fun systemCpu(): String {
+        val l = readText("/proc/stat")?.lineSequence()?.firstOrNull { it.startsWith("cpu ") } ?: return "no disponible (Android lo bloquea)"
+        val v = l.split(Regex("\\s+")).drop(1).mapNotNull { it.toLongOrNull() }
+        if (v.size < 4) return "?"
+        val idle = v[3] + (v.getOrNull(4) ?: 0); val total = v.sum()
+        val r = if (sysLastIdle >= 0 && total > sysLastTotal)
+            "%.0f%%".format(100.0 * (1 - (idle - sysLastIdle).toDouble() / (total - sysLastTotal))) else "midiendo..."
+        sysLastIdle = idle; sysLastTotal = total
+        return r
+    }
+
+    /** Velocidad actual de los núcleos frente a la máxima (baja = el TV se está frenando por calor o ahorro). */
+    private fun cpuFreq(): String {
+        val cur = (0 until cores).mapNotNull { readText("/sys/devices/system/cpu/cpu$it/cpufreq/scaling_cur_freq")?.toLongOrNull() }
+        val max = (0 until cores).mapNotNull { readText("/sys/devices/system/cpu/cpu$it/cpufreq/cpuinfo_max_freq")?.toLongOrNull() }.maxOrNull()
+        if (cur.isEmpty() || max == null) return "no disponible"
+        return "%d de %d MHz".format(cur.average().toLong() / 1000, max / 1000)
+    }
+
+    private fun appRamMb(): Long = try {
+        val am = getSystemService(ACTIVITY_SERVICE) as android.app.ActivityManager
+        am.getProcessMemoryInfo(intArrayOf(android.os.Process.myPid()))[0].totalPss / 1024L
+    } catch (_: Throwable) { -1 }
+
     private fun updateDiag() {
         val p = player ?: return
         val f = p.videoFormat
@@ -928,7 +974,9 @@ class MainActivity : AppCompatActivity() {
                 val tot = BigUdpDataSource.tsPackets; val lost = BigUdpDataSource.tsLost
                 appendLine("Paquetes perdidos en la red: $lost de $tot" + if (tot > 0) " (${"%.2f".format(lost * 100.0 / tot)}%)" else "")
             }
-            append("RAM libre TV: ${mi.availMem / 1048576} de ${mi.totalMem / 1048576} MB" + if (mi.lowMemory) " (BAJA)" else "")
+            appendLine("TV: ${android.os.Build.MANUFACTURER} ${android.os.Build.MODEL} (${android.os.Build.HARDWARE}), Android ${android.os.Build.VERSION.RELEASE}, $cores núcleos")
+            appendLine("Procesador: TV ${systemCpu()} | esta app ${appCpu()} | velocidad ${cpuFreq()}")
+            append("RAM: libre ${mi.availMem / 1048576} de ${mi.totalMem / 1048576} MB" + (if (mi.lowMemory) " (BAJA)" else "") + " | esta app ${appRamMb()} MB")
         }
     }
 
