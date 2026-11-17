@@ -494,7 +494,7 @@ class MainActivity : AppCompatActivity() {
         applyFormat(ch)
         ui.removeCallbacks(multicastTimeout)
         // Todo por multicast (cable y WiFi): no aumenta el consumo por cliente.
-        val mcast = if (BuildConfig.USA_MULTICAST && !multicastFailed) ch.mcast else null
+        val mcast = if (BuildConfig.USA_MULTICAST && !multicastFailed && !forceHttp) ch.mcast else null
         usingMulticast = mcast != null
         val uri = mcast ?: ch.url
         if (usingMulticast) ui.postDelayed(multicastTimeout, 5000)
@@ -533,6 +533,18 @@ class MainActivity : AppCompatActivity() {
         play(current)
     }
 
+
+    // Fuente forzada desde el panel de diagnóstico: HTTP (como por VPN) en vez de multicast
+    private var forceHttp: Boolean
+        get() = prefs.getBoolean("forzar_http", false)
+        set(v) { prefs.edit().putBoolean("forzar_http", v).apply() }
+
+    private fun toggleSource() {
+        forceHttp = !forceHttp
+        android.widget.Toast.makeText(this, "Fuente: " + (if (forceHttp) "HTTP" else "Multicast"), android.widget.Toast.LENGTH_SHORT).show()
+        multicastFailed = false
+        play(current)
+    }
 
     private fun acquireMulticastLock() {
         try {
@@ -878,7 +890,7 @@ class MainActivity : AppCompatActivity() {
         val mi = android.app.ActivityManager.MemoryInfo().also { am.getMemoryInfo(it) }
         val buf = (p.totalBufferedDuration / 100) / 10.0
         diag?.text = buildString {
-            appendLine("Fuente: " + if (usingMulticast) "Multicast" else "HTTP")
+            appendLine("Fuente: " + (if (usingMulticast) "Multicast" else "HTTP") + " (Izquierda cambia)")
             appendLine("Red: " + networkInfo())
             appendLine("Video: " + (f?.let { "${it.width}x${it.height} ${it.sampleMimeType?.substringAfter('/')} ${it.bitrate.takeIf { b -> b > 0 }?.let { b -> "${b / 1000} kbps" } ?: ""}" } ?: "-"))
             appendLine("App: v${BuildConfig.VERSION_NAME} | Modo túnel: no | Última tecla: $lastKeyInfo")
