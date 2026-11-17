@@ -124,6 +124,10 @@ class MainActivity : AppCompatActivity() {
             intro = null
             showLastCrash()
             player?.volume = 1f   // vuelve el audio del canal
+            if (BuildConfig.DIAG_AUTO && !diagAutoShown) {
+                diagAutoShown = true
+                if (diag?.visibility != View.VISIBLE) toggleDiag()
+            }
         }
         intro = v
         (findViewById<View>(android.R.id.content) as FrameLayout).addView(
@@ -196,7 +200,18 @@ class MainActivity : AppCompatActivity() {
     @Volatile private var fpsLastUs = -1L
     @Volatile private var fpsDone = false
     private var detectedFps = 0f
+    // Congelamientos: la imagen se queda quieta más de 0,4 s mientras el canal sigue
+    private var diagAutoShown = false
+    @Volatile private var lastFrameNs = 0L
+    @Volatile private var freezes = 0
+    @Volatile private var longestFreezeMs = 0L
     private val frameRateProbe = VideoFrameMetadataListener { presentationTimeUs, _, format, _ ->
+        val now = System.nanoTime()
+        if (lastFrameNs > 0) {
+            val gapMs = (now - lastFrameNs) / 1_000_000
+            if (gapMs > 400) { freezes++; if (gapMs > longestFreezeMs) longestFreezeMs = gapMs }
+        }
+        lastFrameNs = now
         if (fpsDone) return@VideoFrameMetadataListener
         if (format.frameRate > 0f && format.frameRate < 121f) {
             fpsDone = true
@@ -215,6 +230,8 @@ class MainActivity : AppCompatActivity() {
 
     private fun resetFrameRateProbe() {
         fpsSamples = 0; fpsFirstUs = -1L; fpsLastUs = -1L; fpsDone = false
+        lastFrameNs = 0L; freezes = 0; longestFreezeMs = 0L
+        BigUdpDataSource.resetStats()
     }
 
     /** Elige el modo de pantalla (misma resolución) cuya frecuencia sea múltiplo exacto de los cuadros del canal. */
@@ -471,6 +488,11 @@ class MainActivity : AppCompatActivity() {
                 override fun onPlaybackStateChanged(state: Int) {
                     when (state) {
                         Player.STATE_READY -> {
+                            // Versión de prueba: el panel sale solo, sin tocar el control
+                            if (BuildConfig.DIAG_AUTO && !diagAutoShown && intro == null) {
+                                diagAutoShown = true
+                                if (diag?.visibility != View.VISIBLE) toggleDiag()
+                            }
                             status.visibility = View.GONE
                             ui.removeCallbacks(multicastTimeout)
                             if (usingMulticast) multicastWorked = true
@@ -900,7 +922,12 @@ class MainActivity : AppCompatActivity() {
             appendLine("Cuadros del canal: " + (if (detectedFps > 0f) "%.2f fps".format(detectedFps) else "midiendo...") + " | Pantalla: " + displayHz())
             appendLine("Colchón: $buf s")
             appendLine("Pausas por carga: $rebuffers")
-            appendLine("Cuadros perdidos: $droppedFrames")
+            appendLine("Cuadros perdidos (TV no alcanzó a mostrarlos): $droppedFrames")
+            appendLine("Congelamientos de imagen: $freezes" + if (longestFreezeMs > 0) " (el mayor ${"%.1f".format(longestFreezeMs / 1000.0)} s)" else "")
+            if (usingMulticast) {
+                val tot = BigUdpDataSource.tsPackets; val lost = BigUdpDataSource.tsLost
+                appendLine("Paquetes perdidos en la red: $lost de $tot" + if (tot > 0) " (${"%.2f".format(lost * 100.0 / tot)}%)" else "")
+            }
             append("RAM libre TV: ${mi.availMem / 1048576} de ${mi.totalMem / 1048576} MB" + if (mi.lowMemory) " (BAJA)" else "")
         }
     }

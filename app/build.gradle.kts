@@ -11,8 +11,10 @@ android {
         applicationId = "com.redtica.tv"
         minSdk = 21
         targetSdk = 35
-        versionCode = 29
-        versionName = "2.9"
+        versionCode = 30
+        versionName = "3.0"
+        // Prueba: el panel de diagnóstico se abre solo al ver un canal (quitar en la próxima)
+        buildConfigField("boolean", "DIAG_AUTO", "true")
     }
 
     buildFeatures {

@@ -26,6 +26,33 @@ class BigUdpDataSource : BaseDataSource(/* isNetwork = */ true) {
         private const val RECEIVE_BUFFER = 8 * 1024 * 1024
         private const val MAX_PACKET = 2048
         private const val TIMEOUT_MS = 8000
+
+        // Estadística para el panel de diagnóstico: paquetes TS que faltaron en la red
+        @Volatile @JvmField var tsPackets = 0L
+        @Volatile @JvmField var tsLost = 0L
+        private val lastCc = IntArray(8192) { -1 }
+        fun resetStats() { tsPackets = 0; tsLost = 0; java.util.Arrays.fill(lastCc, -1) }
+
+        /** Revisa el contador de continuidad de cada paquete TS del datagrama. */
+        fun checkContinuity(b: ByteArray, len: Int) {
+            var i = len % 188   // salta una posible cabecera RTP
+            while (i + 188 <= len) {
+                if (b[i] == 0x47.toByte()) {
+                    val pid = ((b[i + 1].toInt() and 0x1F) shl 8) or (b[i + 2].toInt() and 0xFF)
+                    val afc = (b[i + 3].toInt() shr 4) and 3
+                    val cc = b[i + 3].toInt() and 0x0F
+                    tsPackets++
+                    if (pid != 0x1FFF && (afc and 1) == 1) {
+                        val last = lastCc[pid]
+                        if (last >= 0 && cc != last && cc != ((last + 1) and 0x0F)) {
+                            tsLost += ((cc - last - 1) and 0x0F).coerceAtLeast(1)
+                        }
+                        lastCc[pid] = cc
+                    }
+                }
+                i += 188
+            }
+        }
     }
 
     private val packetBuffer = ByteArray(MAX_PACKET)
@@ -74,6 +101,7 @@ class BigUdpDataSource : BaseDataSource(/* isNetwork = */ true) {
                 throw UdpDataSource.UdpDataSourceException(e, androidx.media3.common.PlaybackException.ERROR_CODE_IO_NETWORK_CONNECTION_FAILED)
             }
             remaining = packet.length
+            checkContinuity(packetBuffer, packet.length)
             bytesTransferred(remaining)
         }
         val start = packet.length - remaining
