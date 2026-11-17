@@ -161,7 +161,9 @@ class MainActivity : AppCompatActivity() {
         }
         val action = Runnable {
             pendingArrow = null
-            if (isLeft) cycleAudio() else cycleFormat()
+            // Con el panel de diagnóstico abierto, Izquierda sola cambia la fuente (multicast/HTTP)
+            if (isLeft && diag?.visibility == View.VISIBLE) toggleSource()
+            else if (isLeft) cycleAudio() else cycleFormat()
         }
         pendingArrow = action
         ui.postDelayed(action, ARROW_COMBO_MS)
