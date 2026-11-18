@@ -881,7 +881,7 @@ class MainActivity : AppCompatActivity() {
                 setBackgroundColor(0xCC000000.toInt())
                 textSize = 14f
                 setPadding(24, 16, 24, 16)
-                (findViewById<View>(android.R.id.content) as FrameLayout).addView(
+                (this@MainActivity.findViewById<View>(android.R.id.content) as FrameLayout).addView(
                     this, FrameLayout.LayoutParams(
                         FrameLayout.LayoutParams.WRAP_CONTENT,
                         FrameLayout.LayoutParams.WRAP_CONTENT,
