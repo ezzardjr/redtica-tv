@@ -124,10 +124,7 @@ class MainActivity : AppCompatActivity() {
             intro = null
             showLastCrash()
             player?.volume = 1f   // vuelve el audio del canal
-            if (BuildConfig.DIAG_AUTO && !diagAutoShown) {
-                diagAutoShown = true
-                if (diag?.visibility != View.VISIBLE) toggleDiag()
-            }
+            ensureDiag()
         }
         intro = v
         (findViewById<View>(android.R.id.content) as FrameLayout).addView(
@@ -202,6 +199,17 @@ class MainActivity : AppCompatActivity() {
     private var detectedFps = 0f
     // Congelamientos: la imagen se queda quieta más de 0,4 s mientras el canal sigue
     private var diagAutoShown = false
+
+    /** Versión de diagnóstico: el panel queda siempre encendido y encima del video. */
+    private fun ensureDiag() {
+        if (!BuildConfig.DIAG_AUTO || intro != null || outro != null) return
+        diagAutoShown = true
+        if (diag?.visibility != View.VISIBLE) toggleDiag()
+        diag?.bringToFront()
+    }
+    private val diagKeeper = object : Runnable {
+        override fun run() { ensureDiag(); ui.postDelayed(this, 2000) }
+    }
     @Volatile private var lastFrameNs = 0L
     @Volatile private var freezes = 0
     @Volatile private var longestFreezeMs = 0L
@@ -306,6 +314,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         installCrashCatcher()
+        if (BuildConfig.DIAG_AUTO) ui.postDelayed(diagKeeper, 3000)
         setContentView(R.layout.activity_main)
         playerView = findViewById(R.id.player)
         status = findViewById(R.id.status)
@@ -489,10 +498,7 @@ class MainActivity : AppCompatActivity() {
                     when (state) {
                         Player.STATE_READY -> {
                             // Versión de prueba: el panel sale solo, sin tocar el control
-                            if (BuildConfig.DIAG_AUTO && !diagAutoShown && intro == null) {
-                                diagAutoShown = true
-                                if (diag?.visibility != View.VISIBLE) toggleDiag()
-                            }
+                            ensureDiag()
                             status.visibility = View.GONE
                             ui.removeCallbacks(multicastTimeout)
                             if (usingMulticast) multicastWorked = true

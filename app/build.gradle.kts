@@ -11,9 +11,9 @@ android {
         applicationId = "com.redtica.tv"
         minSdk = 21
         targetSdk = 35
-        versionCode = 31
-        versionName = "3.1"
-        // true = el panel de diagnóstico se abre solo al ver un canal (versión de prueba)
+        versionCode = 32
+        versionName = "3.2"
+        // Panel de diagnóstico siempre encendido solo en la versión "diagnostico"
         buildConfigField("boolean", "DIAG_AUTO", "false")
     }
 
@@ -30,6 +30,16 @@ android {
             buildConfigField("String", "PLAYLIST_URL", "\"http://10.1.1.10:8000/playlist.m3u8?ts\"")
             buildConfigField("boolean", "USA_TUNEL", "false")
             buildConfigField("boolean", "USA_MULTICAST", "true")
+        }
+        // Igual que "cliente" (se instala encima), con el panel de diagnóstico siempre encendido
+        create("diagnostico") {
+            dimension = "modo"
+            applicationId = "com.redtica.tv.cliente"
+            versionNameSuffix = "-diagnostico"
+            buildConfigField("String", "PLAYLIST_URL", "\"http://10.1.1.10:8000/playlist.m3u8?ts\"")
+            buildConfigField("boolean", "USA_TUNEL", "false")
+            buildConfigField("boolean", "USA_MULTICAST", "true")
+            buildConfigField("boolean", "DIAG_AUTO", "true")
         }
         // Prueba fuera de la red: túnel WireGuard embebido (src/prueba/assets/redtica.conf).
         create("prueba") {
