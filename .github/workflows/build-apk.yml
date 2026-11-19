@@ -4,6 +4,9 @@ on:
   push:
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   build:
     runs-on: ubuntu-24.04
@@ -47,6 +50,15 @@ jobs:
           ARES_PACKAGE=$PWD/node_modules/.bin/ares-package ./tv-web/build.sh
           cp tv-web/dist/*.ipk salida/RedTicaTV-LG.ipk
           cp tv-web/dist/RedTicaTV-Samsung-proyecto.zip salida/
+
+      - name: Publicar APK de clientes en la rama "apk" (para bajarlas sin GitHub)
+        run: |
+          mkdir -p /tmp/apk && cp salida/RedTicaTV-cliente.apk salida/RedTicaTV-cliente-DIAGNOSTICO.apk /tmp/apk/
+          cd /tmp/apk
+          git init -q -b apk
+          git config user.name "RedTica build"; git config user.email "build@redtica.local"
+          git add . && git commit -qm "APK ${GITHUB_SHA::7}"
+          git push -q -f "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${GITHUB_REPOSITORY}.git" apk
 
       - uses: actions/upload-artifact@v4
         with:
