@@ -11,8 +11,8 @@ android {
         applicationId = "com.redtica.tv"
         minSdk = 21
         targetSdk = 35
-        versionCode = 33
-        versionName = "3.3"
+        versionCode = 34
+        versionName = "3.4"
         // Panel de diagnóstico siempre encendido solo en la versión "diagnostico"
         buildConfigField("boolean", "DIAG_AUTO", "false")
     }

@@ -8,6 +8,7 @@ import android.os.Handler
 import android.os.Looper
 import android.view.KeyEvent
 import android.view.View
+import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -864,9 +865,15 @@ class MainActivity : AppCompatActivity() {
     // ---------- Panel de diagnóstico ----------
 
     private fun toggleDiag() = try { toggleDiagInner() } catch (e: Throwable) {
-        lastKeyInfo = "error panel: ${e.javaClass.simpleName}: ${e.message}"
+        lastKeyInfo = "v${BuildConfig.VERSION_NAME} error panel: ${e.javaClass.simpleName}: ${e.message}"
         android.widget.Toast.makeText(this, lastKeyInfo, android.widget.Toast.LENGTH_LONG).show()
     }
+
+    /** Contenedor de la ventana donde se dibujan los avisos encima del video. */
+    private fun overlayRoot(): ViewGroup =
+        (window.decorView.findViewById<View>(android.R.id.content) as? ViewGroup)
+            ?: (playerView.parent as? ViewGroup)
+            ?: (window.decorView as ViewGroup)
 
     private fun toggleDiagInner() {
         val d = diag
@@ -881,7 +888,7 @@ class MainActivity : AppCompatActivity() {
                 setBackgroundColor(0xCC000000.toInt())
                 textSize = 14f
                 setPadding(24, 16, 24, 16)
-                (this@MainActivity.findViewById<View>(android.R.id.content) as FrameLayout).addView(
+                overlayRoot().addView(
                     this, FrameLayout.LayoutParams(
                         FrameLayout.LayoutParams.WRAP_CONTENT,
                         FrameLayout.LayoutParams.WRAP_CONTENT,
