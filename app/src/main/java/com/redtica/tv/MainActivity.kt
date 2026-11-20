@@ -295,6 +295,17 @@ class MainActivity : AppCompatActivity() {
     private val hideBanner = Runnable { banner.visibility = View.GONE }
     private val retryPlay = Runnable { play(current) }
     /** Si en 5 s el canal multicast no arranca, se pasa a HTTP. */
+    private var usingHls = false
+    private var hlsWorked = false
+    private var hlsFailed = false   // el Astra no tiene HLS activo: se usa el flujo HTTP de siempre
+
+    private fun onWifi(): Boolean = try {
+        val cm = getSystemService(CONNECTIVITY_SERVICE) as ConnectivityManager
+        if (android.os.Build.VERSION.SDK_INT >= 23)
+            cm.getNetworkCapabilities(cm.activeNetwork)?.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) == true
+        else @Suppress("DEPRECATION") (cm.activeNetworkInfo?.type == ConnectivityManager.TYPE_WIFI)
+    } catch (_: Throwable) { false }
+
     private val multicastTimeout = Runnable { if (usingMulticast && !multicastWorked) fallbackToHttp() }
     private val retryConnect = Runnable { connect() }
 
@@ -446,7 +457,7 @@ class MainActivity : AppCompatActivity() {
         // Colchón de video: arranca con 3 s guardados y, si la red se traba,
         // espera a tener 6 s antes de seguir, para que no se vuelva a pegar enseguida.
         val loadControl = DefaultLoadControl.Builder()
-            .setBufferDurationsMs(15_000, 40_000, 3_000, 6_000)
+            .setBufferDurationsMs(20_000, 40_000, 2_500, 6_000)
             .setPrioritizeTimeOverSizeThresholds(true)
             .build()
         // Decodificación en modo asíncrono (más fluida en TVs) y respaldo a otro decodificador si falla
@@ -486,6 +497,9 @@ class MainActivity : AppCompatActivity() {
                     if (usingMulticast && !multicastWorked) {
                         fallbackToHttp(); return
                     }
+                    if (usingHls && !hlsWorked) {
+                        hlsFailed = true; play(current); return
+                    }
                     showStatus(getString(R.string.sin_senal))
                     ui.removeCallbacks(retryPlay)
                     ui.postDelayed(retryPlay, 3000)
@@ -503,6 +517,7 @@ class MainActivity : AppCompatActivity() {
                             status.visibility = View.GONE
                             ui.removeCallbacks(multicastTimeout)
                             if (usingMulticast) multicastWorked = true
+                            if (usingHls) hlsWorked = true
                         }
                         Player.STATE_ENDED -> {
                             ui.removeCallbacks(retryPlay)
@@ -524,14 +539,21 @@ class MainActivity : AppCompatActivity() {
         adapter?.current = current
         applyFormat(ch)
         ui.removeCallbacks(multicastTimeout)
-        // Todo por multicast (cable y WiFi): no aumenta el consumo por cliente.
-        val mcast = if (BuildConfig.USA_MULTICAST && !multicastFailed && !forceHttp) ch.mcast else null
+        // Por cable: multicast (no aumenta el consumo). Por WiFi: HLS con colchón de 12 s,
+        // porque el multicast por WiFi pierde paquetes y no se puede guardar colchón.
+        val mcast = if (BuildConfig.USA_MULTICAST && !multicastFailed && !forceHttp && !onWifi()) ch.mcast else null
         usingMulticast = mcast != null
-        val uri = mcast ?: ch.url
+        val hls = if (mcast == null && !hlsFailed && ch.id != null && ch.url.contains("/play/"))
+            ch.url.substringBefore("/play/") + "/play/" + ch.id + "/index.m3u8" else null
+        usingHls = hls != null
+        val uri = mcast ?: hls ?: ch.url
         if (usingMulticast) ui.postDelayed(multicastTimeout, 5000)
         val item = MediaItem.Builder()
             .setUri(uri)
             .apply { if (uri.contains(".m3u8")) setMimeType(MimeTypes.APPLICATION_M3U8) }
+            // En vivo por HLS: reproducir 12 s detrás del directo = 12 s de colchón desde el arranque
+            .setLiveConfiguration(MediaItem.LiveConfiguration.Builder()
+                .setTargetOffsetMs(12_000).setMinOffsetMs(9_000).setMaxOffsetMs(16_000).build())
             .build()
         // Canal nuevo: vuelve a la preferencia (español) hasta ver si hay audio guardado
         audioAppliedFor = null
@@ -973,7 +995,7 @@ class MainActivity : AppCompatActivity() {
         val mi = android.app.ActivityManager.MemoryInfo().also { am.getMemoryInfo(it) }
         val buf = (p.totalBufferedDuration / 100) / 10.0
         diag?.text = buildString {
-            appendLine("Fuente: " + (if (usingMulticast) "Multicast" else "HTTP") + " (Izquierda cambia)")
+            appendLine("Fuente: " + (if (usingMulticast) "Multicast" else if (usingHls) "HLS (colchón 12 s)" else "HTTP") + " (Izquierda cambia)")
             appendLine("Red: " + networkInfo())
             appendLine("Video: " + (f?.let { "${it.width}x${it.height} ${it.sampleMimeType?.substringAfter('/')} ${it.bitrate.takeIf { b -> b > 0 }?.let { b -> "${b / 1000} kbps" } ?: ""}" } ?: "-"))
             appendLine("App: v${BuildConfig.VERSION_NAME} | Modo túnel: no | Última tecla: $lastKeyInfo")
